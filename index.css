@@ -1,0 +1,651 @@
+
+.navigation {
+  width: 100%;
+  height: 50px;
+  background-color: #EFEFEF;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items:center;
+  height: 60px;
+}
+
+.header-nav-boxfortext{
+  display: flex;
+  justify-content: space-evenly;
+  align-items:center;
+  width:448px;
+
+}
+
+.header-nav-item {
+  text-decoration: none;
+  color: rgb(39, 11, 11);
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+}
+
+.header-logo-search-phone{
+  background-color:white;
+  height: 120px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-logo-search-phone-box{
+  display: flex;
+  width:1110px;
+  align-items:center;
+}
+
+.text-beaty{
+  font-family: Roboto;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F13C6E;
+  margin-left:20px;
+}
+
+.search{
+  margin-left:100px;
+  background-color: #EFEFEF;
+  border-radius: 10px 10px 10px 10px;
+  align-items:center;
+  background: url(https://cdn3.iconfinder.com/data/icons/forum-emoticons-2-20x20/20/Brief.png) no-repeat scroll 5px 4px;
+}
+
+.phone{
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+margin-left:93px;
+
+}
+.feedback{
+  height: 40px;
+  width: 170px;
+  border: 3px solid;
+  border-color:#F13C6E;
+  border-radius: 25px 25px 25px 25px;
+  background-color: white;
+  margin-left:40px;
+}
+
+.text-phone{
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px;
+letter-spacing: 0em;
+text-align: left;
+}
+
+.line{
+  width: 100%;
+  border: 0.5px solid #EFEFEF;
+}
+
+.line2{
+  width: 1920px;
+  border: 0.5px solid #EFEFEF;
+}
+
+.header-nav-text-two{
+  height:79px;
+  align-items:center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header-nav-two-item{
+  text-decoration: none;
+  color: rgb(39, 11, 11);
+}
+
+.header-nav-two-item{
+  text-decoration: none;
+  color: rgb(39, 11, 11);
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.header-nav-item-wrapper-two{
+   margin-left:40px;
+}
+
+.header-text-two-box{
+  width: 675px;
+}
+
+.main-section{
+  width:100%;
+  display:flex;
+  justify-content: space-evenly;
+}
+
+.main-section-box{
+  width:1920px;
+  height: 604px;
+  background-color: #F13C6E;
+  position: relative;
+  overflow: hidden;
+}
+
+.block-text-section{
+  width:400px;
+  height:400px;
+  margin-left:15%;
+  margin-top:102px;
+}
+.super-kreslo{
+  font-family: Roboto;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #EFEFEF;
+}
+
+.tetsk-akcii{
+  margin-top:20px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #EFEFEF;
+}
+
+.text-list{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top:15%;
+}
+
+.more-detailed{
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 16px;
+  text-align: center;
+  color: #EFEFEF; 
+  height: 40px;
+  width: 170px;
+  border-radius: 50px 50px 50px 50px;
+  border: 1px solid #EFEFEF;
+  width: 170px;
+  padding-top:10px;
+  text-decoration: none;
+}
+
+.box-stul{
+  position:absolute;
+  height: 584px;
+  width: 584px;
+  margin-left:30%;
+  margin-top:46px;
+}
+
+.circle1 {
+  position:absolute;
+  width: 900px; 
+  height: 900px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  z-index: 1;
+  top: -25%;
+  margin-right:40px;
+  }
+
+  .circle2 {
+    position:absolute;
+    width: 700px; 
+    height: 700px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 100%;
+    z-index: 2;
+    top: -25%;
+    margin-left:18%;
+    margin-top:100px;
+    }
+
+  .stul{
+    position:absolute;
+    z-index: 3;
+    margin-left:25%;
+  }
+
+
+.two-cektion{
+  display:flex;
+  justify-content:center;
+}
+
+.box-two-cektion{
+  width:1920px ;
+  background-color:#EFEFEF;;
+  height: 575px;
+}
+
+
+.box-three-cektion{
+  width:1920px ;
+  background-color:#EFEFEF;;
+  height: 680px;
+}
+  .special{
+    font-family: Roboto;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+  padding-top:80px;
+  margin-left:405px;
+  }
+
+  .special-box{
+  width: 1920px;
+  height: 147px;
+  }
+
+  .box-products{
+    width:1140px;
+    height: 363px;
+    margin-left:405px;
+    display:flex;
+  }
+
+  .box-product{
+    height: 363px;
+    width: 290px;
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-right:30px;
+  }
+
+  .stul2{
+    width: 125px;
+    height: 166px;
+    margin-left:65px;
+  }
+
+  .text-stul2{
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .text2-stul2{
+    font-family: Roboto;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  .buy{
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color:white;
+  }
+
+  .buy-item{
+    height: 40px;
+    width: 170px;
+    border: 3px solid;
+    border-color:#F13C6E;
+    border-radius: 25px 25px 25px 25px;
+    background-color: #F13C6E;
+    margin-left:40px;
+  }
+
+  .box-section-bonuses-map{
+    margin-left:405px;
+    height:212px;
+    width: 1110px;
+    display:flex;
+    flex-direction: row;
+  }
+
+  .box-bonuses{
+    margin-top:40px;
+    height:100%;
+    width:540px;
+    background-color: #F13C6E;
+  }
+
+  .text-box-bonuses{
+    height:100%;
+    width:350px;
+    margin-left:40px;
+   
+  }
+
+  .text-box-bonuses-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .text-list2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top:20px;
+  }
+
+.give-bonus-text{
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+  color:white;
+  margin-top:35px;
+}
+
+.every-month-text{
+  margin-top:25px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color:white;
+}
+
+.read-email{
+  margin-top:25px;
+}
+
+.input-email{
+  height: 35px;
+  width: 225px;
+  border-color:#F13C6E;
+  border-radius: 25px 25px 25px 25px;
+  background-color: white;
+}
+
+.email-image{
+  position:absolute;
+  margin-top:85.73px;
+  margin-left:385px;
+}
+
+.gospodi-kak-zaebaclia{
+  margin-left:100px;
+}
+
+.section-map{
+  margin-left:30px;
+}
+
+.maschine-img{
+  position:absolute;
+  margin-left:900px;
+  margin-top:85.73px;
+}
+
+.buton-map{
+  height: 40px;
+  width: 200px;
+  border: 3px solid;
+  border-color:white;
+  border-radius: 25px 25px 25px 25px;
+  background-color: #F13C6E;
+}
+
+.text-map{
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  color:white;
+}
+
+.box-impuls{
+  height: 357px;
+  width: 1110px;
+  background-color: red;
+  margin-top:100px;
+  margin-left:405px;
+}
+
+.box-one-row{
+  width: 100%;
+  height:119px;
+  display:flex;
+}
+
+.box-two-row{
+  width: 100%;
+  height:119px;
+  display:flex;
+}
+
+.box-three-row{
+  width: 100%;
+  height:119px;
+  display:flex;
+}
+
+.box-impuls-small{
+    width:279px;
+  height:119px;
+  background-color: white;
+  border: 0.5px solid;
+  border-color:#EFEFEF;
+}
+
+.item-impuls{
+  margin-top:35px;
+  margin-left:60px;
+}
+
+.main-box-footer{
+  display:flex;
+  justify-content: center;
+  margin-top:1150px;
+  width: 1920px;
+  height: 420px;
+  background-color: white;
+  border: 0.5px solid #EFEFEF;
+}
+
+.row-footer{
+  width: 255px;
+  margin-top:60px;
+  margin-left:40px;
+  
+}
+
+.popular-category{
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.line-row{
+  margin-top:30px;
+  width: 230px;
+  border: 0.5px solid #EFEFEF;
+}
+
+.gap-row{
+  margin-top:30px;
+
+}
+
+.list-row-footer{
+margin-top:10px;
+font-family: Roboto;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 28px;
+letter-spacing: 0em;
+text-align: left;
+color:#828282;
+}
+
+.footer-contack-main{
+  display: flex;
+  justify-content: center;
+  width: 1920px;
+  height: 120px;
+  align-items: center;
+}
+
+.youtube-icon{
+  border: 3px solid #F13C6E;
+  border-radius: 25px 25px 25px 25px;
+  height: 50px;
+  width: 50px;
+  padding-left: 12px;
+  padding-top: 14px;
+}
+
+.vk-icon{
+  border: 3px solid #F13C6E;
+  border-radius: 25px 25px 25px 25px;
+  height: 50px;
+  width: 50px;
+  margin-left:20px;
+  padding-left: 9px;
+  padding-top: 14px;
+}
+
+.facebook-icon{
+  border: 3px solid #F13C6E;
+  border-radius: 25px 25px 25px 25px;
+  height: 50px;
+  width: 50px;
+  padding-left: 13px;
+  padding-top: 12px;
+  margin-left:20px;
+}
+
+.istagram-icon{
+  border: 3px solid #F13C6E;
+  border-radius: 25px 25px 25px 25px;
+  height: 50px;
+  width: 50px;
+  margin-left:20px;
+  padding-left: 13px;
+  padding-top: 12px;
+}
+
+.adres{
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left:160px;
+}
+
+.phone-two
+{
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left:105px;
+}
+
+.box-footer-icon-adress-phone{
+  height: 120px; 
+  display: flex;
+  justify-content: center;
+}
+
+.gospodi-isie-konec{
+  height: 50px;
+  width: 1920px;
+  background-color:#EFEFEF;
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.footer-text-best-shop{
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left:135px;
+ 
+}
+
+.footer-text-politic{
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: right;
+  margin-right:150px;
+}
+
