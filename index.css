@@ -1,4 +1,14 @@
 
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Roboto-rebet';
+  src: url("fonts/Roboto-Bold.ttf");
+}
+
 .navigation {
   width: 100%;
   background-color: #EFEFEF;
@@ -13,10 +23,16 @@
 
 .header-nav-boxfortext{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items:center;
   width:448px;
+}
 
+.header-nav-boxfortext-two{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  width:448px;
 }
 
 .header-nav-item {
@@ -141,10 +157,34 @@ text-align: left;
 }
 
 .main-section{
-  width:100%;
   display:flex;
+  justify-content: center;
+}
+
+.main-block-section{
+  display: flex;
+  justify-content: center;
+}
+
+.block-for-background{
+  width: 1920px;
+  height:1870px;
+  background-color: #EFEFEF; 
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.block-for-all-block{
+  width: 1110px;
+  height:1870px;
+  align-items:center;
+  display:flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
+
 
 .main-section-box{
   width:1920px;
@@ -210,8 +250,8 @@ text-align: left;
   position:absolute;
   height: 584px;
   width: 584px;
-  margin-left:30%;
-  margin-top:46px;
+  padding-left:600px;
+  padding-top:90px;
 }
 
 .circle1 {
@@ -222,7 +262,7 @@ text-align: left;
   border-radius: 100%;
   z-index: 1;
   top: -25%;
-  margin-right:40px;
+  padding-right:40px;
   }
 
   .circle2 {
@@ -240,7 +280,7 @@ text-align: left;
   .stul{
     position:absolute;
     z-index: 3;
-    margin-left:25%;
+    padding-left:25%;
   }
 
 
@@ -268,36 +308,37 @@ text-align: left;
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 0em;
-  padding-top:80px;
-  margin-left:405px;
   }
 
   .special-box{
-  width: 1920px;
-  height: 147px;
+  display:flex;
+  justify-content: left;
+  width: 100%;
+  height: 29px;
   }
 
   .box-products{
     width:1140px;
     height: 363px;
-    margin-left:405px;
     display:flex;
+    justify-content: space-evenly;
   }
 
   .box-product{
     height: 363px;
-    width: 290px;
+    width: 250px;
     background-color: white;
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-right:30px;
+    align-items: center;
+   
   }
 
   .stul2{
     width: 125px;
     height: 166px;
-    margin-left:65px;
+  
   }
 
   .text-stul2{
@@ -337,11 +378,10 @@ text-align: left;
     border-color:#F13C6E;
     border-radius: 25px 25px 25px 25px;
     background-color: #F13C6E;
-    margin-left:40px;
+    
   }
 
   .box-section-bonuses-map{
-    margin-left:405px;
     height:212px;
     width: 1110px;
     display:flex;
@@ -349,7 +389,6 @@ text-align: left;
   }
 
   .box-bonuses{
-    margin-top:40px;
     height:100%;
     width:540px;
     background-color: #F13C6E;
@@ -453,17 +492,11 @@ text-align: left;
 
 .box-impuls{
   height: 357px;
-  width: 1110px;
-  background-color: red;
-  margin-top:100px;
-  margin-left:405px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.box-one-row{
-  width: 100%;
-  height:119px;
-  display:flex;
-}
 
 .box-two-row{
   width: 100%;
@@ -478,7 +511,7 @@ text-align: left;
 }
 
 .box-impuls-small{
-    width:279px;
+    width:277px;
   height:119px;
   background-color: white;
   border: 0.5px solid;
@@ -493,11 +526,8 @@ text-align: left;
 .main-box-footer{
   display:flex;
   justify-content: center;
-  margin-top:1150px;
-  width: 1920px;
+  align-items: center;
   height: 420px;
-  background-color: white;
-  border: 0.5px solid #EFEFEF;
 }
 
 .row-footer{
@@ -540,6 +570,10 @@ text-align: left;
 color:#828282;
 }
 
+.list-row-footer:last-child{
+  font-size:40px;
+}
+
 .footer-contack-main{
   display: flex;
   justify-content: center;
@@ -549,43 +583,38 @@ color:#828282;
 }
 
 .youtube-icon{
+ 
+}
+
+.icon{
+
+
+  
+}
+
+.circle-for-icon{
+  width: 45px; 
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 3px solid #F13C6E;
-  border-radius: 25px 25px 25px 25px;
-  height: 50px;
-  width: 50px;
-  padding-left: 12px;
-  padding-top: 14px;
+  margin-left:20px;
 }
 
 .vk-icon{
-  border: 3px solid #F13C6E;
-  border-radius: 25px 25px 25px 25px;
-  height: 50px;
-  width: 50px;
-  margin-left:20px;
-  padding-left: 9px;
-  padding-top: 14px;
+
 }
 
 .facebook-icon{
-  border: 3px solid #F13C6E;
-  border-radius: 25px 25px 25px 25px;
-  height: 50px;
-  width: 50px;
-  padding-left: 13px;
-  padding-top: 12px;
-  margin-left:20px;
+
 }
 
 .istagram-icon{
-  border: 3px solid #F13C6E;
-  border-radius: 25px 25px 25px 25px;
-  height: 50px;
-  width: 50px;
-  margin-left:20px;
-  padding-left: 13px;
-  padding-top: 12px;
+
 }
+
 
 .adres{
   font-family: Roboto;
