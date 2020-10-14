@@ -77,10 +77,20 @@
 
 .search{
   margin-left:100px;
-  background-color: #EFEFEF;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 20px 20px 20px 20px;
+  border:none;
   align-items:center;
-  background: url(https://cdn3.iconfinder.com/data/icons/forum-emoticons-2-20x20/20/Brief.png) no-repeat scroll 5px 4px;
+  background-image: url(icon/search-icon.png);
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-color: transparent;
+  width: 250px;
+  height:40px;
+  background-color: #EFEFEF;
+}
+
+.search:focus{
+  background-image: none;
 }
 
 .phone{
@@ -157,7 +167,7 @@ text-align: left;
 }
 
 .main-section{
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -190,16 +200,34 @@ text-align: left;
   width:1920px;
   height: 604px;
   background-color: #F13C6E;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+
 }
 
 .block-text-section{
-  width:400px;
-  height:400px;
-  margin-left:15%;
-  margin-top:102px;
+  width:320px;
+  height:219px;
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
+
+.block-stul{
+
+  width:900px;
+  height:604px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+
+
+}
+
 .super-kreslo{
   font-family: Roboto;
   font-size: 48px;
@@ -212,7 +240,6 @@ text-align: left;
 }
 
 .tetsk-akcii{
-  margin-top:20px;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
@@ -221,13 +248,6 @@ text-align: left;
   letter-spacing: 0em;
   text-align: left;
   color: #EFEFEF;
-}
-
-.text-list{
-  display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top:15%;
 }
 
 .more-detailed{
@@ -246,12 +266,16 @@ text-align: left;
   text-decoration: none;
 }
 
+.more-detailed:hover{
+border-color:black;
+}
+
+
+
 .box-stul{
-  position:absolute;
   height: 584px;
   width: 584px;
-  padding-left:600px;
-  padding-top:90px;
+ 
 }
 
 .circle1 {
@@ -260,9 +284,6 @@ text-align: left;
   height: 900px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 100%;
-  z-index: 1;
-  top: -25%;
-  padding-right:40px;
   }
 
   .circle2 {
@@ -271,16 +292,10 @@ text-align: left;
     height: 700px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 100%;
-    z-index: 2;
-    top: -25%;
-    margin-left:18%;
-    margin-top:100px;
     }
 
   .stul{
-    position:absolute;
     z-index: 3;
-    padding-left:25%;
   }
 
 
@@ -318,15 +333,15 @@ text-align: left;
   }
 
   .box-products{
-    width:1140px;
+    width:1110px;
     height: 363px;
     display:flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
 
   .box-product{
     height: 363px;
-    width: 250px;
+    width: 255px;
     background-color: white;
     display:flex;
     flex-direction: column;
@@ -383,22 +398,37 @@ text-align: left;
 
   .box-section-bonuses-map{
     height:212px;
-    width: 1110px;
+    width: 100%;
     display:flex;
     flex-direction: row;
+    justify-content: space-between;
   }
 
   .box-bonuses{
-    height:100%;
+   
     width:540px;
     background-color: #F13C6E;
+    display: flex;
+    align-items: center;
   }
 
   .text-box-bonuses{
     height:100%;
     width:350px;
-    margin-left:40px;
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
    
+  }
+
+  .text-box-map{
+    height:100%;
+    width:210px;
+    display:flex;
+    align-items: left;
+    justify-content: space-evenly;
+    flex-direction: column;
   }
 
   .text-box-bonuses-list{
@@ -407,7 +437,13 @@ text-align: left;
     justify-content: space-evenly;
   }
 
+
+
+
+
+
   .text-list2{
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -423,11 +459,9 @@ text-align: left;
   letter-spacing: 0em;
   text-align: left;
   color:white;
-  margin-top:35px;
 }
 
 .every-month-text{
-  margin-top:25px;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
@@ -450,25 +484,22 @@ text-align: left;
   background-color: white;
 }
 
-.email-image{
-  position:absolute;
-  margin-top:85.73px;
-  margin-left:385px;
-}
 
-.gospodi-kak-zaebaclia{
-  margin-left:100px;
+
+.box-map{
+
 }
 
 .section-map{
-  margin-left:30px;
+  background-color: #F13C6E;
+  width:540px;
+  display: flex;
+  align-items: center;
+  flex-direction: center;
+  justify-content: space-evenly;
+  
 }
 
-.maschine-img{
-  position:absolute;
-  margin-left:900px;
-  margin-top:85.73px;
-}
 
 .buton-map{
   height: 40px;
@@ -530,7 +561,7 @@ text-align: left;
   height: 420px;
 }
 
-.row-footer{
+.column-footer{
   width: 255px;
   margin-top:60px;
   margin-left:40px;
@@ -547,7 +578,7 @@ text-align: left;
   text-align: left;
 }
 
-.line-row{
+.line-column{
   margin-top:30px;
   width: 230px;
   border: 0.5px solid #EFEFEF;
@@ -558,7 +589,7 @@ text-align: left;
 
 }
 
-.list-row-footer{
+.list-column-footer{
 margin-top:10px;
 font-family: Roboto;
 font-size: 12px;
@@ -568,10 +599,6 @@ line-height: 28px;
 letter-spacing: 0em;
 text-align: left;
 color:#828282;
-}
-
-.list-row-footer:last-child{
-  font-size:40px;
 }
 
 .footer-contack-main{
