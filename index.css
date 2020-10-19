@@ -34,7 +34,7 @@
   justify-content: space-evenly;
 }
 
-.block-1110px-section-stul{
+.block-1110px-section-img{
  width: 100%;
  height: 604px;
  display: flex;
@@ -238,7 +238,7 @@ text-align: left;
   flex-direction: column;
 }
 
-.block-stul{
+.section-main-image{
   height:604px;
   width: 100%;
   display: flex;
@@ -294,10 +294,7 @@ text-align: left;
   border-color:black;
 }
 
-.box-stul{
-  height: 584px;
-  width: 584px;
-}
+
 
 .circle1 {
   position:absolute;
@@ -315,7 +312,7 @@ text-align: left;
   border-radius: 100%;
 }
 
-.stul{
+.img-z-index{
   z-index: 3;
 }
 
