@@ -248,7 +248,7 @@ text-align: left;
   overflow: hidden;
 }
 
-.super-kreslo{
+.section-main-first-text{
   font-family: Roboto;
   font-size: 48px;
   font-style: normal;
@@ -259,7 +259,7 @@ text-align: left;
   color: #EFEFEF;
 }
 
-.tetsk-akcii{
+.section-main-two-text{
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
@@ -270,7 +270,7 @@ text-align: left;
   color: #EFEFEF;
 }
 
-.more-detailed{
+.section-main-three-text-link{
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
