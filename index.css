@@ -62,7 +62,6 @@
   color: rgb(39, 11, 11);
   font-weight: bold;
   font-size: 20px;
-  text-decoration: none;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
@@ -422,11 +421,12 @@ text-align: left;
   background-color: #F13C6E;
   display: flex;
   align-items: center;
+justify-content:space-evenly;
 }
 
 .text-box-left{
   height:100%;
-  width:350px;
+  width:210px;
   display:flex;
   align-items: center;
   justify-content: space-evenly;
