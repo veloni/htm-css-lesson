@@ -110,6 +110,7 @@
   height:40px;
   background-color: #EFEFEF;
   padding-left: 20px;
+  outline: none;
 }
 
 .search:focus{
