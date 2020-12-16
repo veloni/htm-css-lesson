@@ -244,7 +244,8 @@ text-align: left;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .section-main-first-text{
@@ -687,3 +688,10 @@ justify-content:space-evenly;
   text-align: right;
 }
 
+.box-circle-chair{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
