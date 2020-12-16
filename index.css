@@ -134,6 +134,7 @@
   border-color:#F13C6E;
   border-radius: 25px 25px 25px 25px;
   background-color: white;
+  outline: none;
 }
 
 .text-phone{
@@ -478,6 +479,7 @@ justify-content:space-evenly;
   border-color:#F13C6E;
   border-radius: 25px 25px 25px 25px;
   background-color: white;
+  outline: none;
 }
 
 .section-map{
