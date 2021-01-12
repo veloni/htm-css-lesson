@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import Test from './src/test';
 
  const Render = () => {
-    ReactDOM.render( <Test/>, document.querySelector('.main-section-box'));
+    ReactDOM.render( <Test/>, document.querySelector('.box-products'));
 }
 
 
 
 
-//Render();
+Render();
