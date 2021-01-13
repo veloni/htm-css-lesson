@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import FillingBasket from './ fillingBasket.js';
 
 const Basket = () => {
-
-
+    const [productArrayState, setProductArrayState] = useState([]);
+    let quanityProduct = 1; //времено тут
+    const getItem = () => {
+        setProductArrayState([
+            ...productArrayState,
+            {
+                productName,
+                quanityProduct,
+                productPrice,
+            },
+        ]);
+    }
+  /*    useEffect(() => {
+        console.log(productArrayState);
+    }); */
+ 
     return (
-
+    <div>
+        <button
+            className="dn js-trigger-charts"
+            onClick={() => getItem()}
+        />
         <table className="table-basket-border">
             <tr className="table-basket-border table-title">
                 <th className="column-delete "></th>
@@ -15,18 +34,15 @@ const Basket = () => {
                 <th className="column-end-price">Цена</th>
             </tr>
 
-            <tr className="table-basket-border container-product-basket">
-                <td> </td>
-                <td>3,5</td>
-                <td>36</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                </tr>
-        </table>
+            {productArrayState.map((data) => (
+                <FillingBasket
+                    data={data}
+                />
+              ))}
 
+        </table>
+    </div>
     );
 };
-
 
 export default Basket;

@@ -7,7 +7,7 @@ const displayNoneRemoveBasket = () => {
     basket.classList.remove('dn');
 }
 
-displayNoneBasket();
+//displayNoneBasket();
 
 const basketOpen = () => {
     const basketIcon = document.querySelector('.basket-icon');
