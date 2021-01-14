@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
 
-
 const FillingBasket = (
     data, 
 ) => {
@@ -27,7 +26,6 @@ const FillingBasket = (
 
     );
 };
-
 
 export default FillingBasket;
 
