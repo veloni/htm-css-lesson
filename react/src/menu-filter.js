@@ -1,7 +1,7 @@
 const sortAscendingOrder = () => {
     const buttonSortAscendingOrder = document.querySelector('.sort-ascending-order')
 
-   /*  let sortingOrder = productList;
+    let sortingOrder = productList;
     let sorting = sortingOrder.id;
       
     sorting.sort(function(a,b) {
@@ -10,9 +10,8 @@ const sortAscendingOrder = () => {
         return x < y ? -1 : x > y ? 1 : 0;
     });
     
-    tesData = sorting;
+    testData = sorting;
 
-   */
 
     buttonSortAscendingOrder.onclick = function(){
         window.ReRender();

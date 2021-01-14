@@ -888,13 +888,15 @@ justify-content:space-evenly;
 .end-point-line{
   height: 100%;
   width: 10px;
+  margin-right: 40px;
   background-color: black;
 }
 
 .box-filter-price{
 
-
 }
+
+
 
 .dn{
   display: none;
