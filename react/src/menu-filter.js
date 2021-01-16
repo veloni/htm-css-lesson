@@ -11,12 +11,11 @@ const sortAscendingOrder = () => {
     });
     
     testData = sorting;
-
-
+    testData = Object.assign({}, [testData]); 
+    
     buttonSortAscendingOrder.onclick = function(){
         window.ReRender();
     }
-  
 }
 
 sortAscendingOrder();

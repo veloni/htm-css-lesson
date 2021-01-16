@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Test from './src/test';
-import ReRender from './src/test1';
+
 import Basket from './src/basket';
 import FilterProducts from './src/filterProducts';
 
 
 const Render = () => {
+    pushData = "productList.id[index].";
     ReactDOM.render( <Test/>, document.querySelector('.box-products'));
 }
 
 const reRender = () => {
-    ReactDOM.render( <ReRender/>, document.querySelector('.box-products'));
+    pushData = "testData[0][index].";
+    ReactDOM.render( <Test/>, document.querySelector('.box-products'));
 }
 
 const RenderBasket = () => {

@@ -28,7 +28,7 @@ const FilterProducts = () => {
                         <div 
                             onMouseDown={(e) => setIsMoving(true)} 
                             onMouseUp={(e) => setIsMoving(false)}
-                            onMouseMove={(e) => isMoving &&  setFirstPointX(e.clientX - 1700)}
+                            onMouseMove={(e) => isMoving &&  setFirstPointX(e.clientX - 1800)}
 
                             style={
                                 {
