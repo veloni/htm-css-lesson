@@ -848,7 +848,7 @@ justify-content:space-evenly;
 .box-input{
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width: 340px;
 }
 
 .input-price{
@@ -857,16 +857,16 @@ justify-content:space-evenly;
 
 .line-price{
   margin-top: 20px;
-  height: 20px;
-  width: 100%;
+  height: 50px;
+  width: 240px;
   background-color:grey;
 }
 
 .into-line-price{
-  display:flex;
-  justify-content: space-between;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  display: flex;
+background-color:grey;
 }
 
 .true-into-line-price{
@@ -875,20 +875,18 @@ justify-content:space-evenly;
   background-color: red;
 }
 
-.sort-ascending-order{
- 
-}
-
 .first-point-line{
-  height: 100%;
-  width: 10px;
-  background-color: black;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background-color: grey;
+
 }
 
 .end-point-line{
-  height: 100%;
-  width: 10px;
-  margin-right: 40px;
+  position: relative;
+  height: 50px;
+  width: 50px;
   background-color: black;
 }
 
@@ -896,6 +894,11 @@ justify-content:space-evenly;
 
 }
 
+.test{
+  height: 100%;
+  width: 100%;
+  background-color: yellow;
+}
 
 
 .dn{
