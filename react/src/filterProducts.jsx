@@ -11,7 +11,9 @@ const FilterProducts = () => {
     const [isCheckPosition, setIsCheckPosition] = useState(0);
 
     const buttonMove = (moving ,pointX) => {
-      console.log(isCheckPosition);
+    /*   console.log(isCheckPosition);
+      console.log(firstPointX);
+      console.log(endPointX); */
     //test need rework
         if (isCheckPosition < 280)
         {   
@@ -59,8 +61,6 @@ const FilterProducts = () => {
             }
             setIsCheckPosition(firstPointX+endPointX);
         }
-       
-       
     }
 
     return (
@@ -69,13 +69,25 @@ const FilterProducts = () => {
                 Сортировка по возрастанию
             </button>
 
+            <button className="sort-descending-order">
+                Сортировка по убыванию
+            </button>
+
+            <button className="sort-price-order">
+                Сортировка по выбраной стоимости
+            </button>
+
             <div class="box-filter-price">
                 <div class="box-input">
-                    <input className="input-price">
+                    <input 
+                    value = {firstPointX*50}
+                    className="input-price js-input-price-first">
 
                     </input>
 
-                    <input className="input-price">
+                    <input 
+                    value = {15500 - endPointX*50}
+                    className="input-price js-input-price-end">
                     
                     </input>
                 </div>
@@ -118,10 +130,22 @@ const FilterProducts = () => {
                             </div>
                        
                         </div>
-
+                     
                        
                     </div>
                 </div>
+
+                <select className="js-select-type-product">
+
+                    <option className="js-switch-period">Стулья</option>
+                    <option className="js-switch-period">Столы</option>
+                    <option className="js-switch-period">Комплекты</option>
+                </select>
+
+                <button className="sort-price-order">
+                            очистить фиьлтры
+                </button>
+
 
             </div>
         </div>
