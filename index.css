@@ -466,7 +466,7 @@ text-align: left;
 .box-products{
   position: relative;
   height: auto;
-  width: 1400px;
+  width: 1150px;
   display:flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -829,7 +829,7 @@ justify-content:space-evenly;
 
 .box-filter-products{
   height: 650px;
-  width: 250px;
+  width: 350px;
   background-color: #C0C0C0;
   box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.3);
   position: absolute;
@@ -847,47 +847,49 @@ justify-content:space-evenly;
 
 .box-input{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-left: 5px;
   width: 340px;
 }
 
 .input-price{
-  width: 40%;
+  width: 45%;
 }
 
 .line-price{
+  margin-left: 5px;
   margin-top: 20px;
-  height: 50px;
-  width: 240px;
-  background-color:grey;
+  height: 30px;
+  width: 340px;
+  display: flex;
 }
 
 .into-line-price{
   height: 100%;
   width: 100%;
   display: flex;
-background-color:grey;
 }
 
 .true-into-line-price{
   height: 100%;
   width: 100%;
   background-color: red;
+  display:flex;
+  justify-content: space-between;
 }
 
 .first-point-line{
-  position: absolute;
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   background-color: grey;
-
+  border-radius: 30px 30px 30px 30px;
 }
 
 .end-point-line{
-  position: relative;
-  height: 50px;
-  width: 50px;
-  background-color: black;
+  height: 30px;
+  width: 30px;
+  background-color: grey;
+  border-radius: 30px 30px 30px 30px;
 }
 
 .box-filter-price{
