@@ -1,5 +1,5 @@
-window.productList = {
-    id: [  
+window.productList = [
+  
         {
             id: "1" ,
             price: "3000" ,
@@ -300,6 +300,6 @@ window.productList = {
             product: "Комплект" ,
             classProduct: "set" ,
             },
-        ],
-    };  
+       
+        ];  
     

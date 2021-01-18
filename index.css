@@ -472,6 +472,14 @@ text-align: left;
   justify-content: space-around;
 }
   
+.box-product-one{
+  position: relative;
+  height: auto;
+  width: 1150px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 
 .box-product{
   height: 363px;

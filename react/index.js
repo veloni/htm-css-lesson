@@ -13,13 +13,12 @@ const Render = () => {
 
 const reRender = () => {
     pushData = "testData[0][index].";
-    ReactDOM.render( <Test/>, document.querySelector('.box-products'));
     
 }
 
 const reRenderDataDescending = () => {
     pushData = "tesDataDescending[0][index].";
-    ReactDOM.render( <Test/>, document.querySelector('.box-products'));
+
 }
 
 const RenderBasket = () => {
@@ -37,8 +36,10 @@ const RenderFilter = () => {
 
 window.ReRender = reRender;
 window.renderDataDescending = reRenderDataDescending;
-/* RenderFilterPrice(); */
+// RenderFilterPrice(); 
+
 Render();
+
 RenderBasket();
 RenderFilter(); 
 

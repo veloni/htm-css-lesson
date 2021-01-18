@@ -1,8 +1,9 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useRef } from 'react';
 
 const FilterProducts = () => {
    
+    const widthPointOne = useRef(null);
     const [firstPointX, setFirstPointX] = useState(0);
     const [endPointX, setEndPointX] = useState(0);
     const [positionButton, setPositionButton] = useState(0);
@@ -10,11 +11,13 @@ const FilterProducts = () => {
     const [isMovingEndButton, setIsMovingEndButton] = useState(false);
     const [isCheckPosition, setIsCheckPosition] = useState(0);
 
+
     const buttonMove = (moving ,pointX) => {
     /*   console.log(isCheckPosition);
       console.log(firstPointX);
       console.log(endPointX); */
     //test need rework
+
         if (isCheckPosition < 280)
         {   
             if (positionButton > 20)
@@ -61,15 +64,44 @@ const FilterProducts = () => {
             }
             setIsCheckPosition(firstPointX+endPointX);
         }
+
+       // console.log(widthPointOne.current.clientWidth); This
     }
+
+    const buttonSortAscendingOrder = () =>{
+    
+    let sorting = [];
+    sorting = productList.slice();
+   
+       sorting.sort(function(a,b) {
+            let x = parseInt(a.price.replace(/\D/g,''));
+            let y = parseInt(b.price.replace(/\D/g,''));
+            return x < y ? -1 : x > y ? 1 : 0;
+        });  
+
+        testData = sorting;
+       /*  console.log(testData); */
+        document.querySelector('.trigger-filter').click();
+    }
+
+
+    const testTwo = ()=>{
+        testData = productList;
+        document.querySelector('.trigger-filter').click();
+    }
+
 
     return (
         <div className="box-filter-products">
-            <button className="sort-ascending-order">
+            <button className="sort-ascending-order"
+                    onClick = {(e) => buttonSortAscendingOrder()}  
+            >
                 Сортировка по возрастанию
             </button>
 
-            <button className="sort-descending-order">
+            <button className="sort-descending-order"
+                    onClick = {(e) => testTwo()} 
+                    >
                 Сортировка по убыванию
             </button>
 
@@ -80,16 +112,18 @@ const FilterProducts = () => {
             <div class="box-filter-price">
                 <div class="box-input">
                     <input 
-                    value = {firstPointX*50}
-                    className="input-price js-input-price-first">
+                        defaultValue={0}
+                        value={firstPointX*50} 
+                        onChange={(e) => setFirstPointX((e.target.value)/50)} 
+                        className="input-price js-input-price-first"
 
-                    </input>
+                    />
 
                     <input 
-                    value = {15500 - endPointX*50}
-                    className="input-price js-input-price-end">
-                    
-                    </input>
+                        value = {15500 - endPointX*50}
+                        className="input-price js-input-price-end"
+                
+                    />
                 </div>
 
                 <div className="line-price">
@@ -116,6 +150,7 @@ const FilterProducts = () => {
                             </div>
 
                             <div 
+                                ref = {widthPointOne}
                                 onMouseUp={(e) => setIsMovingEndButton(false) && setIsMoving(false)}
                                 onMouseDown={(e) => setIsMovingEndButton(true)}  
                                 onMouseMove={(e) => setPositionButton(e.nativeEvent.offsetX)}
@@ -125,7 +160,7 @@ const FilterProducts = () => {
                                         marginRight: `${endPointX}px`
                                     }
                                 }
-
+                                
                                 className="end-point-line">
                             </div>
                        
