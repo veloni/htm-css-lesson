@@ -10,29 +10,26 @@ const FilterProducts = () => {
     const [isMoving, setIsMoving] = useState(false);
     const [isMovingEndButton, setIsMovingEndButton] = useState(false);
     const [isCheckPosition, setIsCheckPosition] = useState(0);
-
+    const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
+    const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
     const buttonMove = (moving ,pointX) => {
-    /*   console.log(isCheckPosition);
-      console.log(firstPointX);
-      console.log(endPointX); */
-    //test need rework
-
+        const widthButton = widthPointOne.current.clientWidth/2;
         if (isCheckPosition < 280)
         {   
-            if (positionButton > 20)
+            if (positionButton > widthButton + 5)
             {
                 isMoving && setFirstPointX((firstPointX + 5));
                 isMovingEndButton && setEndPointX((endPointX - 5));
             }
-            if (positionButton < 10)
+            if (positionButton < widthButton - 5)
             {
                 isMoving && setFirstPointX((firstPointX - 5));
                 isMovingEndButton && setEndPointX((endPointX + 5));
             }
             setIsCheckPosition(firstPointX+endPointX);
 
-            if (positionButton > 20)
+            if (positionButton > widthButton + 5)
             {
                 if (endPointX <= 0)
                 {
@@ -41,7 +38,7 @@ const FilterProducts = () => {
                 isMoving && setFirstPointX((firstPointX + 5));
                 }
     
-            if (positionButton < 10)
+            if (positionButton < widthButton - 5)
             {
                 if (firstPointX <= 0)
                 {
@@ -51,13 +48,13 @@ const FilterProducts = () => {
             } 
         }
         else{
-            if (positionButton > 20)
+            if (positionButton > widthButton + 5)
             {
                 isMoving && setFirstPointX((firstPointX));
                 isMovingEndButton && setEndPointX((endPointX - 5));
             }
 
-            if (positionButton < 10)
+            if (positionButton < widthButton - 5)
             {
                 isMoving && setFirstPointX((firstPointX - 5));
                 isMovingEndButton && setEndPointX((endPointX));
@@ -65,31 +62,227 @@ const FilterProducts = () => {
             setIsCheckPosition(firstPointX+endPointX);
         }
 
-       // console.log(widthPointOne.current.clientWidth); This
     }
 
-    const buttonSortAscendingOrder = () =>{
-    
-    let sorting = [];
-    sorting = productList.slice();
-   
-       sorting.sort(function(a,b) {
+
+  
+  const buttonSortAscendingOrder = () =>{
+        setCheckAscendingOrder(true);
+        setCheckDescendingOrder(false);
+        let sorting = [];
+        sorting = productList.slice();
+        sorting.sort(function(a,b) {
             let x = parseInt(a.price.replace(/\D/g,''));
             let y = parseInt(b.price.replace(/\D/g,''));
             return x < y ? -1 : x > y ? 1 : 0;
         });  
+      
+        const inputPriceFirst = document.querySelector('.js-input-price-first');
+        const inputPriceEnd = document.querySelector('.js-input-price-end');
+        const inputValueFirst = parseInt(inputPriceFirst.value);
+        const inputValueEnd = parseInt(inputPriceEnd.value);
 
-        testData = sorting;
-       /*  console.log(testData); */
+        let sortingTwo = []
+
+        sorting.forEach(function(item, index) {
+        
+            if(parseInt(item.price) < inputValueEnd)
+            {
+                if(parseInt(item.price) > inputValueFirst)
+                {
+                    sortingTwo.push(item);
+                }
+            } 
+            
+        });
+
+        const selectType = document.querySelector('.js-select-type-product');
+        let sortingThree = []; 
+        switch (selectType.value) {
+            case "Показать всё":
+                sortingThree = sortingTwo;
+              break;
+            case "Стулья":
+                sortingTwo.forEach(function(item, index) {
+                    if (item.classProduct === "chair"){
+                        sortingThree.push(item);
+                    }
+                });
+
+              break;
+            case "Столы":
+                sortingTwo.forEach(function(item, index) {
+                    if (item.classProduct === "table"){
+                        sortingThree.push(item);
+                    }
+                });
+
+              break;
+            case "Комплекты":
+                sortingTwo.forEach(function(item, index) {
+                    if (item.classProduct === "set"){
+                        sortingThree.push(item);
+                    }
+                });
+              break; 
+          }
+
+        testData = sortingThree;
+        document.querySelector('.trigger-filter').click();
+
+    }
+
+    const buttonSortDescendingOrder = () =>{
+        setCheckDescendingOrder(true);
+        setCheckAscendingOrder(false);
+        let sorting = [];
+        sorting = productList.slice();
+        sorting.sort(function(a,b) {
+            let x = parseInt(a.price.replace(/\D/g,''));
+            let y = parseInt(b.price.replace(/\D/g,''));
+            return x < y ? 1 : x > y ? -1 : 0;
+        }); 
+
+        const inputPriceFirst = document.querySelector('.js-input-price-first');
+        const inputPriceEnd = document.querySelector('.js-input-price-end');
+        const inputValueFirst = parseInt(inputPriceFirst.value);
+        const inputValueEnd = parseInt(inputPriceEnd.value);
+
+        let sortingTwo = []
+
+        sorting.forEach(function(item, index) {
+        
+            if(parseInt(item.price) < inputValueEnd)
+            {
+                if(parseInt(item.price) > inputValueFirst)
+                {
+                    sortingTwo.push(item);
+                }
+            } 
+            
+        });
+
+        const selectType = document.querySelector('.js-select-type-product');
+        let sortingThree = []; 
+        switch (selectType.value) {
+            case "Показать всё":
+                sortingThree = sortingTwo;
+              break;
+            case "Стулья":
+                sortingTwo.forEach(function(item, index) {
+                    if (item.classProduct === "chair"){
+                        sortingThree.push(item);
+                    }
+                });
+
+              break;
+            case "Столы":
+                sortingTwo.forEach(function(item, index) {
+                    if (item.classProduct === "table"){
+                        sortingThree.push(item);
+                    }
+                });
+
+              break;
+            case "Комплекты":
+                sortingTwo.forEach(function(item, index) {
+                    if (item.classProduct === "set"){
+                        sortingThree.push(item);
+                    }
+                });
+
+              break;
+          }
+
+        testData = sortingThree;
         document.querySelector('.trigger-filter').click();
     }
 
+    const sortPriceChange = () =>{
+        filterTypeFilter();
+    }
 
-    const testTwo = ()=>{
+    const removeFilter = ()=> {
         testData = productList;
+        setCheckAscendingOrder(false);
+        setCheckDescendingOrder(false); 
         document.querySelector('.trigger-filter').click();
     }
 
+    const filterTypeFilter = () => {
+
+        if (checkAscendingOrder){
+            console.log(checkAscendingOrder);
+            buttonSortAscendingOrder();
+        }
+        if (checkDescendingOrder){
+            buttonSortDescendingOrder();
+        }
+        if (!checkAscendingOrder && !checkDescendingOrder){
+
+            const inputPriceFirst = document.querySelector('.js-input-price-first');
+            const inputPriceEnd = document.querySelector('.js-input-price-end');
+            const inputValueFirst = parseInt(inputPriceFirst.value);
+            const inputValueEnd = parseInt(inputPriceEnd.value);
+    
+            let sorting = [];
+            sorting = productList.slice();
+    
+            let sortingTwo = [];
+            sorting.forEach(function(item, index) {
+            
+                if(parseInt(item.price) < inputValueEnd)
+                {
+                    if(parseInt(item.price) > inputValueFirst)
+                    {
+                        sortingTwo.push(item);
+                    }
+                } 
+                
+            });
+    
+            const selectType = document.querySelector('.js-select-type-product');
+            let sortingThree = []; 
+            switch (selectType.value) {
+                case "Показать всё":
+                    sortingThree = sortingTwo;
+                  break;
+                case "Стулья":
+                    sortingTwo.forEach(function(item, index) {
+                        if (item.classProduct === "chair"){
+                            sortingThree.push(item);
+                        }
+                    });
+    
+                  break;
+                case "Столы":
+                    sortingTwo.forEach(function(item, index) {
+                        if (item.classProduct === "table"){
+                            sortingThree.push(item);
+                        }
+                    });
+    
+                  break;
+                case "Комплекты":
+                    sortingTwo.forEach(function(item, index) {
+                        if (item.classProduct === "set"){
+                            sortingThree.push(item);
+                        }
+                    });
+    
+                  break;
+              }
+    
+            testData = sortingThree;
+            document.querySelector('.trigger-filter').click();
+    } 
+
+    }
+    const buttonUpReRender = () => {
+        setIsMoving(false);
+        setIsMovingEndButton(false);
+        filterTypeFilter();
+    }
 
     return (
         <div className="box-filter-products">
@@ -100,13 +293,16 @@ const FilterProducts = () => {
             </button>
 
             <button className="sort-descending-order"
-                    onClick = {(e) => testTwo()} 
+                     onClick = {(e) => buttonSortDescendingOrder()}  
                     >
                 Сортировка по убыванию
             </button>
 
-            <button className="sort-price-order">
-                Сортировка по выбраной стоимости
+            <button className="sort-price-order"
+                    onClick = {(e) => sortPriceChange()}
+                    >  
+                    Сортировка по выбраной стоимости
+                
             </button>
 
             <div class="box-filter-price">
@@ -120,7 +316,9 @@ const FilterProducts = () => {
                     />
 
                     <input 
+                        defaultValue={15500}
                         value = {15500 - endPointX*50}
+                        onChange={(e) => setFirstPointX((e.target.value)/50)} 
                         className="input-price js-input-price-end"
                 
                     />
@@ -136,7 +334,7 @@ const FilterProducts = () => {
 
 
                             <div 
-                                onMouseUp={(e) => setIsMoving(false) && setIsMovingEndButton(false)}
+                                onMouseUp={(e) => buttonUpReRender() }
                                 onMouseDown={(e) => setIsMoving(true)}  
                                 onMouseMove={(e) => setPositionButton(e.nativeEvent.offsetX)}
                             
@@ -151,7 +349,7 @@ const FilterProducts = () => {
 
                             <div 
                                 ref = {widthPointOne}
-                                onMouseUp={(e) => setIsMovingEndButton(false) && setIsMoving(false)}
+                                onMouseUp={(e) => buttonUpReRender()}
                                 onMouseDown={(e) => setIsMovingEndButton(true)}  
                                 onMouseMove={(e) => setPositionButton(e.nativeEvent.offsetX)}
                             
@@ -170,14 +368,21 @@ const FilterProducts = () => {
                     </div>
                 </div>
 
-                <select className="js-select-type-product">
+                <select className="js-select-type-product"
+                         onChange = {(e) => filterTypeFilter()}
+                        >
 
+                    <option className="js-switch-period"
+                            
+                            >
+                        Показать всё</option>
                     <option className="js-switch-period">Стулья</option>
                     <option className="js-switch-period">Столы</option>
                     <option className="js-switch-period">Комплекты</option>
                 </select>
 
-                <button className="sort-price-order">
+                <button className="sort-price-order"
+                        onClick = {(e) => removeFilter()} >
                             очистить фиьлтры
                 </button>
 

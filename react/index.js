@@ -7,20 +7,20 @@ import FilterProducts from './src/filterProducts';
 
 
 const Render = () => {
-    pushData = "productList.id[index].";
+
     ReactDOM.render( <Test/>, document.querySelector('.box-products'));
 }
 
-const reRender = () => {
+/* const reRender = () => {
     pushData = "testData[0][index].";
     
 }
 
 const reRenderDataDescending = () => {
     pushData = "tesDataDescending[0][index].";
-
-}
-
+ */
+/* }
+ */
 const RenderBasket = () => {
     ReactDOM.render( <Basket/>, document.querySelector('.box-basket'));
 }
@@ -34,8 +34,7 @@ const RenderFilter = () => {
 }
  */
 
-window.ReRender = reRender;
-window.renderDataDescending = reRenderDataDescending;
+
 // RenderFilterPrice(); 
 
 Render();

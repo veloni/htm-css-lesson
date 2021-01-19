@@ -2,25 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 const BoxAllProducts = () => {
 
-  const [dataState, setDataState] = useState(null);
+const [dataState, setDataState] = useState(productList);
 
-
- 
-
-
-const testat = () =>{
+const giveData = () =>{
   setDataState([...testData]);
-/*   console.log(dataState);
-  console.log(testData); 
-  console.log(productList); */
 }
-
 
   return (
     <div className="box-products">
       <button 
         className="dn trigger-filter"
-        onClick={() => testat() }
+        onClick={() => giveData() }
       />
             
       {dataState && dataState.map((item, index) => (
