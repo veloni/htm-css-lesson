@@ -24,7 +24,7 @@ const giveData = () =>{
           <span className="product-description-text"> {item.product}  </span>
           <span className="product-price"> {item.price} </span>
           <button className="buy-item" height="50px" width="170px"
-                  onClick={(e) => console.log(123)}
+                  onClick={(e) => console.log()}
           >
             <span className="buy">
               Купить

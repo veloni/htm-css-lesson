@@ -1,22 +1,32 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const FillingBasket = (
-    data, 
+    {data}, 
 ) => {
 
-    const [productNameState, setProductName] = useState(productName);
-    const [productPriceState, setProductPrice] = useState(productPrice);
+    let testId = useRef(null);
+
+/*     console.log(data); */
+
+    const [idState, setIdState] = useState(data.productId);
+    const [productNameState, setProductName] = useState(data.productName);
+    const [productPriceState, setProductPrice] = useState(data.productPrice);
     const [quanityProductState, setQuanityProduct] = useState(1);
-    const [endPriceState, setEndPriceState] = useState(productPrice.replace(/\D/g,''));
+    const [endPriceState, setEndPriceState] = useState(data.productPrice);
+
+    useEffect(() => {
+        setQuanityProduct(data.quanityProduct);
+        setEndPriceState(data.productPrice);
+      })
 
     return (
 
         <tr className="table-basket-border container-product-basket">
             <td> </td>
-            <td> </td>
+            <td> <span ref={testId} className="idtable"> {idState} </span></td>
             <td className="product-name-text"> {productNameState} </td>
-            <td className="product-price-text"> {productPriceState} </td>
+            <td className="product-price-text"> {productPriceState + " р"} </td>
             <td className="product-quanity-text"> {quanityProductState} </td>
             <td className="product-price-text"> {endPriceState + " р"} </td>
         </tr>

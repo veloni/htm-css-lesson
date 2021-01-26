@@ -25,10 +25,11 @@ const findProduct = () => {
             productPrice = item.price;
             productName = item.product;
             itemFind = false;
-            console.log(productPrice);
+            productId = item.id
         }
         else{
             return;
         }
     });
 }
+

@@ -3,20 +3,52 @@ import FillingBasket from './ fillingBasket';
 
 const Basket = () => {
     const [productArrayState, setProductArrayState] = useState([]);
-    let quanityProduct = 1; //времено тут
+    const [idArrayState, setIdArrayState] = useState([]);
+     //времено тут
+
     const getItem = () => {
-        setProductArrayState([
-            ...productArrayState,
-            {
-                productName,
-                quanityProduct,
-                productPrice,
-            },
-        ]);
+        if (!checkItem()){
+            setProductArrayState([
+                ...productArrayState,
+                {
+                    productName,
+                    quanityProduct,
+                    productPrice,
+                    productId,
+
+                },
+            ]);  
+            setIdArrayState([
+                ...idArrayState,
+                    productId,
+            ]);  
+            }
+        else {
+            test123();
+ 
+        }
     }
-    /*    useEffect(() => {
-          console.log(productArrayState);
-      }); */
+   
+    const checkItem = () => idArrayState.includes(productId);
+    const addQuanity = () => {
+        const newProductArray = productArrayState.map((item) => {
+            if (item.productId === productId) {
+                item.quanityProduct += 1;
+                item.productPrice = item.productPrice * 2;
+            }
+            return item;
+        });
+        return newProductArray;
+    }
+
+    const test123 = () => {
+        const newArray = addQuanity();
+        setProductArrayState([...newArray]);
+    }
+
+    
+    
+    
 
     return (
         <div>

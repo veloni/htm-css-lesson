@@ -4,12 +4,18 @@ import Test from './src/test';
 
 import Basket from './src/basket';
 import FilterProducts from './src/filterProducts';
-
+import Slider from './src/slider';
 
 const Render = () => {
 
     ReactDOM.render( <Test/>, document.querySelector('.box-products'));
 }
+
+const RenderSlider = () => {
+
+    ReactDOM.render( <Slider/>, document.querySelector('.slider'));
+}
+
 
 /* const reRender = () => {
     pushData = "testData[0][index].";
@@ -38,7 +44,7 @@ const RenderFilter = () => {
 // RenderFilterPrice(); 
 
 Render();
-
+RenderSlider();
 RenderBasket();
 RenderFilter(); 
 

@@ -7,3 +7,5 @@ let data;
 let pushData;
 let tesDataDescending;
 let test = false;
+let whoAddBasket = [];
+let quanityProduct = 1;

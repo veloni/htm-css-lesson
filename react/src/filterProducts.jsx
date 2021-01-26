@@ -13,9 +13,11 @@ const FilterProducts = () => {
     const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
     const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
+/*     console.log(isCheckPosition) */;
+
     const buttonMove = (moving ,pointX) => {
         const widthButton = widthPointOne.current.clientWidth/2;
-        if (isCheckPosition < 280)
+        if (isCheckPosition < 240)
         {   
             if (positionButton > widthButton + 5)
             {
@@ -286,26 +288,26 @@ const FilterProducts = () => {
 
     return (
         <div className="box-filter-products">
-            <button className="sort-ascending-order"
+            <button className="sort-ascending-order style-button-filter"
                     onClick = {(e) => buttonSortAscendingOrder()}  
             >
                 Сортировка по возрастанию
             </button>
 
-            <button className="sort-descending-order"
+            <button className="sort-descending-order style-button-filter"
                      onClick = {(e) => buttonSortDescendingOrder()}  
                     >
                 Сортировка по убыванию
             </button>
 
-            <button className="sort-price-order"
+            <button className="sort-price-order style-button-filter"
                     onClick = {(e) => sortPriceChange()}
                     >  
                     Сортировка по выбраной стоимости
                 
             </button>
 
-            <div class="box-filter-price">
+         
                 <div class="box-input">
                     <input 
                         defaultValue={0}
@@ -368,11 +370,11 @@ const FilterProducts = () => {
                     </div>
                 </div>
 
-                <select className="js-select-type-product"
+                <select className="js-select-type-product style-button-filter"
                          onChange = {(e) => filterTypeFilter()}
                         >
 
-                    <option className="js-switch-period"
+                    <option className="js-switch-period "
                             
                             >
                         Показать всё</option>
@@ -381,14 +383,13 @@ const FilterProducts = () => {
                     <option className="js-switch-period">Комплекты</option>
                 </select>
 
-                <button className="sort-price-order"
+     
+            <button className="sort-price-order style-button-filter"
                         onClick = {(e) => removeFilter()} >
-                            очистить фиьлтры
-                </button>
-
-
-            </div>
-        </div>
+                            Очистить фильтры
+            </button>
+        </div> 
+ 
     );
 };
 
