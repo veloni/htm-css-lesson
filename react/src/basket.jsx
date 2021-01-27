@@ -45,6 +45,10 @@ const Basket = () => {
         setProductArrayState([...newArray]);
     }
 
+    const boxOrderOpen = () => {
+        window.boxOrderRefWindow.current.classList.remove('dn');
+    }    
+
 
     return (
         <div>
@@ -69,6 +73,10 @@ const Basket = () => {
                 ))}
 
             </table>
+            <button className="button-create-order"
+                     onClick={() => boxOrderOpen()}>
+                Оформить заказ
+            </button>
         </div>
     );
 };

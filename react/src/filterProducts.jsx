@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState , useRef } from 'react';
 
 const FilterProducts = () => {
@@ -7,17 +6,82 @@ const FilterProducts = () => {
     const [firstPointX, setFirstPointX] = useState(0);
     const [endPointX, setEndPointX] = useState(0);
     const [positionButton, setPositionButton] = useState(0);
+
+    const [positionButtonOne, setPositionButtonOne] = useState(0);
+    const [positionButtonTwo, setPositionButtonTwo] = useState(0);
+
     const [isMoving, setIsMoving] = useState(false);
     const [isMovingEndButton, setIsMovingEndButton] = useState(false);
     const [isCheckPosition, setIsCheckPosition] = useState(0);
     const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
     const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
-/*     console.log(isCheckPosition) */;
 
-    const buttonMove = (moving ,pointX) => {
+    const selectButtonMove = () => {
+        if (isMoving){
+            buttonMoveOne();
+        }
+        if (isMovingEndButton){
+            buttonMoveTwo();
+        }
+    }
+
+
+    const buttonMoveOne = () => {
         const widthButton = widthPointOne.current.clientWidth/2;
-        if (isCheckPosition < 240)
+        if (isCheckPosition <= 210)
+        {
+            if(firstPointX > 0){
+                if (positionButtonOne > widthButton + 5){
+                    isMoving && setFirstPointX((firstPointX + 5));
+                }
+                if (positionButtonOne < widthButton - 5){
+                    isMoving && setFirstPointX((firstPointX - 5));
+                }
+            }
+            else{
+                if (positionButtonOne > widthButton + 5){
+                    isMoving && setFirstPointX((firstPointX + 5));
+                }
+            }
+        }
+        else{
+            if (positionButtonOne < widthButton - 5){
+                isMoving && setFirstPointX((firstPointX - 5));
+            }
+        }
+        setIsCheckPosition(firstPointX+endPointX);
+    }
+
+    const buttonMoveTwo = () => {
+        const widthButton = widthPointOne.current.clientWidth/2;
+        if (isCheckPosition <= 210)
+        {
+            if(endPointX >= 0){
+                if (positionButtonTwo > widthButton + 5){
+                    isMovingEndButton && setEndPointX((endPointX - 5));
+                }
+                if (positionButtonTwo < widthButton - 5){
+                    isMovingEndButton && setEndPointX((endPointX + 5));
+                }
+            }
+            else{
+                if (positionButtonTwo < widthButton + 5){
+                    isMovingEndButton && setEndPointX((endPointX + 5));
+                }
+            }
+        }
+        else{
+            if (positionButtonTwo > widthButton + 5){
+                isMovingEndButton && setEndPointX((endPointX - 5));
+            }
+        }
+        setIsCheckPosition(firstPointX+endPointX);
+    }
+        
+
+        /* const widthButton = widthPointOne.current.clientWidth/2;
+        if (isCheckPosition < 215)
         {   
             if (positionButton > widthButton + 5)
             {
@@ -62,9 +126,8 @@ const FilterProducts = () => {
                 isMovingEndButton && setEndPointX((endPointX));
             }
             setIsCheckPosition(firstPointX+endPointX);
-        }
-
-    }
+        } */
+    
 
 
   
@@ -280,11 +343,16 @@ const FilterProducts = () => {
     } 
 
     }
-    const buttonUpReRender = () => {
+    const buttonUpReRenderOne = () => {
         setIsMoving(false);
+        filterTypeFilter();
+    }
+
+    const buttonUpReRenderTwo = () => {
         setIsMovingEndButton(false);
         filterTypeFilter();
     }
+
 
     return (
         <div className="box-filter-products">
@@ -307,39 +375,39 @@ const FilterProducts = () => {
                 
             </button>
 
-         
                 <div class="box-input">
                     <input 
+                        type="number"
+                        min = "0"
+                        max = "15000"
                         defaultValue={0}
                         value={firstPointX*50} 
                         onChange={(e) => setFirstPointX((e.target.value)/50)} 
                         className="input-price js-input-price-first"
-
                     />
 
                     <input 
-                        defaultValue={15500}
+                        type="number"
+                        min = "0"
+                        max = "15000"
+                        defaultValue={0}
                         value = {15500 - endPointX*50}
-                        onChange={(e) => setFirstPointX((e.target.value)/50)} 
+                        onChange={(e) => setEndPointX((e.target.value)/50)} 
                         className="input-price js-input-price-end"
-                
                     />
                 </div>
 
                 <div className="line-price">
                     <div className="into-line-price">   
-                
                         <div 
                             onMouseUp={(e) => setIsMoving(false)}
-                            onMouseMove={(e) => buttonMove()}
+                            onMouseMove={(e) => selectButtonMove()}
                             className="true-into-line-price">  
 
-
                             <div 
-                                onMouseUp={(e) => buttonUpReRender() }
+                                onMouseUp={(e) => buttonUpReRenderOne() }
                                 onMouseDown={(e) => setIsMoving(true)}  
-                                onMouseMove={(e) => setPositionButton(e.nativeEvent.offsetX)}
-                            
+                                onMouseMove={(e) => setPositionButtonOne(e.nativeEvent.offsetX)}
                                 style={
                                     {
                                         marginLeft: `${firstPointX}px`
@@ -351,42 +419,34 @@ const FilterProducts = () => {
 
                             <div 
                                 ref = {widthPointOne}
-                                onMouseUp={(e) => buttonUpReRender()}
+                                onMouseUp={(e) => buttonUpReRenderTwo()}
                                 onMouseDown={(e) => setIsMovingEndButton(true)}  
-                                onMouseMove={(e) => setPositionButton(e.nativeEvent.offsetX)}
-                            
+                                onMouseMove={(e) => setPositionButtonTwo(e.nativeEvent.offsetX)}
                                 style={
                                     {
                                         marginRight: `${endPointX}px`
                                     }
                                 }
-                                
-                                className="end-point-line">
+                                className="end-point-line"
+                                >
                             </div>
-                       
                         </div>
-                     
-                       
                     </div>
                 </div>
 
                 <select className="js-select-type-product style-button-filter"
                          onChange = {(e) => filterTypeFilter()}
                         >
-
-                    <option className="js-switch-period "
-                            
-                            >
-                        Показать всё</option>
+                    <option className="js-switch-period"> Показать всё</option>
                     <option className="js-switch-period">Стулья</option>
                     <option className="js-switch-period">Столы</option>
                     <option className="js-switch-period">Комплекты</option>
                 </select>
 
-     
             <button className="sort-price-order style-button-filter"
-                        onClick = {(e) => removeFilter()} >
-                            Очистить фильтры
+                    onClick = {(e) => removeFilter()} 
+                    >
+                    Очистить фильтры
             </button>
         </div> 
  
