@@ -4,8 +4,7 @@ import FillingBasket from './ fillingBasket';
 const Basket = () => {
     const [productArrayState, setProductArrayState] = useState([]);
     const [idArrayState, setIdArrayState] = useState([]);
-     //времено тут
-
+    
     const getItem = () => {
         if (!checkItem()){
             setProductArrayState([
@@ -24,7 +23,7 @@ const Basket = () => {
             ]);  
             }
         else {
-            test123();
+            createNewArray();
  
         }
     }
@@ -34,21 +33,18 @@ const Basket = () => {
         const newProductArray = productArrayState.map((item) => {
             if (item.productId === productId) {
                 item.quanityProduct += 1;
-                item.productPrice = item.productPrice * 2;
+                item.productPrice = parseInt(item.productPrice) + parseInt(item.productPrice);
             }
             return item;
         });
         return newProductArray;
     }
 
-    const test123 = () => {
+    const createNewArray = () => {
         const newArray = addQuanity();
         setProductArrayState([...newArray]);
     }
 
-    
-    
-    
 
     return (
         <div>

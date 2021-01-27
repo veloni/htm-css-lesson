@@ -7,8 +7,6 @@ const FillingBasket = (
 
     let testId = useRef(null);
 
-/*     console.log(data); */
-
     const [idState, setIdState] = useState(data.productId);
     const [productNameState, setProductName] = useState(data.productName);
     const [productPriceState, setProductPrice] = useState(data.productPrice);
@@ -24,7 +22,7 @@ const FillingBasket = (
 
         <tr className="table-basket-border container-product-basket">
             <td> </td>
-            <td> <span ref={testId} className="idtable"> {idState} </span></td>
+            <td> <span ref={testId} className="idtable dn"> {idState} </span></td>
             <td className="product-name-text"> {productNameState} </td>
             <td className="product-price-text"> {productPriceState + " р"} </td>
             <td className="product-quanity-text"> {quanityProductState} </td>
