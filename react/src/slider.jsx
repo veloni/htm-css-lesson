@@ -12,98 +12,82 @@ const Slider = () => {
   const [checkEndAnimation, setCheckEndAnimation] = useState(true);
 
   const moveLeftImage = () => {
+    if (!checkEndAnimation) { return alert('bratish pomedlenee') }
 
-    if (checkEndAnimation) {
-      setCheckEndAnimation(false);
-      centerImage.current.classList.add('img-slider');
-      rightImage.current.classList.add('img-slider');
+    setCheckEndAnimation(false);
+    centerImage.current.classList.add('img-slider');
+    rightImage.current.classList.add('img-slider');
 
-      centerImage.current.classList.add('move-slider-img-left');
-      centerImage.current.style.opacity = "0";
+    centerImage.current.classList.add('move-slider-img-left');
+    centerImage.current.style.opacity = "0";
 
-      rightImage.current.style.opacity = "1";
-      rightImage.current.classList.add('move-slider-img-left');
+    rightImage.current.style.opacity = "1";
+    rightImage.current.classList.add('move-slider-img-left');
 
-      setTimeout(
-        () => removeMoveImitation(),
-        1000
-      );
+    setTimeout(
+      () => removeMoveImitation(),
+      750
+    );
 
-      const removeMoveImitation = () => {
-        centerImage.current.style.opacity = "1";
-        rightImage.current.style.opacity = "0";
+    const removeMoveImitation = () => {
+      centerImage.current.style.opacity = "1";
+      rightImage.current.style.opacity = "0";
 
-        centerImage.current.classList.remove('img-slider');
-        rightImage.current.classList.remove('img-slider');
+      centerImage.current.classList.remove('img-slider');
+      rightImage.current.classList.remove('img-slider');
 
-        centerImage.current.classList.remove('move-slider-img-left');
-        rightImage.current.classList.remove('move-slider-img-left');
+      centerImage.current.classList.remove('move-slider-img-left');
+      rightImage.current.classList.remove('move-slider-img-left');
 
-        changeImg(imgCenterSliderState, setCenterImgSliderState);
-        changeImg(imgLeftSliderState, setLeftImgSliderState);
-        changeImg(imgRightSliderState, setRightImgSliderState);
-        setCheckEndAnimation(true);
-      }
-
-      const changeImg = (state, setstate) => {
-        if (state === 1) {
-          setstate(4);
-        }
-        else {
-          setstate(state - 1);
-        }
-      }
+      changeImg(imgCenterSliderState, setCenterImgSliderState);
+      changeImg(imgLeftSliderState, setLeftImgSliderState);
+      changeImg(imgRightSliderState, setRightImgSliderState);
+      setCheckEndAnimation(true);
     }
-    else {
-      alert("Братиш помедлейней");
+
+    const changeImg = (state, setstate) => {
+      setstate(state === 1 ? 4 : state - 1);
     }
   }
 
   const moveRightImage = () => {
-    if (checkEndAnimation) {
-      setCheckEndAnimation(false);
-      centerImage.current.classList.add('img-slider');
-      leftImage.current.classList.add('img-slider');
+    if (!checkEndAnimation) { return alert('bratish pomedlenee') }
 
-      centerImage.current.classList.add('move-slider-img-right');
-      centerImage.current.style.opacity = "0";
+    setCheckEndAnimation(false);
+    centerImage.current.classList.add('img-slider');
+    leftImage.current.classList.add('img-slider');
 
-      leftImage.current.style.opacity = "1";
-      leftImage.current.classList.add('move-slider-img-right');
+    centerImage.current.classList.add('move-slider-img-right');
+    centerImage.current.style.opacity = "0";
 
-      setTimeout(
-        () => removeMoveImitation(),
-        2000
-      );
+    leftImage.current.style.opacity = "1";
+    leftImage.current.classList.add('move-slider-img-right');
 
-      const removeMoveImitation = () => {
-        centerImage.current.style.opacity = "1";
-        leftImage.current.style.opacity = "0";
+    setTimeout(
+      () => removeMoveImitation(),
+      750
+    );
 
-        centerImage.current.classList.remove('img-slider');
-        leftImage.current.classList.remove('img-slider');
+    const removeMoveImitation = () => {
+      centerImage.current.style.opacity = "1";
+      leftImage.current.style.opacity = "0";
 
-        centerImage.current.classList.remove('move-slider-img-right');
-        leftImage.current.classList.remove('move-slider-img-right');
+      centerImage.current.classList.remove('img-slider');
+      leftImage.current.classList.remove('img-slider');
 
-        changeImg(imgCenterSliderState, setCenterImgSliderState);
-        changeImg(imgLeftSliderState, setLeftImgSliderState);
-        changeImg(imgRightSliderState, setRightImgSliderState);
-        setCheckEndAnimation(true);
-      }
+      centerImage.current.classList.remove('move-slider-img-right');
+      leftImage.current.classList.remove('move-slider-img-right');
 
-      const changeImg = (state, setstate) => {
-        if (state === 4) {
-          setstate(1);
-        }
-        else {
-          setstate(state + 1);
-        }
-      }
+      changeImg(imgCenterSliderState, setCenterImgSliderState);
+      changeImg(imgLeftSliderState, setLeftImgSliderState);
+      changeImg(imgRightSliderState, setRightImgSliderState);
+      setCheckEndAnimation(true);
     }
-    else {
-      alert("Братиш помедленей")
+
+    const changeImg = (state, setstate) => {
+      setstate(state === 4 ? 1 : state + 1);
     }
+    
   }
   
   return (

@@ -1,141 +1,108 @@
 import React, { useEffect, useState , useRef } from 'react';
 
 const FilterProducts = () => {
-   
-    const widthPointOne = useRef(null);
-    const [firstPointX, setFirstPointX] = useState(0);
-    const [endPointX, setEndPointX] = useState(0);
-    const [positionButton, setPositionButton] = useState(0);
-
+    const lineRef = useRef(null);
+    const widthPointRight = useRef(null);
+    const widthPointLeft = useRef(null);
+    const [leftPointX, setLeftPointX] = useState(0);
+    const [rightPointX, setRightPointX] = useState(-216);
     const [positionButtonOne, setPositionButtonOne] = useState(0);
     const [positionButtonTwo, setPositionButtonTwo] = useState(0);
 
-    const [isMoving, setIsMoving] = useState(false);
-    const [isMovingEndButton, setIsMovingEndButton] = useState(false);
+    const [isMovingLeftButton, setIsMovingLeftButton] = useState(false);
+    const [isMovingRightButton, setIsMovingRightButton] = useState(false);
     const [isCheckPosition, setIsCheckPosition] = useState(0);
     const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
     const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
+    const leftButtonClickCheck = () => {
+        setIsMovingLeftButton(true);
+    }
+
+    const rightButtonClickCheck = () => {
+        setIsMovingRightButton(true);
+    }
+
+
+    const moveClosestButton = (e) => {
+        if (e.target === widthPointRight.current) { return; };
+
+        const { clientWidth } = widthPointRight.current;
+        const { offsetX } = e.nativeEvent;
+        const checkLeftPositionButton = offsetX - leftPointX - clientWidth < -offsetX - rightPointX + clientWidth; 
+    
+        if (checkLeftPositionButton) {  
+            if (offsetX <= rightPointX - 2 * clientWidth) {
+                setLeftPointX(-rightPointX + 1.5*clientWidth);
+                return;
+            }
+
+            if (positionButtonOne-clientWidth < clientWidth) { 
+                setLeftPointX(0); 
+                return;
+            }
+
+            return setLeftPointX(positionButtonOne - clientWidth); 
+        }
+
+        ////////
+
+       if (offsetX <= leftPointX + 2 * clientWidth) {
+            setRightPointX(-(leftPointX) );
+            return;
+        } 
+
+        if (positionButtonTwo >= 300) { 
+            setRightPointX(-216); 
+            return;
+        } 
+
+        return setRightPointX(-positionButtonTwo +  2 * clientWidth);      
+    }
+
+
+    const leaveMouse = () => {
+        setIsMovingRightButton(false);
+        setIsMovingLeftButton(false);
+    }
+
+    const handleLineMoving = (e) => {
+        setPositionButtonOne(e.nativeEvent.layerX);
+        setPositionButtonTwo(e.nativeEvent.layerX);
+        selectButtonMove();
+    }
 
     const selectButtonMove = () => {
-        if (isMoving){
+        if (isMovingLeftButton){
             buttonMoveOne();
+  
         }
-        if (isMovingEndButton){
+        if (isMovingRightButton){
             buttonMoveTwo();
         }
     }
 
-
     const buttonMoveOne = () => {
-        const widthButton = widthPointOne.current.clientWidth/2;
-        if (isCheckPosition <= 210)
-        {
-            if(firstPointX > 0){
-                if (positionButtonOne > widthButton + 5){
-                    isMoving && setFirstPointX((firstPointX + 5));
-                }
-                if (positionButtonOne < widthButton - 5){
-                    isMoving && setFirstPointX((firstPointX - 5));
-                }
-            }
-            else{
-                if (positionButtonOne > widthButton + 5){
-                    isMoving && setFirstPointX((firstPointX + 5));
-                }
-            }
-        }
-        else{
-            if (positionButtonOne < widthButton - 5){
-                isMoving && setFirstPointX((firstPointX - 5));
-            }
-        }
-        setIsCheckPosition(firstPointX+endPointX);
+        const widthButton = widthPointRight.current.clientWidth / 2;
+        if (positionButtonOne <= widthButton) { return; };
+        if (positionButtonOne - widthButton  >= -rightPointX) { return; };
+        setLeftPointX(positionButtonOne - widthButton);
     }
 
     const buttonMoveTwo = () => {
-        const widthButton = widthPointOne.current.clientWidth/2;
-        if (isCheckPosition <= 210)
-        {
-            if(endPointX >= 0){
-                if (positionButtonTwo > widthButton + 5){
-                    isMovingEndButton && setEndPointX((endPointX - 5));
-                }
-                if (positionButtonTwo < widthButton - 5){
-                    isMovingEndButton && setEndPointX((endPointX + 5));
-                }
-            }
-            else{
-                if (positionButtonTwo < widthButton + 5){
-                    isMovingEndButton && setEndPointX((endPointX + 5));
-                }
-            }
-        }
-        else{
-            if (positionButtonTwo > widthButton + 5){
-                isMovingEndButton && setEndPointX((endPointX - 5));
-            }
-        }
-        setIsCheckPosition(firstPointX+endPointX);
+        const widthButton = widthPointRight.current.clientWidth / 2;
+        if (positionButtonTwo >= 246) { return; };
+        if (positionButtonTwo - widthButton  <= leftPointX) { return; };
+        setRightPointX(-positionButtonTwo + widthButton);
     }
-        
 
-        /* const widthButton = widthPointOne.current.clientWidth/2;
-        if (isCheckPosition < 215)
-        {   
-            if (positionButton > widthButton + 5)
-            {
-                isMoving && setFirstPointX((firstPointX + 5));
-                isMovingEndButton && setEndPointX((endPointX - 5));
-            }
-            if (positionButton < widthButton - 5)
-            {
-                isMoving && setFirstPointX((firstPointX - 5));
-                isMovingEndButton && setEndPointX((endPointX + 5));
-            }
-            setIsCheckPosition(firstPointX+endPointX);
-
-            if (positionButton > widthButton + 5)
-            {
-                if (endPointX <= 0)
-                {
-                    isMovingEndButton && setEndPointX((endPointX));
-                }
-                isMoving && setFirstPointX((firstPointX + 5));
-                }
-    
-            if (positionButton < widthButton - 5)
-            {
-                if (firstPointX <= 0)
-                {
-                    isMoving && setFirstPointX((firstPointX));
-                }
-                isMovingEndButton && setEndPointX((endPointX + 5));
-            } 
-        }
-        else{
-            if (positionButton > widthButton + 5)
-            {
-                isMoving && setFirstPointX((firstPointX));
-                isMovingEndButton && setEndPointX((endPointX - 5));
-            }
-
-            if (positionButton < widthButton - 5)
-            {
-                isMoving && setFirstPointX((firstPointX - 5));
-                isMovingEndButton && setEndPointX((endPointX));
-            }
-            setIsCheckPosition(firstPointX+endPointX);
-        } */
-    
-
-
-  
-  const buttonSortAscendingOrder = () =>{
+  const buttonSortAscendingOrder = () => {
         setCheckAscendingOrder(true);
         setCheckDescendingOrder(false);
         let sorting = [];
         sorting = productList.slice();
+        console.log(sorting);
+        console.log(sorting === productList);
         sorting.sort(function(a,b) {
             let x = parseInt(a.price.replace(/\D/g,''));
             let y = parseInt(b.price.replace(/\D/g,''));
@@ -344,12 +311,12 @@ const FilterProducts = () => {
 
     }
     const buttonUpReRenderOne = () => {
-        setIsMoving(false);
+        setIsMovingLeftButton(false);
         filterTypeFilter();
     }
 
     const buttonUpReRenderTwo = () => {
-        setIsMovingEndButton(false);
+        setIsMovingRightButton(false);
         filterTypeFilter();
     }
 
@@ -375,14 +342,14 @@ const FilterProducts = () => {
                 
             </button>
 
-                <div class="box-input">
+                <div className="box-input">
                     <input 
                         type="number"
                         min = "0"
                         max = "15000"
                         defaultValue={0}
-                        value={firstPointX*50} 
-                        onChange={(e) => setFirstPointX((e.target.value)/50)} 
+                        value={leftPointX*50} 
+                        onChange={(e) => setLeftPointX((e.target.value)/50)} 
                         className="input-price js-input-price-first"
                     />
 
@@ -391,8 +358,8 @@ const FilterProducts = () => {
                         min = "0"
                         max = "15000"
                         defaultValue={0}
-                        value = {15500 - endPointX*50}
-                        onChange={(e) => setEndPointX((e.target.value)/50)} 
+                        value = {15500 - rightPointX*50}
+                        onChange={(e) => setRightPointX((e.target.value)/50)} 
                         className="input-price js-input-price-end"
                     />
                 </div>
@@ -400,34 +367,36 @@ const FilterProducts = () => {
                 <div className="line-price">
                     <div className="into-line-price">   
                         <div 
-                            onMouseUp={(e) => setIsMoving(false)}
-                            onMouseMove={(e) => selectButtonMove()}
+                            ref = {lineRef}
+                            onMouseUp={() => leaveMouse()}
+                            onMouseDown={(e) => moveClosestButton(e)}
+                            onMouseMove={(e) => handleLineMoving(e)}
+                            onMouseLeave={() => leaveMouse()}
                             className="true-into-line-price">  
 
                             <div 
-                                onMouseUp={(e) => buttonUpReRenderOne() }
-                                onMouseDown={(e) => setIsMoving(true)}  
-                                onMouseMove={(e) => setPositionButtonOne(e.nativeEvent.offsetX)}
+                                ref = {widthPointLeft}
+                                onMouseUp={() => buttonUpReRenderOne()}
+                                onMouseDown={() => leftButtonClickCheck()}  
                                 style={
                                     {
-                                        marginLeft: `${firstPointX}px`
+                                        transform: `translateX(${leftPointX}px)`
                                     }
                                 }
-                                className="first-point-line"
+                                className={`first-point-line ${!isMovingLeftButton ? 'transition-point' : ''}`}
                             >
                             </div>
 
                             <div 
-                                ref = {widthPointOne}
-                                onMouseUp={(e) => buttonUpReRenderTwo()}
-                                onMouseDown={(e) => setIsMovingEndButton(true)}  
-                                onMouseMove={(e) => setPositionButtonTwo(e.nativeEvent.offsetX)}
+                                ref = {widthPointRight}
+                                onMouseUp={() => buttonUpReRenderTwo()}
+                                onMouseDown={() => rightButtonClickCheck()}  
                                 style={
                                     {
-                                        marginRight: `${endPointX}px`
+                                        transform: `translateX(${-rightPointX}px)`
                                     }
                                 }
-                                className="end-point-line"
+                                className={`end-point-line ${!isMovingRightButton ? 'transition-point' : ''}`}
                                 >
                             </div>
                         </div>
@@ -435,7 +404,7 @@ const FilterProducts = () => {
                 </div>
 
                 <select className="js-select-type-product style-button-filter"
-                         onChange = {(e) => filterTypeFilter()}
+                         onChange = {() => filterTypeFilter()}
                         >
                     <option className="js-switch-period"> Показать всё</option>
                     <option className="js-switch-period">Стулья</option>
@@ -444,7 +413,7 @@ const FilterProducts = () => {
                 </select>
 
             <button className="sort-price-order style-button-filter"
-                    onClick = {(e) => removeFilter()} 
+                    onClick = {() => removeFilter()} 
                     >
                     Очистить фильтры
             </button>
