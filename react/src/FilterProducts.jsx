@@ -4,16 +4,19 @@ const FilterProducts = () => {
     const lineRef = useRef(null);
     const widthPointRight = useRef(null);
     const widthPointLeft = useRef(null);
+
+    const inputLeft = useRef(null);
+    const inputRight = useRef(null);
+
     const [leftPointX, setLeftPointX] = useState(0);
     const [rightPointX, setRightPointX] = useState(-216);
     const [positionButtonOne, setPositionButtonOne] = useState(0);
     const [positionButtonTwo, setPositionButtonTwo] = useState(0);
-
     const [isMovingLeftButton, setIsMovingLeftButton] = useState(false);
     const [isMovingRightButton, setIsMovingRightButton] = useState(false);
-    const [isCheckPosition, setIsCheckPosition] = useState(0);
     const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
     const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
+ /*    const [valueRightInput, setValueRightInput] = useState(0); */
 
     const leftButtonClickCheck = () => {
         setIsMovingLeftButton(true);
@@ -22,7 +25,6 @@ const FilterProducts = () => {
     const rightButtonClickCheck = () => {
         setIsMovingRightButton(true);
     }
-
 
     const moveClosestButton = (e) => {
         if (e.target === widthPointRight.current) { return; };
@@ -252,8 +254,8 @@ const FilterProducts = () => {
         }
         if (!checkAscendingOrder && !checkDescendingOrder){
 
-            const inputPriceFirst = document.querySelector('.js-input-price-first');
-            const inputPriceEnd = document.querySelector('.js-input-price-end');
+            const inputPriceFirst = inputLeft.current;
+            const inputPriceEnd = inputRight.current;
             const inputValueFirst = parseInt(inputPriceFirst.value);
             const inputValueEnd = parseInt(inputPriceEnd.value);
     
@@ -320,6 +322,27 @@ const FilterProducts = () => {
         filterTypeFilter();
     }
 
+    const inputValueLeft = (e) => {
+        if(parseInt(e.target.value) < parseInt(inputRight.current.value)){
+            setLeftPointX(e.target.value/50); 
+            return;
+        } 
+        alert("Братиш лево не может быть меньше чем право");
+    }
+
+    const inputValueRight = (e) => {
+        const { value } = e.target;
+
+        const isBiggerNumber = parseInt(value) > parseInt(inputLeft.current.value);
+
+        if (isBiggerNumber) {
+            setRightPointX(Math.ceil(-value + 2500) / 50);
+            return;
+        } 
+        alert("Братиш лево не может быть меньше чем право");
+    }
+
+  
 
     return (
         <div className="box-filter-products">
@@ -344,23 +367,19 @@ const FilterProducts = () => {
 
                 <div className="box-input">
                     <input 
+                        ref = {inputLeft}
                         type="number"
-                        min = "0"
-                        max = "15000"
-                        defaultValue={0}
-                        value={leftPointX*50} 
-                        onChange={(e) => setLeftPointX((e.target.value)/50)} 
-                        className="input-price js-input-price-first"
+                        value={(leftPointX * 50)} 
+                        onChange={(e) => inputValueLeft(e)} 
+                        className="input-price"
                     />
 
                     <input 
+                       ref = {inputRight}
                         type="number"
-                        min = "0"
-                        max = "15000"
-                        defaultValue={0}
-                        value = {15500 - rightPointX*50}
-                        onChange={(e) => setRightPointX((e.target.value)/50)} 
-                        className="input-price js-input-price-end"
+                        value = {Math.ceil((-(rightPointX-50) * 50))}
+                        onChange={(e) => inputValueRight(e)} 
+                        className="input-price"
                     />
                 </div>
 
