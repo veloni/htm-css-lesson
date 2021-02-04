@@ -8,6 +8,12 @@ const FilterProducts = () => {
     const inputLeft = useRef(null);
     const inputRight = useRef(null);
 
+    const  [whereGetValueLeft, setWhereGetValueLeft] = useState(true);
+    const  [whereGetValueRight, setWhereGetValueRight] = useState(true);
+
+    const [leftInputValue, setLeftInputValue] = useState(null);
+    const [rightInputValue, setRightInputValue] = useState(null);
+
     const [leftPointX, setLeftPointX] = useState(0);
     const [rightPointX, setRightPointX] = useState(-216);
     const [positionButtonOne, setPositionButtonOne] = useState(0);
@@ -16,7 +22,6 @@ const FilterProducts = () => {
     const [isMovingRightButton, setIsMovingRightButton] = useState(false);
     const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
     const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
- /*    const [valueRightInput, setValueRightInput] = useState(0); */
 
     const leftButtonClickCheck = () => {
         setIsMovingLeftButton(true);
@@ -309,9 +314,9 @@ const FilterProducts = () => {
     
             testData = sortingThree;
             document.querySelector('.trigger-filter').click();
-    } 
-
+        } 
     }
+
     const buttonUpReRenderOne = () => {
         setIsMovingLeftButton(false);
         filterTypeFilter();
@@ -322,27 +327,45 @@ const FilterProducts = () => {
         filterTypeFilter();
     }
 
+    const getValueLeft = (e) =>{
+        setLeftInputValue(e.target.value);
+        setWhereGetValueLeft(false);
+        console.log(whereGetValueLeft);
+    }
+
     const inputValueLeft = (e) => {
-        if(parseInt(e.target.value) < parseInt(inputRight.current.value)){
-            setLeftPointX(e.target.value/50); 
-            return;
-        } 
-        alert("Братиш лево не может быть меньше чем право");
+        if (e.key === 'Enter') {
+            if (parseInt(inputLeft.current.value) + 1500 < parseInt(inputRight.current.value)){
+                setLeftPointX(Math.abs(leftInputValue/50));
+                setWhereGetValueLeft(true);
+                sortPriceChange();
+                return;
+            }
+            setLeftPointX(-rightPointX);
+            setWhereGetValueLeft(true); 
+            sortPriceChange();
+          }
+    }
+
+    const getValueRight = (e) =>{
+        setRightInputValue(e.target.value);
+        setWhereGetValueRight(false);
     }
 
     const inputValueRight = (e) => {
-        const { value } = e.target;
-
-        const isBiggerNumber = parseInt(value) > parseInt(inputLeft.current.value);
-
-        if (isBiggerNumber) {
-            setRightPointX(Math.ceil(-value + 2500) / 50);
-            return;
-        } 
-        alert("Братиш лево не может быть меньше чем право");
+        if (e.key === 'Enter') {
+            if(parseInt(inputRight.current.value)>13300) { setRightPointX(-216); return; } 
+                if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value) + 1500){ 
+                        setRightPointX((-(rightInputValue)/50+50));
+                        setWhereGetValueRight(true);
+                        sortPriceChange();
+                        return;
+                    } 
+                    setRightPointX(-leftPointX);
+                    setWhereGetValueRight(true);  
+                    sortPriceChange();
+                }
     }
-
-  
 
     return (
         <div className="box-filter-products">
@@ -369,16 +392,18 @@ const FilterProducts = () => {
                     <input 
                         ref = {inputLeft}
                         type="number"
-                        value={(leftPointX * 50)} 
-                        onChange={(e) => inputValueLeft(e)} 
+                        value={whereGetValueLeft ? leftPointX * 50 : leftInputValue} 
+                        onChange={(e) => getValueLeft(e)} 
+                        onKeyDown={(e) => inputValueLeft(e)} 
                         className="input-price"
                     />
 
                     <input 
-                       ref = {inputRight}
+                        ref = {inputRight}
                         type="number"
-                        value = {Math.ceil((-(rightPointX-50) * 50))}
-                        onChange={(e) => inputValueRight(e)} 
+                        value = {whereGetValueRight ?  Math.ceil((-(rightPointX-50) * 50)) : rightInputValue}
+                        onChange={(e) => getValueRight(e)} 
+                        onKeyDown={(e) => inputValueRight(e)} 
                         className="input-price"
                     />
                 </div>
