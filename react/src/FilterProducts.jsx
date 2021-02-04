@@ -4,7 +4,6 @@ const FilterProducts = () => {
     const lineRef = useRef(null);
     const widthPointRight = useRef(null);
     const widthPointLeft = useRef(null);
-
     const inputLeft = useRef(null);
     const inputRight = useRef(null);
 
@@ -77,6 +76,7 @@ const FilterProducts = () => {
         setPositionButtonOne(e.nativeEvent.layerX);
         setPositionButtonTwo(e.nativeEvent.layerX);
         selectButtonMove();
+        sortPriceChange();
     }
 
     const selectButtonMove = () => {
@@ -115,9 +115,10 @@ const FilterProducts = () => {
             let y = parseInt(b.price.replace(/\D/g,''));
             return x < y ? -1 : x > y ? 1 : 0;
         });  
+
       
-        const inputPriceFirst = document.querySelector('.js-input-price-first');
-        const inputPriceEnd = document.querySelector('.js-input-price-end');
+        const inputPriceFirst = inputLeft.current;
+        const inputPriceEnd = inputRight.current;
         const inputValueFirst = parseInt(inputPriceFirst.value);
         const inputValueEnd = parseInt(inputPriceEnd.value);
 
@@ -182,8 +183,8 @@ const FilterProducts = () => {
             return x < y ? 1 : x > y ? -1 : 0;
         }); 
 
-        const inputPriceFirst = document.querySelector('.js-input-price-first');
-        const inputPriceEnd = document.querySelector('.js-input-price-end');
+        const inputPriceFirst = inputLeft.current;
+        const inputPriceEnd = inputRight.current;
         const inputValueFirst = parseInt(inputPriceFirst.value);
         const inputValueEnd = parseInt(inputPriceEnd.value);
 

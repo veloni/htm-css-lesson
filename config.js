@@ -9,3 +9,4 @@ let tesDataDescending;
 let test = false;
 let whoAddBasket = [];
 let quanityProduct = 1;
+let endProductArray = [];

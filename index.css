@@ -89,6 +89,7 @@
 .basket-icon{
   height: 50%;
 }
+
 .box-basket{
   overflow: scroll;
   height: 750px;
@@ -133,7 +134,7 @@
   color: black;
 }
 .column-delete{
-  width: 5%;
+  width: 10%;
 }
 .column-img{
   width: 15%;
@@ -276,9 +277,21 @@ text-align: left;
   font-weight: 400;
   line-height: 19px;
   letter-spacing: 0em;
+  height: 100%;
   text-align: center;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  border: none;
 }
-
+.arrow-svg{
+  height: 40px;
+}
+.arrow-svg-down{
+  height: 40px;
+  transform: rotate(180deg);
+}
 .header-nav-two{
   display: flex;
   justify-content: space-between;
@@ -957,7 +970,7 @@ justify-content:space-evenly;
   background-color: grey;
   opacity: 0.8;
   z-index: 4;
-  display: flex;
+
   flex-direction: column;
 }
 

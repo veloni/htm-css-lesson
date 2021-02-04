@@ -1,6 +1,6 @@
 const displayNoneBasket = () => {
     const basket = document.querySelector('.box-basket');
-    basket.classList.add('dn');
+ /*    basket.classList.add('dn'); */
 }
 const displayNoneRemoveBasket = () => {
     const basket = document.querySelector('.box-basket');

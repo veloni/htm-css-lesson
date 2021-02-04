@@ -25,7 +25,8 @@ const findProduct = () => {
             productPrice = item.price;
             productName = item.product;
             itemFind = false;
-            productId = item.id
+            productId = item.id;
+            ordered = true;
         }
         else{
             return;

@@ -17,7 +17,6 @@ const RenderSlider = () => {
 }
 
 const RenderOrder = () => {
-
     ReactDOM.render( <BoxOrder/>, document.querySelector('.order-wrapper'));
 }
 
