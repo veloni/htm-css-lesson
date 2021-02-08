@@ -15,10 +15,11 @@ const FillingBasket = ({
     const [quanityProductState, setQuanityProduct] = useState(1);
     const [endPriceState, setEndPriceState] = useState(data.productPrice);
     const [orderedState, setOrderedState] = useState(data.ordered);
+   
 
     useEffect(() => {
         setQuanityProduct(data.quanityProduct);
-        setEndPriceState(data.productPrice);
+        setEndPriceState(data.productPrice); 
       })
     
     const deleteItem = () => {

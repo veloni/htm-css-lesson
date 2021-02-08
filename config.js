@@ -10,3 +10,4 @@ let test = false;
 let whoAddBasket = [];
 let quanityProduct = 1;
 let endProductArray = [];
+let endPrice = 0;

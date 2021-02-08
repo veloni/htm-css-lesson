@@ -4,7 +4,7 @@ import FillingBasket from './ fillingBasket';
 const Basket = () => {
     const [productArrayState, setProductArrayState] = useState([]);
     const [idArrayState, setIdArrayState] = useState([]);
-    
+
     const getItem = () => {
         if (!checkItem()){
             setProductArrayState([
@@ -30,7 +30,7 @@ const Basket = () => {
 
 
     const pushData = (idState) => {
-    
+
        const newProductArray = productArrayState.map((item) => {
             if (item.productId === idState) {
                 item.ordered = false;
@@ -63,13 +63,16 @@ const Basket = () => {
     }
 
     const boxOrderOpen = () => {
+
         const mainBoxOrder = document.querySelector('.order-wrapper');
         mainBoxOrder.style.display = "flex";
-        // window.boxOrderRefWindow.current.classList.remove('dn');
-
         endProductArray = productArrayState;
         document.querySelector('.trigger-fillingOrder').click();
     }    
+  /*   setTimeout(
+        () =>  boxOrderOpen(),
+        1
+      ); */ 
 
     const renderBasketItems = () => {
         const myArray = productArrayState.map((data, index) => {

@@ -7,12 +7,10 @@ import FilterProducts from './src/FilterProducts';
 import Slider from './src/slider';
 
 const Render = () => {
-
     ReactDOM.render( <BoxAllProducts/>, document.querySelector('.box-products'));
 }
 
 const RenderSlider = () => {
-
     ReactDOM.render( <Slider/>, document.querySelector('.slider'));
 }
 
