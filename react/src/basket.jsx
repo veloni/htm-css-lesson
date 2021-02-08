@@ -30,14 +30,15 @@ const Basket = () => {
 
 
     const pushData = (idState) => {
-
        const newProductArray = productArrayState.map((item) => {
             if (item.productId === idState) {
                 item.ordered = false;
             }
             return item;
         });
+      
         setProductArrayState([...newProductArray]);
+
     }    
    
     const checkItem = () => idArrayState.includes(productId);
@@ -63,11 +64,12 @@ const Basket = () => {
     }
 
     const boxOrderOpen = () => {
-
         const mainBoxOrder = document.querySelector('.order-wrapper');
         mainBoxOrder.style.display = "flex";
         endProductArray = productArrayState;
         document.querySelector('.trigger-fillingOrder').click();
+        const bodySelector = document.querySelector('body');
+        bodySelector.style.overflow = "hidden";
     }    
   /*   setTimeout(
         () =>  boxOrderOpen(),

@@ -24,6 +24,7 @@ const FillingBasket = ({
     
     const deleteItem = () => {
         pushData(idState);
+        
     }
 
     const upQunity = () => {

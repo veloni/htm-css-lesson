@@ -9,22 +9,32 @@ const BoxOrder = () => {
     let [quanityItemsEnd, setQuanityItemsEnd] = useState(1);
 
     const giveDataOrder = () => {
+        const NewProductArrayFilter = endProductArray;
 
-        const newProductArray = endProductArray.map((item) => {
+        NewProductArrayFilter.forEach((item,index) =>{
+            if (item.ordered === false){
+                NewProductArrayFilter.splice(index, 1)
+            }
+        });
+
+        const newProductArray = NewProductArrayFilter.map((item) => {
             setEndPriceSate(endPriceState += item.productPrice * item.quanityProduct);
             setQuanityItemsEnd(quanityItemsEnd++);
             return item;
         });
         setOrderArrayState([...newProductArray]);
-
-
     }
 
+    const closeOrder = () => {
+        const mainBoxOrder = document.querySelector('.order-wrapper');
+        mainBoxOrder.style.display = "none";
+        const bodySelector = document.querySelector('body');
+        bodySelector.style.overflow = "visible";
+    }
 
     /*     useEffect(() => {
             console.log(orderArrayState);
         }); */
-
 
 
     return (
@@ -40,6 +50,11 @@ const BoxOrder = () => {
                         <span className="text-order-title">
                             Оформление заказа
                         </span>
+                        <div className="close-order"
+                             onClick={() => closeOrder()}    
+                                        >
+                            CLOSE
+                        </div>
                     </div>
                     <div className="container-main-order">
                         <div className="container-busket-order">
@@ -126,12 +141,12 @@ const BoxOrder = () => {
                                     <div className="wrapper-payment-bottom-order-one-section">
                                         <div className="wrapper-payment-bottom-order-two">
                                             <div>
-                                                <span> Ввод промокода </span>
-                                                <input>
+                                                <span className="text-bottom-order"> Ввод промокода: </span>
+                                                <input className="input-promo">
                                                 </input>
                                             </div>
 
-                                            <span> Выберите способ оплаты </span>
+                                            <span className="text-bottom-order"> Выберите способ оплаты </span>
                                             <select className="">
                                                 <option className=""> При получении </option>
                                                 <option className=""> Онлайн</option>
@@ -139,7 +154,7 @@ const BoxOrder = () => {
                                         </div>
 
                                         <div className="wrapper-details-order">
-                                            <span> Детали заказа </span>
+                                            <span className="text-bottom-order"> Детали заказа </span>
                                         </div>
                                     </div>
                                 </div>
