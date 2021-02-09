@@ -22,6 +22,10 @@ const FilterProducts = () => {
     const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
     const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
+    const [fixMoveRightButton, setFixMoveRightButton] = useState(false);
+    const [fixMoveLeftButton, setFixMoveLeftButton] = useState(false);
+
+
     const leftButtonClickCheck = () => {
         setIsMovingLeftButton(true);
     }
@@ -36,34 +40,52 @@ const FilterProducts = () => {
         const { clientWidth } = widthPointRight.current;
         const { offsetX } = e.nativeEvent;
         const checkLeftPositionButton = offsetX - leftPointX - clientWidth < -offsetX - rightPointX + clientWidth; 
-    
+        setFixMoveLeftButton(true);
         if (checkLeftPositionButton) {  
             if (offsetX <= rightPointX - 2 * clientWidth) {
-                setLeftPointX(-rightPointX + 1.5*clientWidth);
+                setLeftPointX(-rightPointX + 1.5 * clientWidth);
+                removeMoveOutLeftButton();
                 return;
             }
 
             if (positionButtonOne-clientWidth < clientWidth) { 
                 setLeftPointX(0); 
+                removeMoveOutLeftButton();
                 return;
             }
-
-            return setLeftPointX(positionButtonOne - clientWidth); 
+            removeMoveOutLeftButton();
+            setLeftPointX(positionButtonOne - clientWidth); 
+            return;
         }
 
-        ////////
-
+       setFixMoveRightButton(true);
        if (offsetX <= leftPointX + 2 * clientWidth) {
             setRightPointX(-(leftPointX) );
+            removeMoveOutRightButton();
             return;
         } 
 
         if (positionButtonTwo >= 300) { 
             setRightPointX(-216); 
+            removeMoveOutRightButton();
             return;
         } 
 
-        return setRightPointX(-positionButtonTwo +  2 * clientWidth);      
+        removeMoveOutRightButton();
+        setRightPointX(-positionButtonTwo +  2 * clientWidth);    
+        return;  
+    }
+
+    const removeMoveOutRightButton = () => {
+        setTimeout(() => {
+            setFixMoveRightButton(false);
+        }, 2000);
+    }
+
+    const removeMoveOutLeftButton = () => {
+        setTimeout(() => {
+            setFixMoveLeftButton(false);
+        }, 2000);
     }
 
 
@@ -91,14 +113,22 @@ const FilterProducts = () => {
 
     const buttonMoveOne = () => {
         const widthButton = widthPointRight.current.clientWidth / 2;
-        if (positionButtonOne <= widthButton) { return; };
+        if (positionButtonOne <= widthButton * 2) {
+            setLeftPointX(0);
+            return; 
+        };
         if (positionButtonOne - widthButton  >= -rightPointX) { return; };
+ 
         setLeftPointX(positionButtonOne - widthButton);
+        return;
     }
 
     const buttonMoveTwo = () => {
         const widthButton = widthPointRight.current.clientWidth / 2;
-        if (positionButtonTwo >= 246) { return; };
+        if (positionButtonTwo >= 246) { 
+            setRightPointX(-216);
+            return;
+        };
         if (positionButtonTwo - widthButton  <= leftPointX) { return; };
         setRightPointX(-positionButtonTwo + widthButton);
     }
@@ -331,7 +361,6 @@ const FilterProducts = () => {
     const getValueLeft = (e) =>{
         setLeftInputValue(e.target.value);
         setWhereGetValueLeft(false);
-        console.log(whereGetValueLeft);
     }
 
     const inputValueLeft = (e) => {
@@ -428,7 +457,7 @@ const FilterProducts = () => {
                                         transform: `translateX(${leftPointX}px)`
                                     }
                                 }
-                                className={`first-point-line ${!isMovingLeftButton ? 'transition-point' : ''}`}
+                                className={`first-point-line ${!isMovingLeftButton && fixMoveLeftButton ? 'transition-point' : ''}`}
                             >
                             </div>
 
@@ -441,7 +470,7 @@ const FilterProducts = () => {
                                         transform: `translateX(${-rightPointX}px)`
                                     }
                                 }
-                                className={`end-point-line ${!isMovingRightButton ? 'transition-point' : ''}`}
+                                className={`end-point-line ${!isMovingRightButton && fixMoveRightButton ? 'transition-point' : ''}`}
                                 >
                             </div>
                         </div>
@@ -468,4 +497,3 @@ const FilterProducts = () => {
 };
 
 export default FilterProducts;
-

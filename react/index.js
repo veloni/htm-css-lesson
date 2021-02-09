@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BoxAllProducts from './src/BoxAllProducts';
-import BoxOrder from './src/order';
-import Basket from './src/basket';
+import BoxOrder from './src/Order';
+import Basket from './src/Basket';
 import FilterProducts from './src/FilterProducts';
-import Slider from './src/slider';
+import Slider from './src/Slider';
+import RenderBasketFirst from './src/RenderBasket'
+
 
 const Render = () => {
     ReactDOM.render( <BoxAllProducts/>, document.querySelector('.box-products'));
@@ -19,7 +21,8 @@ const RenderOrder = () => {
 }
 
 const RenderBasket = () => {
-    ReactDOM.render( <Basket/>, document.querySelector('.box-basket'));
+    ReactDOM.render(<RenderBasketFirst/>, document.querySelector('.render-react-basket'));
+  
 }
 
 const RenderFilter = () => {
@@ -31,4 +34,4 @@ Render();
 RenderSlider();
 RenderBasket();
 RenderFilter(); 
-RenderOrder();
+/* RenderOrder(); */

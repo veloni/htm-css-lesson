@@ -45,7 +45,16 @@ const FillingBasket = ({
                     src={"./img/icon-delete.svg"}>
                 </img>
              </td>
-            <td> <span ref={testId} className="idtable dn"> {idState} </span></td>
+
+            <td> 
+                <img   
+                    className=""
+                    src={"./img/item-1.png"}>
+                </img>
+                
+                <span ref={testId} className="idtable dn"> {idState} </span>
+            </td>
+
             <td className="product-name-text"> {productNameState} {orderedState} </td>
             <td className="product-price-text"> {productPriceState + " р"} </td>
             <td className="product-quanity-text">

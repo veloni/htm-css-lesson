@@ -100,14 +100,20 @@ const Slider = () => {
       <div className="box-image-slider">
 
         <img ref={leftImage}
+          width = "650"
+          height = "650"
           className="img-slider left-image-slider"
           src={"./img/item-" + imgLeftSliderState + ".png"}></img>
 
         <img ref={centerImage}
+          width = "650"
+          height = "650"
           className="img-slider center-image-slider"
           src={"./img/item-" + imgCenterSliderState + ".png"}></img>
 
         <img ref={rightImage}
+          width = "650"
+          height = "650"
           className="img-slider right-image-slider"
           src={"./img/item-" + imgRightSliderState + ".png"}></img>
 

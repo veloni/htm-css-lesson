@@ -19,8 +19,8 @@ const giveData = () =>{
         <div className="box-product">
           <span className="find-id dn">
               {item.id}
-            </span>
-          <img className="product-item-img" src="img/stul2.png" alt="альтернативный текст"></img>
+          </span>
+          <img className="product-item-img" src="img/table-2.png" alt="альтернативный текст"></img>
           <span className="product-description-text"> {item.product}  </span>
           <span className="product-price"> {item.price} </span>
           <button className="buy-item" height="50px" width="170px"
@@ -28,7 +28,7 @@ const giveData = () =>{
           >
             <span className="buy">
               Купить
-                    </span>
+            </span>
           </button>
         </div>
       ))}

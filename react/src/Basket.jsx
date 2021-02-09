@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import FillingBasket from './ fillingBasket';
+import FillingBasket from './ FillingBasket';
+import BoxOrder from './Order';
 
 const Basket = () => {
-    const [productArrayState, setProductArrayState] = useState([]);
+    const [productArrayState, setProductArrayState] = useState(saveProductArrayState);
     const [idArrayState, setIdArrayState] = useState([]);
+    const [orderState, setOrderState] = useState(false);
 
-    const getItem = () => {
+    useEffect(() => {
+        saveProductArrayState = productArrayState;
+    });
+
+       const getItem = () => {
+   
         if (!checkItem()){
             setProductArrayState([
                 ...productArrayState,
@@ -23,24 +30,31 @@ const Basket = () => {
             ]);  
             }
         else {
-            createNewArray(1);
- 
+   
+           const newProductArrayDelete = productArrayState.map((item) => {
+                const newItem = Object.assign({}, item);
+                if (item.productId === productId) {
+                    newItem.ordered = true;
+                    newItem.productPrice =  newItem.productPrice /  newItem.quanityProduct;
+                    newItem.quanityProduct = 1;
+                }
+                return newItem;
+            });
+            setProductArrayState([...newProductArrayDelete]);
         }
     }
 
-
     const pushData = (idState) => {
        const newProductArray = productArrayState.map((item) => {
+            const newItem = Object.assign({}, item);
             if (item.productId === idState) {
-                item.ordered = false;
+                newItem.ordered = false;
             }
-            return item;
+            return newItem;
         });
-      
         setProductArrayState([...newProductArray]);
-
-    }    
-   
+    };
+ 
     const checkItem = () => idArrayState.includes(productId);
 
     const addQuanity = (sign, idState) => {
@@ -64,17 +78,23 @@ const Basket = () => {
     }
 
     const boxOrderOpen = () => {
-        const mainBoxOrder = document.querySelector('.order-wrapper');
-        mainBoxOrder.style.display = "flex";
-        endProductArray = productArrayState;
-        document.querySelector('.trigger-fillingOrder').click();
-        const bodySelector = document.querySelector('body');
-        bodySelector.style.overflow = "hidden";
+        newFilterArray = [];
+        quanityItems = null;
+        endPriceForOrder = null;
+
+        productArrayState.forEach((item, index) => {
+            if (item.ordered !== false) {
+                newFilterArray.push(item);
+                endPriceForOrder += parseInt(item.productPrice);
+            }
+        });
+
+        quanityItems = newFilterArray.length;
+        (quanityItems === 0) ? quanityItems = null: "" ;
+        setOrderState(true);
     }    
-  /*   setTimeout(
-        () =>  boxOrderOpen(),
-        1
-      ); */ 
+
+
 
     const renderBasketItems = () => {
         const myArray = productArrayState.map((data, index) => {
@@ -84,23 +104,28 @@ const Basket = () => {
                     pushData={pushData}
                     createNewArray={createNewArray}
                 />
-            }
+            } 
         });
         return myArray;
     }
 
+    
     return (
-        <div>
+         <div className="box-basket">
+                {orderState && <BoxOrder
+                setOrderState={setOrderState}
+                productArrayState={newFilterArray}
+                quanityItems={quanityItems}
+                endPriceForOrder={endPriceForOrder}
+            />}
             <button
-                className="js-trigger-charts"
+                className="js-trigger-charts dn"
                 onClick={() => getItem()}
             />
             <table className="table-basket-border">
                 <tr className="table-basket-border table-title">
-                    <th className="column-delete ">
-                     
-                    </th>
-                    <th className="column-img"></th>
+                    <th className="column-delete "> </th>
+                    <th className="column-img"> </th>
                     <th className="column-name-product">Наименование товара</th>
                     <th className="column-price">Цена за шт.</th>
                     <th className="column-quanity-product">Количество</th>
@@ -110,12 +135,16 @@ const Basket = () => {
                 {renderBasketItems()}
 
             </table>
-            <button className="button-create-order"
-                     onClick={() => boxOrderOpen()}>
-                Оформить заказ
-            </button>
+            <div className="wrapper-button-create-order">
+                <div></div>
+                <button className="button-create-order"
+                        onClick={() => boxOrderOpen()}>
+                    Оформить заказ
+                </button>
+            </div>
         </div>
     );
 };
 
 export default Basket;
+
