@@ -23,6 +23,7 @@ let saveAdressUser = null;
 let savePaymentMethod = 'При получении';
 let saveCommitOrder = null;
 let saveDiskount = true;
+let pathImage = [];
 
 let isBasketOpen = false;
 let saveProductArrayState = [];

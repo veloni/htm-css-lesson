@@ -30,6 +30,7 @@ const Basket = () => {
                     productPrice,
                     productId,
                     ordered,
+                    pathImage,
                 },
             ]);  
             setIdArrayState([
@@ -86,6 +87,7 @@ const Basket = () => {
     }
 
     const boxOrderOpen = () => {
+        document.querySelector('.box-basket').classList.add('overflow-hiden');
         newFilterArray = [];
         quanityItems = null;
         endPriceForOrder = null;
@@ -125,6 +127,7 @@ const Basket = () => {
                 productArrayState={newFilterArray}
                 quanityItems={quanityItems}
                 endPriceForOrder={endPriceForOrder}
+                pathImage={pathImage}
             />}
             <button
                 className="js-trigger-charts dn"

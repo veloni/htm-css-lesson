@@ -6,11 +6,9 @@ const BoxOrder = ({
     setOrderState,
     quanityItems,
     endPriceForOrder,
-
 }) => {
     const boxOrderRef = useRef(null);
     window.boxOrderRefWindow = boxOrderRef;
-
     const selectRef = useRef(null);
     const inputPromo = useRef(null);
 
@@ -32,7 +30,6 @@ const BoxOrder = ({
 
     const [seeCloseOrder, setSeeCloseOrder] = useState(false);
     const [discountGive, setDiscountGive] = useState(saveDiskount);
-
     useEffect(() => {
         saveEmailUsers = emailUser;
         savePhoneUser = phoneUser;
@@ -99,6 +96,7 @@ const BoxOrder = ({
 
     const closeOrder = () => {
         setOrderState(false);
+        document.querySelector('.box-basket').classList.remove('overflow-hiden');
     }
 
     const close = (e) => {
@@ -111,7 +109,7 @@ const BoxOrder = ({
         return () => window.removeEventListener('keydown', close);
     }, [])
 
-
+console.log(productArrayState);
     return (
         <div>
             {seeCloseOrder && <CloseOrder
@@ -174,10 +172,12 @@ const BoxOrder = ({
                                         <td> <span className="idtable-order"> {item.productId} </span>  </td>
                                         
                                         <td> 
-                                            <img   
-                                                className=""
-                                                src={"./img/item-2.png"}>
-                                            </img> 
+                                            <div className="wrapper-box-img-order">
+                                                <img   
+                                                    className="img-order"
+                                                    src={"./img/photoBase/" + item.pathImage }>
+                                                </img> 
+                                                </div>
                                         </td>
 
                                         <td className="product-name-text-order"> <span> {item.productName} </span>  </td>

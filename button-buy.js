@@ -6,18 +6,32 @@ const buyItem = () => {
         item.addEventListener('click', function() {
             const productId = findId[index].innerHTML;
             idDataBuyItem.push(productId);
+            let checkAddItems = false;
             findProduct();
             if (isBasketOpen){
                 document.querySelector('.js-trigger-charts').click();
             } else{
-                //ckeck add id
+
+            saveProductArrayState.forEach((product) => {
+            if (product.productId === productId){
+                console.log(product.ordered);
+                if (product.ordered === true){
+                    checkAddItems =! checkAddItems;
+                    return;
+                }
+            }
+            });  
+              
+             if (!checkAddItems) {
                 saveProductArrayState.push({
                     productName,
                     quanityProduct,
                     productPrice,
                     productId,
                     ordered,
+                    pathImage,
                 });
+            }
             }
         });
     });
@@ -35,6 +49,8 @@ const findProduct = () => {
             itemFind = false;
             productId = item.id;
             ordered = true;
+            pathImage = item.img
+
         } else {
             return;
         }

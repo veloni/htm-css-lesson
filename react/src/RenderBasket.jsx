@@ -10,7 +10,7 @@ const renderBasket = () => {
         setOpenBusketState(!openBusketState);
     }
 
-    const openBusketFromButtonItems = () => {
+  /*   const openBusketFromButtonItems = () => {
         if (!openBusketForItemsState){
             setOpenBusketState(true);   
         }
@@ -20,7 +20,7 @@ const renderBasket = () => {
         if (!openBusketForItemsState){
             setOpenBusketState(false);
         }
-    } 
+    }  */
 
   /*   useEffect(() => {
          console.log(openBusketState); 
@@ -33,7 +33,7 @@ const renderBasket = () => {
                         onClick={(e) => openBusket()}
                     />
 
-                    <button 
+                   {/*  <button 
                         className="dn js-trigger-open-basket-for-button"
                         onClick={(e) => openBusketFromButtonItems()}
                     />
@@ -41,7 +41,7 @@ const renderBasket = () => {
                     <button 
                         className="dn js-trigger-close-basket-for-button"
                         onClick={(e) => closeBusketFromButtonItems()}
-                    />
+                    /> */}
                     {openBusketState && <Basket/>}
               </div>
         );

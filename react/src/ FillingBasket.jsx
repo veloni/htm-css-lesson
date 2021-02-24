@@ -15,7 +15,7 @@ const FillingBasket = ({
     const [quanityProductState, setQuanityProduct] = useState(1);
     const [endPriceState, setEndPriceState] = useState(data.productPrice);
     const [orderedState, setOrderedState] = useState(data.ordered);
-   
+    const [pathImage, setPathImage] = useState(data.pathImage);
 
     useEffect(() => {
         setQuanityProduct(data.quanityProduct);
@@ -35,6 +35,7 @@ const FillingBasket = ({
         quanityProductState >= 2 && createNewArray(-1, idState);
     }
 
+ 
     return (
 
         <tr className="table-basket-border container-product-basket">
@@ -46,11 +47,13 @@ const FillingBasket = ({
                 </img>
              </td>
 
-            <td> 
-                <img   
-                    className=""
-                    src={"./img/item-1.png"}>
-                </img>
+            <td className="box-product-image"> 
+                <div className="wrapper-box-img-basket"> 
+                    <img   
+                        className="img-in-basket"
+                        src={"./img/photoBase/" + pathImage }>
+                    </img>
+                </div>
                 
                 <span ref={testId} className="idtable dn"> {idState} </span>
             </td>
