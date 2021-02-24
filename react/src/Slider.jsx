@@ -12,7 +12,7 @@ const Slider = () => {
   const [checkEndAnimation, setCheckEndAnimation] = useState(true);
 
   const moveLeftImage = () => {
-    if (!checkEndAnimation) { return alert('bratish pomedlenee') }
+    if (!checkEndAnimation) { return; }
 
     setCheckEndAnimation(false);
     centerImage.current.classList.add('img-slider');
@@ -51,7 +51,7 @@ const Slider = () => {
   }
 
   const moveRightImage = () => {
-    if (!checkEndAnimation) { return alert('bratish pomedlenee') }
+    if (!checkEndAnimation) { return; }
 
     setCheckEndAnimation(false);
     centerImage.current.classList.add('img-slider');

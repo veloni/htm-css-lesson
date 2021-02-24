@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import FillingBasket from './ FillingBasket';
 import BoxOrder from './Order';
@@ -8,8 +9,15 @@ const Basket = () => {
     const [orderState, setOrderState] = useState(false);
 
     useEffect(() => {
-        saveProductArrayState = productArrayState;
+         saveProductArrayState = productArrayState; 
     });
+
+    useEffect(() => { 
+        isBasketOpen = true;
+        return () => { 
+            isBasketOpen = false; 
+        }
+    }, []);
 
        const getItem = () => {
    
@@ -147,4 +155,3 @@ const Basket = () => {
 };
 
 export default Basket;
-

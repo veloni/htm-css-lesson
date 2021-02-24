@@ -210,8 +210,6 @@ const BoxOrder = ({
                                     maxlength="11"
                                     className={phoneUserCorrect ? "input-phone" : "incorect-value"}
                                 />
-
-
                                 <div> Населенный пункт
                                     <span className={adressUserCorrect ? "dn" : "incorect-value"}>
                                             *
@@ -252,7 +250,6 @@ const BoxOrder = ({
                                     defaultValue={saveCommitOrder}
                                     className="input-comment"
                                     onChange={(e) => giveDataUsers(e, setCommitOrder)}>
-
                                 </textarea>
 
                             </div>
@@ -315,7 +312,6 @@ const BoxOrder = ({
                         </div>
                     </div>
                 </div>
-
             </div>
        </div>
       </div>

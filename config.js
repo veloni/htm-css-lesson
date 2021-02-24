@@ -14,8 +14,8 @@ let endPrice = 0;
 let newFilterArray = [];
 let quanityItems;
 let endPriceForOrder = null;
-
-let saveProductArrayState = [];
+let itemFind = true;
+/* let saveProductArrayState = []; */
 let saveEmailUsers = null;
 let savePhoneUser = null;
 let saveNameUser = null;
@@ -23,6 +23,9 @@ let saveAdressUser = null;
 let savePaymentMethod = 'При получении';
 let saveCommitOrder = null;
 let saveDiskount = true;
+
+let isBasketOpen = false;
+let saveProductArrayState = [];
 
 /* let saveProductArrayState = [];
 let saveEmailUsers = "dasdasgfd@gmail.com";

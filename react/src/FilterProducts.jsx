@@ -14,7 +14,7 @@ const FilterProducts = () => {
     const [rightInputValue, setRightInputValue] = useState(null);
 
     const [leftPointX, setLeftPointX] = useState(0);
-    const [rightPointX, setRightPointX] = useState(-216);
+    const [rightPointX, setRightPointX] = useState(-222);
     const [positionButtonOne, setPositionButtonOne] = useState(0);
     const [positionButtonTwo, setPositionButtonTwo] = useState(0);
     const [isMovingLeftButton, setIsMovingLeftButton] = useState(false);
@@ -24,7 +24,6 @@ const FilterProducts = () => {
 
     const [fixMoveRightButton, setFixMoveRightButton] = useState(false);
     const [fixMoveLeftButton, setFixMoveLeftButton] = useState(false);
-
 
     const leftButtonClickCheck = () => {
         setIsMovingLeftButton(true);
@@ -66,7 +65,7 @@ const FilterProducts = () => {
         } 
 
         if (positionButtonTwo >= 300) { 
-            setRightPointX(-216); 
+            setRightPointX(-222); 
             removeMoveOutRightButton();
             return;
         } 
@@ -126,7 +125,7 @@ const FilterProducts = () => {
     const buttonMoveTwo = () => {
         const widthButton = widthPointRight.current.clientWidth / 2;
         if (positionButtonTwo >= 246) { 
-            setRightPointX(-216);
+            setRightPointX(-222);
             return;
         };
         if (positionButtonTwo - widthButton  <= leftPointX) { return; };
@@ -316,31 +315,28 @@ const FilterProducts = () => {
             switch (selectType.value) {
                 case "Показать всё":
                     sortingThree = sortingTwo;
-                  break;
+                    break;
                 case "Стулья":
-                    sortingTwo.forEach(function(item, index) {
+                    sortingTwo.forEach(function(item) {
                         if (item.classProduct === "chair"){
                             sortingThree.push(item);
                         }
                     });
-    
-                  break;
+                    break;
                 case "Столы":
-                    sortingTwo.forEach(function(item, index) {
+                    sortingTwo.forEach(function(item) {
                         if (item.classProduct === "table"){
                             sortingThree.push(item);
                         }
                     });
-    
-                  break;
+                    break;
                 case "Комплекты":
-                    sortingTwo.forEach(function(item, index) {
+                    sortingTwo.forEach(function(item) {
                         if (item.classProduct === "set"){
                             sortingThree.push(item);
                         }
                     });
-    
-                  break;
+                    break;
               }
     
             testData = sortingThree;
@@ -384,7 +380,7 @@ const FilterProducts = () => {
 
     const inputValueRight = (e) => {
         if (e.key === 'Enter') {
-            if(parseInt(inputRight.current.value)>13300) { setRightPointX(-216); return; } 
+            if(parseInt(inputRight.current.value)>13300) { setRightPointX(-222); return; } 
                 if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value) + 1500){ 
                         setRightPointX((-(rightInputValue)/50+50));
                         setWhereGetValueRight(true);
