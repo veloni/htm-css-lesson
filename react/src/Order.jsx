@@ -11,9 +11,8 @@ const BoxOrder = ({
     window.boxOrderRefWindow = boxOrderRef;
     const selectRef = useRef(null);
     const inputPromo = useRef(null);
-
-/*     const [orderArrayState, setOrderArrayState] = useState([...productArrayState]); */
-    const [endPriceState, setEndPriceSate] = useState(saveDiskount ? endPriceForOrder : endPriceForOrder * 0.9);
+    
+    const [endPriceState, setEndPriceSate] = useState(saveDiscount ? endPriceForOrder : endPriceForOrder * 0.9);
     const [quanityItemsEnd, setQuanityItemsEnd] = useState(quanityItems);
 
     const [phoneUser, setPhoneUser] = useState(savePhoneUser);
@@ -29,7 +28,8 @@ const BoxOrder = ({
     const [emailUserCorrect, setEmailUserCorrect] = useState(true);
 
     const [seeCloseOrder, setSeeCloseOrder] = useState(false);
-    const [discountGive, setDiscountGive] = useState(saveDiskount);
+    const [discountGive, setDiscountGive] = useState(saveDiscount);
+
     useEffect(() => {
         saveEmailUsers = emailUser;
         savePhoneUser = phoneUser;
@@ -37,11 +37,11 @@ const BoxOrder = ({
         saveAdressUser = adressUser;
         savePaymentMethod = paymentMethod;
         saveCommitOrder = commitOrder;
-        saveDiskount = discountGive;
+        saveDiscount = discountGive;
     });
 
-    const inputGiveDiskount= (e) => {
-        if (e.key === 'Enter' && inputPromo.current.value === 'diskount' && discountGive && quanityItemsEnd != null ) {
+    const inputGiveDiscount= (e) => {
+        if (e.key === 'Enter' && inputPromo.current.value === 'discount' && discountGive && quanityItemsEnd != null ) {
             alert('Ваша скидка 10 процентов')
             setEndPriceSate(endPriceState * 0.9);
             setDiscountGive(false);
@@ -74,15 +74,13 @@ const BoxOrder = ({
         }
 
         if (!nameRegular.test(nameUser)) {
-            messageAlert = messageAlert + "  ФИО не верно!";
+            messageAlert = messageAlert + " ФИО не верно!";
             setNameUserCorrect(false);
         } else {
             setNameUserCorrect(true);
         }
 
-        if (adressUser === 0) { messageAlert = messageAlert + "  адреса нет"; }
-
-        console.log(quanityItemsEnd);
+        if (adressUser === 0) { messageAlert = messageAlert + " адреса нет"; }
 
         if (quanityItemsEnd === null) { messageAlert = messageAlert + " Вы ничего не добавили"; }
 
@@ -90,17 +88,17 @@ const BoxOrder = ({
             setSeeCloseOrder(!seeCloseOrder);
             return; 
         }
-
-            alert(messageAlert);
+        alert(messageAlert);
     }
 
     const closeOrder = () => {
         setOrderState(false);
-        document.querySelector('.box-basket').classList.remove('overflow-hiden');
+        document.querySelector('.box-basket').classList.remove('overflow-hidden');
+        document.querySelector('.trigger-message-alert-open').click();
     }
 
-    const close = (e) => {
-        if (e.keyCode !== 27) { return; };
+    const close = (e) => { 
+        if (e.keyCode !== 27) { return; }; 
         closeOrder();
     }
 
@@ -109,7 +107,6 @@ const BoxOrder = ({
         return () => window.removeEventListener('keydown', close);
     }, [])
 
-console.log(productArrayState);
     return (
         <div>
             {seeCloseOrder && <CloseOrder
@@ -122,7 +119,6 @@ console.log(productArrayState);
                 paymentMethod={paymentMethod}
             />}
 
-
         <div className="order-wrapper">    
             <button
                 className="dn trigger-close-last-order"
@@ -134,16 +130,14 @@ console.log(productArrayState);
                 onClick={() => giveDataOrder()}
             />
 
-
             <div ref={boxOrderRef} className="container-order">
                 <div className="box-order">
-
                     <div className="wrapper-order-title">
                         <span className="text-order-title">
                             Оформление заказа
                         </span>
                         <div className="close-order"
-                            onClick={() => closeOrder()}
+                             onClick={() => closeOrder()}
                         >
                             Закрыть
                         </div>
@@ -169,24 +163,43 @@ console.log(productArrayState);
 
                                 {productArrayState.map((item) => (
                                     <tr className="table-basket-border-order container-product-basket-order">
-                                        <td> <span className="idtable-order"> {item.productId} </span>  </td>
+                                        <td> 
+                                            <span className="idtable-order"> 
+                                                {item.productId} 
+                                            </span>  
+                                        </td>
                                         
                                         <td> 
                                             <div className="wrapper-box-img-order">
                                                 <img   
-                                                    className="img-order"
-                                                    src={"./img/photoBase/" + item.pathImage }>
+                                                    className="img-order" 
+                                                    src={`img/photoBase/${item.pathImage}`}>
                                                 </img> 
-                                                </div>
+                                            </div>
                                         </td>
 
-                                        <td className="product-name-text-order"> <span> {item.productName} </span>  </td>
-                                        <td className="product-price-text-order"> <span> {item.productPrice / item.quanityProduct + " р"} </span> </td>
-                                        <td className="product-quanity-text-order"> <span> {item.quanityProduct}  </span> </td>
-                                        <td className="product-price-text-order"> <span> {item.productPrice + " р"} </span> </td>
+                                        <td className="product-name-text-order"> 
+                                            <span> 
+                                                {item.productName} 
+                                            </span>  
+                                        </td>
+                                        <td className="product-price-text-order"> 
+                                            <span> 
+                                                {item.productPrice / item.quanityProduct} р
+                                            </span> 
+                                        </td>
+                                        <td className="product-quanity-text-order"> 
+                                            <span> 
+                                                {item.quanityProduct}  
+                                            </span> 
+                                        </td>
+                                        <td className="product-price-text-order"> 
+                                            <span> 
+                                                {item.productPrice} р 
+                                            </span> 
+                                        </td>
                                     </tr>
                                 ))}
-
                             </table>
 
                         </div>
@@ -268,10 +281,10 @@ console.log(productArrayState);
                                         <div className="wrapper-promo-code">
                                             <span className="text-bottom-order"> Ввод промокода: </span>
                                             <input 
-                                                defaultValue="diskount"
+                                                defaultValue="discount"
                                                 ref={inputPromo}
                                                 className="input-promo"
-                                                onKeyDown={(e) => inputGiveDiskount(e)} 
+                                                onKeyDown={(e) => inputGiveDiscount(e)} 
                                             >
                                             </input>
                                         </div>

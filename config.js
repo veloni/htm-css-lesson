@@ -2,7 +2,7 @@ let idDataBuyItem = [];
 let productPrice;
 let productName;
 let dataSort = [];
-let testData;
+let sortingData;
 let data;
 let pushData;
 let tesDataDescending;
@@ -22,9 +22,9 @@ let saveNameUser = null;
 let saveAdressUser = null;
 let savePaymentMethod = 'При получении';
 let saveCommitOrder = null;
-let saveDiskount = true;
+let saveDiscount = true;
 let pathImage = [];
-
+let onlyOneCreateMessageAlert = true
 let isBasketOpen = false;
 let saveProductArrayState = [];
 
@@ -35,4 +35,4 @@ let saveNameUser = "Иван Иваныч Иванов";
 let saveAdressUser = "sasa";
 let savePaymentMethod = 'При получении';
 let saveCommitOrder = null;
-let saveDiskount = true; */
+let saveDiscount = true; */

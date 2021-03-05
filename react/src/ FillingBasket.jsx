@@ -1,13 +1,12 @@
-
+// decompose states and functions to hooks
 import React, { useEffect, useState, useRef } from 'react';
 
 const FillingBasket = ({
     data,
-    pushData, 
+    pushData,
     createNewArray,
 }) => {
-
-    let testId = useRef(null);
+    const testId = useRef(null);
 
     const [idState, setIdState] = useState(data.productId);
     const [productNameState, setProductName] = useState(data.productName);
@@ -19,12 +18,11 @@ const FillingBasket = ({
 
     useEffect(() => {
         setQuanityProduct(data.quanityProduct);
-        setEndPriceState(data.productPrice); 
-      })
-    
+        setEndPriceState(data.productPrice);
+    })
+
     const deleteItem = () => {
         pushData(idState);
-        
     }
 
     const upQunity = () => {
@@ -35,51 +33,53 @@ const FillingBasket = ({
         quanityProductState >= 2 && createNewArray(-1, idState);
     }
 
- 
     return (
-
         <tr className="table-basket-border container-product-basket">
             <td>
-                <img   
+                <img
                     onClick={() => deleteItem()}
                     className="icon-delete"
-                    src={"./img/icon-delete.svg"}>
-                </img>
+                    src="./img/icon-delete.svg"
+                />
              </td>
 
-            <td className="box-product-image"> 
-                <div className="wrapper-box-img-basket"> 
-                    <img   
+            <td className="box-product-image">
+                <div className="wrapper-box-img-basket">
+                    <img
                         className="img-in-basket"
-                        src={"./img/photoBase/" + pathImage }>
-                    </img>
+                        src={`img/photoBase/${pathImage}`}
+                    /> 
                 </div>
-                
-                <span ref={testId} className="idtable dn"> {idState} </span>
+                <span ref={testId} className="idtable dn"> 
+                    {idState} 
+                </span>
             </td>
 
-            <td className="product-name-text"> {productNameState} {orderedState} </td>
-            <td className="product-price-text"> {productPriceState + " р"} </td>
+            <td className="product-name-text"> 
+                {productNameState} 
+                {orderedState} 
+            </td> 
+            <td className="product-price-text"> 
+                {productPriceState} р
+            </td> 
             <td className="product-quanity-text">
-                <img   
+                <img
                     onClick={() => upQunity()}
                     className="arrow-svg"
-                    src={"./img/up-arrow.svg"}>
-                </img>
-
-                 {quanityProductState}
-
-                <img   
+                    src="./img/up-arrow.svg"
+                />
+                {quanityProductState}
+                <img
                     onClick={() => downQunity()}
                     className="arrow-svg-down"
-                    src={"./img/up-arrow.svg"}>
-                </img>
+                    src="./img/up-arrow.svg"
+                /> 
             </td>
-            <td className="product-price-text"> {endPriceState + " р"} </td>
+            <td className="product-price-text"> 
+                {endPriceState} р
+            </td> 
         </tr>
-
     );
 };
 
 export default FillingBasket;
-

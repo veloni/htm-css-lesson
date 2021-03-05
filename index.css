@@ -82,17 +82,20 @@
 	height: 750px;
 	width: 700px;
 	background-color:#FAF0E6;
+	position: absolute;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	position: absolute;
 	margin-top: 50px;
 	margin-right: 150px;
 	z-index: 4;
 	border-radius: 20px 20px 20px 20px;
 	box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.3);
 }
-.overflow-hiden{
-	overflow-y: hidden;
+
+
+
+.overflow-hidden-scrollbar{
+	scrollbar-width: 0px;
 }
 .table-basket-border{
 	width: 100%;
@@ -134,11 +137,9 @@
 	zoom: 0.75;
 }
 .wrapper-box-img-order{
-	height: 85%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
 }
 .column-delete{
 	width: 10%;
@@ -1317,3 +1318,67 @@
 	justify-content: center;
 	font-size: 1.5vw;
 }
+.wrapper-for-message{
+	position: fixed;
+	z-index: 10;
+	height: 175px;
+	width: 300px;
+	top: 50%;
+	right: 10;
+	border: 3px solid;
+	border-color:#F13C6E;
+	border-radius: 25px 25px 25px 25px;
+	background-color: #F13C6E;
+	outline: none;
+	transition: opacity 1s ease-out 0.05s; 
+}
+
+.message-opacity {
+	opacity: 1;
+}
+
+.wrapper-message-alert{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+}
+
+/* .text-message-alert{
+	
+} */
+
+.text-message-alert-item-added::before{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-family: Roboto;
+	font-size: 35px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 56px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #EFEFEF;
+	content: "Товар добавлен в корзину";
+}
+
+.text-message-alert-item-dont-added::before{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-family: Roboto;
+	font-size: 35px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 56px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #EFEFEF;
+	content: "Товар уже был  добавлен в корзину";
+}
+

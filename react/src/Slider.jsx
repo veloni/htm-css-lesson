@@ -87,41 +87,43 @@ const Slider = () => {
     const changeImg = (state, setstate) => {
       setstate(state === 4 ? 1 : state + 1);
     }
-    
   }
   
   return (
 
     <div className="slider-box">
       <button className="button-slider left-arrow"
-        onMouseUp={(e) => moveLeftImage()}>
+        onMouseUp={(e) => moveLeftImage()}
+      />
 
-      </button>
       <div className="box-image-slider">
 
         <img ref={leftImage}
           width = "650"
           height = "650"
           className="img-slider left-image-slider"
-          src={"./img/item-" + imgLeftSliderState + ".png"}></img>
+          src={`./img/item-${imgLeftSliderState}.png`}
+        />
 
         <img ref={centerImage}
           width = "650"
           height = "650"
           className="img-slider center-image-slider"
-          src={"./img/item-" + imgCenterSliderState + ".png"}></img>
+          src={`./img/item-${imgCenterSliderState}.png`}
+        />
 
         <img ref={rightImage}
           width = "650"
           height = "650"
           className="img-slider right-image-slider"
-          src={"./img/item-" + imgRightSliderState + ".png"}></img>
+          src={`./img/item-${imgRightSliderState}.png`}
+        />
 
       </div>
       <button className="button-slider right-arrow"
-        onMouseUp={(e) => moveRightImage()}>
+        onMouseUp={(e) => moveRightImage()}
+      />
 
-      </button>
     </div>
 
   )
