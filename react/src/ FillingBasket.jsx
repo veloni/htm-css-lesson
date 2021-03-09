@@ -63,6 +63,7 @@ const FillingBasket = ({
                 {productPriceState} р
             </td> 
             <td className="product-quanity-text">
+                <div className="product-quanity-text-content">
                 <img
                     onClick={() => upQunity()}
                     className="arrow-svg"
@@ -73,7 +74,7 @@ const FillingBasket = ({
                     onClick={() => downQunity()}
                     className="arrow-svg-down"
                     src="./img/up-arrow.svg"
-                /> 
+                /></div>
             </td>
             <td className="product-price-text"> 
                 {endPriceState} р

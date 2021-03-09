@@ -138,9 +138,8 @@ const Basket = () => {
     }
 
     return (
-        <div    className="box-basket overflow-hiden">  
-            {
-                orderState && <BoxOrder
+        <div className="box-basket">  
+            {orderState && <BoxOrder
                 setOrderState={setOrderState}
                 productArrayState={newFilterArray}
                 quanityItems={quanityItems}

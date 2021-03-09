@@ -4,23 +4,13 @@ const buyItem = () => {
 
     Array.from(buttonBuy).forEach(function(item, index) {
         item.addEventListener('click', function() {
-        
-            onlyOneCreateMessageAlert && document.querySelector('.trigger-message-first-create').click();
-
+            document.querySelector('.js-trigger-item-added').click();
+           
             const productId = findId[index].innerHTML;
             idDataBuyItem.push(productId);
             let checkAddItems = false;
 
             findProduct();
-            const wrapperMessageExist = document.querySelector('.wrapper-for-message');
-            
-            const createMessageAddItems = () => {
-                document.querySelector('.trigger-message-alert-open').click();
-                document.querySelector('.trigger-change-text-message').click();
-            }
-        
-            !wrapperMessageExist && createMessageAddItems();
-            document.querySelector('.trigger-change-text-message').click();
 
             if (isBasketOpen){
                 document.querySelector('.js-trigger-charts').click();
@@ -30,13 +20,14 @@ const buyItem = () => {
             if (product.productId === productId){
                 if (product.ordered === true){
                     checkAddItems =! checkAddItems;
+                    document.querySelector('.js-trigger-item-dont-added').click();
                     document.querySelector('.trigger-check-added-item').click(); 
                     return;
                 }
             }
             });  
-            
-             if (!checkAddItems) {
+
+            if (!checkAddItems) {
                 saveProductArrayState.push({
                     productName,
                     quanityProduct,

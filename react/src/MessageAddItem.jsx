@@ -1,61 +1,31 @@
 import React, { useState } from 'react';
 
-const MessageAddItem = () => {
+const MesageAddItem = () => {
 
-const [createMessageState, setCreateMessageState] = useState(false);
-const [firstCreateMessageAlert, setFirstCreateMessageAlert] = useState(false);
-const [itemAddedInBasketCheck, setItemAddedInBasketCheck] = useState(true);
-
-const createFirstMessageAlert = () => {
-    setFirstCreateMessageAlert(true);
-    onlyOneCreateMessageAlert = false;
-}
-
-const classNameMessageAlert = `"text-message-alert ${itemAddedInBasketCheck ? "text-message-alert-item-added" : "text-message-alert-item-dont-added"}`;
+const [textContentMessage, setTextContentMessage] = useState("Товар пока не добавлен");
 
   return (
     <div>
         <button 
-            className="dn trigger-message-alert-open"
-            onClick={() => setCreateMessageState(true)}
-        > 
-        </button>
+            className="dn js-trigger-item-added"
+            onClick={(e) => setTextContentMessage("Товар добавлен")}
+        />
 
         <button 
-            className="dn trigger-message-alert-close"
-            onClick={() => setCreateMessageState(false)}
-        > 
-        </button>
+            className="dn js-trigger-item-dont-added"
+            onClick={(e) => setTextContentMessage("Товар уже был добавлен")}
+        />
 
-        <button 
-            className="dn trigger-message-first-create"
-            onClick={() => createFirstMessageAlert()}
-        > 
-        </button>
-
-        <button 
-            className="dn trigger-check-added-item"
-            onClick={() => setItemAddedInBasketCheck(false)}
-        > 
-        </button>
-
-        <button 
-            className="dn trigger-change-text-message"
-            onClick={() => setItemAddedInBasketCheck(true)}
-        > 
-        </button>
-
-        {createMessageState && firstCreateMessageAlert &&
         <div className="wrapper-for-message">
             <div className="wrapper-message-alert">
-                <span className={classNameMessageAlert}>
+                <span className={"text-mesasge-alert"}>
+                    {textContentMessage}
                 </span>
             </div>
         </div>
-        }
+        
     </div>
   );
 };
 
-export default MessageAddItem;
-
+export default MesageAddItem;
