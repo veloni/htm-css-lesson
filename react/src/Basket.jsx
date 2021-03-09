@@ -22,8 +22,7 @@ const Basket = () => {
     
     const getItem = () => {
 
-        const itemDontBeenDeleteDunction = () => {
-            document.querySelector('.trigger-change-text-message').click(); 
+        const itemDontBeenDeleteDunction = () => { 
             setProductArrayState([
                 ...productArrayState,
                 {
@@ -100,7 +99,7 @@ const Basket = () => {
     const boxOrderOpen = () => {
 
         document.querySelector('.box-basket').classList.add('overflow-hidden'); 
-        document.querySelector('.trigger-message-alert-close').click();
+        document.querySelector('.js-trigger-message-alert-hide').click();
 
         const clearVariable = () => {
             newFilterArray = [];

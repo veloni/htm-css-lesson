@@ -94,7 +94,7 @@ const BoxOrder = ({
     const closeOrder = () => {
         setOrderState(false);
         document.querySelector('.box-basket').classList.remove('overflow-hidden');
-        document.querySelector('.trigger-message-alert-open').click();
+        document.querySelector('.js-trigger-message-alert-hide').click();
     }
 
     const close = (e) => { 

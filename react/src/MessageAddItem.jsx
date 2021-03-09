@@ -3,6 +3,13 @@ import React, { useState } from 'react';
 const MesageAddItem = () => {
 
 const [textContentMessage, setTextContentMessage] = useState("Товар пока не добавлен");
+const [hideMessageAlert, setHideMessageAlert] = useState(true);
+
+
+const etsts = () => {
+    setHideMessageAlert(!hideMessageAlert);
+    console.log(hideMessageAlert);
+}
 
   return (
     <div>
@@ -12,18 +19,23 @@ const [textContentMessage, setTextContentMessage] = useState("Товар пок�
         />
 
         <button 
+            className="dn js-trigger-message-alert-hide"
+            onClick={(e) => etsts()}
+        />
+
+        <button 
             className="dn js-trigger-item-dont-added"
             onClick={(e) => setTextContentMessage("Товар уже был добавлен")}
         />
-
-        <div className="wrapper-for-message">
-            <div className="wrapper-message-alert">
-                <span className={"text-mesasge-alert"}>
-                    {textContentMessage}
-                </span>
+        { hideMessageAlert &&
+            <div className="wrapper-for-message">
+                <div className="wrapper-message-alert">
+                    <span className={"text-mesasge-alert"}>
+                        {textContentMessage}
+                    </span>
+                </div>
             </div>
-        </div>
-        
+        }
     </div>
   );
 };
