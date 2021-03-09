@@ -2,333 +2,350 @@ import React, { useEffect, useState, useRef } from 'react';
 import CloseOrder from './CloseOrder.jsx';
 
 const BoxOrder = ({
-    productArrayState,
-    setOrderState,
-    quanityItems,
-    endPriceForOrder,
+	productArrayState,
+	setOrderState,
+	quanityItems,
+	endPriceForOrder,
 }) => {
-    const boxOrderRef = useRef(null);
-    window.boxOrderRefWindow = boxOrderRef;
-    const selectRef = useRef(null);
-    const inputPromo = useRef(null);
-    
-    const [endPriceState, setEndPriceSate] = useState(saveDiscount ? endPriceForOrder : endPriceForOrder * 0.9);
-    const [quanityItemsEnd, setQuanityItemsEnd] = useState(quanityItems);
+	const boxOrderRef = useRef(null);
+	const selectRef = useRef(null);
+	const inputPromo = useRef(null);
 
-    const [phoneUser, setPhoneUser] = useState(savePhoneUser);
-    const [nameUser, setNameUser] = useState(saveNameUser);
-    const [adressUser, setAdressUser] = useState(saveAdressUser);
-    const [emailUser, setEmailUser] = useState(saveEmailUsers);
-    const [paymentMethod, setPaymentMethod] = useState(savePaymentMethod);
-    const [commitOrder, setCommitOrder] = useState(saveCommitOrder);
+	const [endPriceState, setEndPriceState] = useState(saveDiscount ? endPriceForOrder : endPriceForOrder * 0.9);
 
-    const [phoneUserCorrect, setPhoneUserCorrect] = useState(true);
-    const [nameUserCorrect, setNameUserCorrect] = useState(true);
-    const [adressUserCorrect, setAdressUserCorrect] = useState(true);
-    const [emailUserCorrect, setEmailUserCorrect] = useState(true);
+	const [phoneUser, setPhoneUser] = useState(savePhoneUser);
+	const [nameUser, setNameUser] = useState(saveNameUser);
+	const [adressUser, setAdressUser] = useState(saveAdressUser);
+	const [emailUser, setEmailUser] = useState(saveEmailUsers);
+	const [paymentMethod, setPaymentMethod] = useState(savePaymentMethod);
+	const [commitOrder, setCommitOrder] = useState(saveCommitOrder);
 
-    const [seeCloseOrder, setSeeCloseOrder] = useState(false);
-    const [discountGive, setDiscountGive] = useState(saveDiscount);
+	const [phoneUserCorrect, setPhoneUserCorrect] = useState(true);
+	const [nameUserCorrect, setNameUserCorrect] = useState(true);
+	const [emailUserCorrect, setEmailUserCorrect] = useState(true);
+	const [warningMessage, setWarningMessage] = useState(null);
 
-    useEffect(() => {
-        saveEmailUsers = emailUser;
-        savePhoneUser = phoneUser;
-        saveNameUser = nameUser;
-        saveAdressUser = adressUser;
-        savePaymentMethod = paymentMethod;
-        saveCommitOrder = commitOrder;
-        saveDiscount = discountGive;
-    });
+	const [seeCloseOrder, setSeeCloseOrder] = useState(false);
+	const [discountGive, setDiscountGive] = useState(saveDiscount);
 
-    const inputGiveDiscount= (e) => {
-        if (e.key === 'Enter' && inputPromo.current.value === 'discount' && discountGive && quanityItemsEnd != null ) {
-            alert('Ваша скидка 10 процентов')
-            setEndPriceSate(endPriceState * 0.9);
-            setDiscountGive(false);
-          }
-    }
+ 	useEffect(() => {
+		saveEmailUsers = emailUser;
+		savePhoneUser = phoneUser;
+		saveNameUser = nameUser;
+		saveAdressUser = adressUser;
+		savePaymentMethod = paymentMethod;
+		saveCommitOrder = commitOrder;
+		saveDiscount = discountGive;
+		researchMessage();
+	}); 
 
-    const giveDataUsers = (e, set) => {
-        set(e.target.value);
-        return;
-    }
+	const inputGiveDiscount= (e) => {
+		if (
+			e.key === 'Enter' && 
+			inputPromo.current.value === 'discount' &&
+			discountGive && 
+			quanityItems !== null
+		)	{
+			setEndPriceState(endPriceState * 0.9);
+			setDiscountGive(false);
+			alert('Ваша скидка 10 процентов');
+		}
+	}
 
-    const checkCorrectValue = () => {
-        const phoneRegular = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
-        const emailRegular = /^\S+@\S+$/;
-        const nameRegular = /^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}\-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/;
-        let messageAlert = "";
+	const checkCorrectValue = () => {
+		checkAllRegular();
+	}
 
-        if (!phoneRegular.test(phoneUser)) {
-            messageAlert = "телефон не верен  ";
-            setPhoneUserCorrect(false);
-        } else {
-            setPhoneUserCorrect(true);
-        }
+	const closeOrder = () => {
+		setOrderState(false);
+		document.querySelector('.box-basket').classList.remove('overflow-hidden');
+		document.querySelector('.js-trigger-message-alert-hide').click();
+	}
 
-        if (!emailRegular.test(emailUser)) {
-            messageAlert = messageAlert + " email не верен!";
-            setEmailUserCorrect(false);
-        } else {
-            setEmailUserCorrect(true);
-        }
+	const close = (e) => {
+		if (e.keyCode !== 27) { return; };
+		closeOrder();
+	}
 
-        if (!nameRegular.test(nameUser)) {
-            messageAlert = messageAlert + " ФИО не верно!";
-            setNameUserCorrect(false);
-        } else {
-            setNameUserCorrect(true);
-        }
+	const checkAllRegular = () => {
+		if (!firstRenderOrder) {firstRenderOrder = true;}
+		const phoneRegular = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+		const emailRegular = /^\S+@\S+$/;
+		const nameRegular = /^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}\-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/;
+		setPhoneUserCorrect(phoneRegular.test(phoneUser));
+		setEmailUserCorrect(emailRegular.test(emailUser));
+		setNameUserCorrect(nameRegular.test(nameUser));
+	}
 
-        if (adressUser === 0) { messageAlert = messageAlert + " адреса нет"; }
+	const researchMessage = () => {
+		const phoneWarning = !phoneUserCorrect ? 'Телефон не верен' : '';
+		const emailWarning = !emailUserCorrect ? 'Email не верен' : '';
+		const nameUserWarning = !nameUserCorrect ? 'ФИО не верно' : '';
+		const quanityWarning = quanityItems === null ? 'Ничего не добавлено' : '';
+		
+		let messageFromArray = '';
+		let arrayMessage = [];
+		let arrayMessageСommas = [];
 
-        if (quanityItemsEnd === null) { messageAlert = messageAlert + " Вы ничего не добавили"; }
+		if (firstRenderOrder){
+			arrayMessageСommas = [];
+			arrayMessage = [];
+			arrayMessage.push(phoneWarning, emailWarning, nameUserWarning, quanityWarning);
 
-        if (messageAlert === "") { 
-            setSeeCloseOrder(!seeCloseOrder);
-            return; 
-        }
-        alert(messageAlert);
-    }
+			arrayMessage.map(function(item, index) {
+		
+				if (item === ''){
+					return;
+				} 
 
-    const closeOrder = () => {
-        setOrderState(false);
-        document.querySelector('.box-basket').classList.remove('overflow-hidden');
-        document.querySelector('.js-trigger-message-alert-hide').click();
-    }
+				arrayMessageСommas.push(item);
+		
+				if (index + 1 === arrayMessage.length){
+					arrayMessageСommas.push('!');
+					return;
+				}
+				if (item !== 0) arrayMessageСommas.push(', ');
+				
+			});
 
-    const close = (e) => { 
-        if (e.keyCode !== 27) { return; }; 
-        closeOrder();
-    }
+			arrayMessageСommas.forEach(function(item, index) {
+				messageFromArray += item;
+			});
 
-    useEffect(() => {
-        window.addEventListener('keydown', close);
-        return () => window.removeEventListener('keydown', close);
-    }, [])
+		}
+	
+		setWarningMessage(messageFromArray);
+	}
 
-    return (
-        <div>
-            {seeCloseOrder && <CloseOrder
-                phoneUser={phoneUser}
-                nameUser={nameUser}
-                adressUser={adressUser}
-                emailUser={emailUser}
-                endPriceState={endPriceState}
-                quanityItemsEnd={quanityItemsEnd}
-                paymentMethod={paymentMethod}
-            />}
+	useEffect(() => {
+		window.addEventListener('keydown', close);
+		return () => window.removeEventListener('keydown', close);
+	}, [])
 
-        <div className="order-wrapper">    
-            <button
-                className="dn trigger-close-last-order"
-                onClick={() => setSeeCloseOrder(!seeCloseOrder)}
-            />
+	return (
+		<div>
+			{seeCloseOrder && <CloseOrder
+				phoneUser={phoneUser}
+				nameUser={nameUser}
+				adressUser={adressUser}
+				emailUser={emailUser}
+				endPriceState={endPriceState}
+				quanityItems={quanityItems}
+				paymentMethod={paymentMethod}
+			/>}
 
-            <button
-                className="dn trigger-fillingOrder"
-                onClick={() => giveDataOrder()}
-            />
+		<div className="order-wrapper">
+			<button
+				className="dn trigger-close-last-order"
+				onClick={() => setSeeCloseOrder(!seeCloseOrder)}
+			/>
 
-            <div ref={boxOrderRef} className="container-order">
-                <div className="box-order">
-                    <div className="wrapper-order-title">
-                        <span className="text-order-title">
-                            Оформление заказа
-                        </span>
-                        <div className="close-order"
-                             onClick={() => closeOrder()}
-                        >
-                            Закрыть
-                        </div>
-                    </div>
+			<button
+				className="dn trigger-fillingOrder"
+				onClick={() => giveDataOrder()}
+			/>
 
-                    <div className="container-main-order">
-                        <div className="container-busket-order">
-                            <div className="wrapper-text-order-title-items">
-                                <span className="text-order-title-items">
-                                    Ваш заказ
-                                </span>
-                            </div>
+			<div ref={boxOrderRef} className="container-order">
+				<div className="box-order">
+					<div className="wrapper-order-title">
+						<span className="text-order-title">
+							Оформление заказа
+						</span>
+						<div
+							className="close-order"
+							onClick={() => closeOrder()}
+						>
+							Закрыть
+						</div>
+					</div>
 
-                            <table className="table-basket-border-order-main">
-                                <tr className="table-basket-border-order">
-                                    <th className="column-id-order"> Артикул </th>
-                                    <th className="column-img-order"> Картинка </th>
-                                    <th className="column-name-product-order">Наименование товара</th>
-                                    <th className="column-price-order">Цена за шт.</th>
-                                    <th className="column-quanity-product-order">Кол.</th>
-                                    <th className="column-end-price-order">Цена</th>
-                                </tr>
+					<div className="container-main-order">
+						<div className="container-busket-order">
+							<div className="wrapper-text-order-title-items">
+								<span className="text-order-title-items">
+									Ваш заказ
+								</span>
+							</div>
 
-                                {productArrayState.map((item) => (
-                                    <tr className="table-basket-border-order container-product-basket-order">
-                                        <td> 
-                                            <span className="idtable-order"> 
-                                                {item.productId} 
-                                            </span>  
-                                        </td>
-                                        
-                                        <td> 
-                                            <div className="wrapper-box-img-order">
-                                                <img   
-                                                    className="img-order" 
-                                                    src={`img/photoBase/${item.pathImage}`}>
-                                                </img> 
-                                            </div>
-                                        </td>
+							<table className="table-basket-border-order-main">
+								<tr className="table-basket-border-order">
+									<th className="column-id-order"> Артикул </th>
+									<th className="column-img-order"> Картинка </th>
+									<th className="column-name-product-order">Наименование товара</th>
+									<th className="column-price-order">Цена за шт.</th>
+									<th className="column-quanity-product-order">Кол.</th>
+									<th className="column-end-price-order">Цена</th>
+								</tr>
 
-                                        <td className="product-name-text-order"> 
-                                            <span> 
-                                                {item.productName} 
-                                            </span>  
-                                        </td>
-                                        <td className="product-price-text-order"> 
-                                            <span> 
-                                                {item.productPrice / item.quanityProduct} р
-                                            </span> 
-                                        </td>
-                                        <td className="product-quanity-text-order"> 
-                                            <span> 
-                                                {item.quanityProduct}  
-                                            </span> 
-                                        </td>
-                                        <td className="product-price-text-order"> 
-                                            <span> 
-                                                {item.productPrice} р 
-                                            </span> 
-                                        </td>
-                                    </tr>
-                                ))}
-                            </table>
+								{productArrayState.map((item) => (
+									<tr className="table-basket-border-order container-product-basket-order">
+										<td>
+											<span className="idtable-order">
+												{item.productId}
+											</span>
+										</td>
 
-                        </div>
-                        <div className="container-details-order">
-                            <div className="wrapper-text-order-title-items">
-                                <span className="text-order-title">
-                                    Детали заказа
-                                </span>
-                            </div>
-                            <div className="grid">
+										<td>
+											<div className="wrapper-box-img-order">
+												<img
+													className="img-order"
+													src={`img/photoBase/${item.pathImage}`}>
+												</img>
+											</div>
+										</td>
 
-                                <div className="order-phone">  Телефон
-                                    <span className={phoneUserCorrect ? "dn" : "incorect-value"}>
-                                            *
-                                    </span>
-                                </div>
-                                <input
-                                    defaultValue = {phoneUser}
-                                    onChange={(e) => giveDataUsers(e, setPhoneUser)}
-                                    type="number"
-                                    maxlength="11"
-                                    className={phoneUserCorrect ? "input-phone" : "incorect-value"}
-                                />
-                                <div> Населенный пункт
-                                    <span className={adressUserCorrect ? "dn" : "incorect-value"}>
-                                            *
-                                    </span>
-                                </div>
-                                <input type="text" className=""
-                                    defaultValue = {adressUser}
-                                    onChange={(e) => giveDataUsers(e, setAdressUser)}
-                                    className={adressUserCorrect ? "input-phone" : "incorect-value"}
-                                />
+										<td className="product-name-text-order">
+											<span>
+												{item.productName}
+											</span>
+										</td>
+										<td className="product-price-text-order">
+											<span>
+												{item.productPrice / item.quanityProduct} р
+											</span>
+										</td>
+										<td className="product-quanity-text-order">
+											<span>
+												{item.quanityProduct}
+											</span>
+										</td>
+										<td className="product-price-text-order">
+											<span>
+												{item.productPrice} р
+											</span>
+										</td>
+									</tr>
+								))}
+							</table>
 
-                                <div> Имя
-                                    <span className={nameUserCorrect ? "dn" : "incorect-value"}>
-                                            *
-                                    </span>
-                                </div>
-                                <input type="text" className=""
-                                    defaultValue = {nameUser}
-                                    onChange={(e) => giveDataUsers(e, setNameUser)}
-                                    className={nameUserCorrect ? "input-phone" : "incorect-value"}
-                                />
+						</div>
+						<div className="container-details-order">
+							<div className="wrapper-text-order-title-items">
+								<span className="text-order-title">
+									Детали заказа
+								</span>
+								<span className="warning-mesage-text">
+									{warningMessage}
+								</span>
+							</div>
+							<div className="grid">
 
-                                <div>
-                                    Электронная почта
-                                    <span className={emailUserCorrect ? "dn" : "incorect-value"}>
-                                        *
-                                    </span>
-                                </div>
-                                <input type="text" className=""
-                                    defaultValue = {emailUser}
-                                    onChange={(e) => giveDataUsers(e, setEmailUser)}
-                                    className={emailUserCorrect ? "input-phone" : "incorect-value"}
-                                />
+								<div className="order-phone">  Телефон
+									<span className={!phoneUserCorrect ? "incorect-value" : "dn"}>
+											*
+									</span>
+								</div>
+								<input
+									defaultValue = {phoneUser}
+									onChange={(e) => setPhoneUser(e.target.value)}
+									type="number"
+									maxlength="11"
+									className={!phoneUserCorrect ? "incorect-value" : "input-phone"}
+								/>
+								<div> Населенный пункт
 
-                                <div> Комментарий </div>
+								</div>
+								<input type="text" className=""
+									defaultValue = {adressUser}
+									onChange={(e) => setAdressUser(e.target.value)}
+									className="input-phone"
+								/>
 
-                                <textarea 
-                                    defaultValue={saveCommitOrder}
-                                    className="input-comment"
-                                    onChange={(e) => giveDataUsers(e, setCommitOrder)}>
-                                </textarea>
+								<div> Имя
+									<span className={!nameUserCorrect ? "incorect-value" : "dn"}>
+											*
+									</span>
+								</div>
+								<input type="text" className=""
+									defaultValue = {nameUser}
+									onChange={(e) => setNameUser(e.target.value)}
+									className={!nameUserCorrect ? "incorect-value" : "input-phone"}
+								/>
 
-                            </div>
+								<div>
+									Электронная почта
+									<span className={!emailUserCorrect ? "incorect-value" : "dn"}>
+										*
+									</span>
+								</div>
+								<input type="text" className=""
+									defaultValue = {emailUser}
+									onChange={(e) => setEmailUser(e.target.value)}
+									className={!emailUserCorrect ? "incorect-value" : "input-phone"}
+								/>
 
-                            <div className="bottom-order">
-                                <div className="wrapper-title-bottom-order title-bottom-order">
-                                    <span className={quanityItemsEnd || "if-dont-have-items-ins-busket"}>
-                                        {quanityItemsEnd && `Итого: ${quanityItemsEnd}
-                                        товаров на сумму  ${endPriceState} р`}
-                                    </span>
-                                </div>
+								<div> Комментарий </div>
 
-                                <div className="wrapper-payment-bottom-order">
+								<textarea
+									defaultValue={saveCommitOrder}
+									className="input-comment"
+									onChange={(e) => setCommitOrder(e.target.value)}>
+								</textarea>
 
-                                    <div className="wrapper-payment-bottom-order-two">
-                                        <div className="wrapper-promo-code">
-                                            <span className="text-bottom-order"> Ввод промокода: </span>
-                                            <input 
-                                                defaultValue="discount"
-                                                ref={inputPromo}
-                                                className="input-promo"
-                                                onKeyDown={(e) => inputGiveDiscount(e)} 
-                                            >
-                                            </input>
-                                        </div>
-                                        <div className="wraper-payment">
-                                            <span className="text-bottom-order"> Выберите способ оплаты: </span>
-                                            <select
-                                            defaultValue={savePaymentMethod}
-                                                ref={selectRef}
-                                                className="select-payment-method"
-                                                onClick={(e) => setPaymentMethod(selectRef.current.value)}>
-                                                <option className="">
-                                                    При получении
-                                                    </option>
+							</div>
 
-                                                <option className="">
-                                                    Онлайн</option>
-                                            </select>
+							<div className="bottom-order">
+								<div className="wrapper-title-bottom-order title-bottom-order">
+									<span className={quanityItems || "if-dont-have-items-ins-busket"}>
+										{quanityItems && `Итого: ${quanityItems}
+										товаров на сумму  ${endPriceState} р`}
+									</span>
+								</div>
 
-                                        </div>
+								<div className="wrapper-payment-bottom-order">
 
-                                        {/*  <div className="wrapper-details-order">
-                                            <span className="text-bottom-order"> Детали заказа: </span>
-                                    
-                                        </div> */}
-                                    </div>
-                                </div>
-                                <div className="wrapper-payment-bottom-order-two-section">
-                                    <span className="text-doc">
-                                        Нажимая на кнопку оформить заказ вы принимаете условие публичной оферты.
-                                    </span>
-                                    <button className="button-close-order"
-                                        onClick={(e) => checkCorrectValue()}
-                                    >
-                                        Оформление заказа
-                                    </button>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       </div>
-      </div>
-    );
+									<div className="wrapper-payment-bottom-order-two">
+										<div className="wrapper-promo-code">
+											<span className="text-bottom-order"> Ввод промокода: </span>
+											<input
+												defaultValue="discount"
+												ref={inputPromo}
+												className="input-promo"
+												onKeyDown={(e) => inputGiveDiscount(e)}
+											>
+											</input>
+										</div>
+										<div className="wraper-payment">
+											<span className="text-bottom-order"> Выберите способ оплаты: </span>
+											<select
+											defaultValue={savePaymentMethod}
+												ref={selectRef}
+												className="select-payment-method"
+												onClick={(e) => setPaymentMethod(selectRef.current.value)}>
+												<option className="">
+													При получении
+													</option>
+
+												<option className="">
+													Онлайн</option>
+											</select>
+
+										</div>
+
+										{/*  <div className="wrapper-details-order">
+											<span className="text-bottom-order"> Детали заказа: </span>
+
+										</div> */}
+									</div>
+								</div>
+								<div className="wrapper-payment-bottom-order-two-section">
+									<span className="text-doc">
+										Нажимая на кнопку оформить заказ вы принимаете условие публичной оферты.
+									</span>
+									<button className="button-close-order"
+										onClick={(e) => checkCorrectValue()}
+									>
+										Оформление заказа
+									</button>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	   </div>
+	  </div>
+	);
 };
 
 export default BoxOrder;

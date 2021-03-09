@@ -4,7 +4,7 @@ let productName;
 let dataSort = [];
 let sortingData;
 let data;
-let pushData;
+let deleteProduct;
 let tesDataDescending;
 let test = false;
 let whoAddBasket = [];
@@ -27,6 +27,8 @@ let pathImage = [];
 let onlyOneCreateMessageAlert = true
 let isBasketOpen = false;
 let saveProductArrayState = [];
+let firstRenderOrder = false;
+
 
 /* let saveProductArrayState = [];
 let saveEmailUsers = "dasdasgfd@gmail.com";

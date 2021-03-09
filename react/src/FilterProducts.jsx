@@ -374,97 +374,97 @@ const FilterProducts = () => {
         <div className="box-filter-products">
             <button 
                 className="sort-ascending-order style-button-filter"
-                onClick = {(e) => buttonSortAscendingOrder()}
+                onClick={() => buttonSortAscendingOrder()}
             >
                 Сортировка по возрастанию
             </button>
 
             <button 
                 className="sort-descending-order style-button-filter"
-                onClick = {(e) => buttonSortDescendingOrder()}
+                onClick={() => buttonSortDescendingOrder()}
             >
                 Сортировка по убыванию
             </button>
 
             <button 
                 className="sort-price-order style-button-filter"
-                onClick = {(e) => sortPriceChange()}
+                onClick={() => sortPriceChange()}
             >
                 Сортировка по выбраной стоимости
             </button>
 
-                <div className="box-input">
-                    <input
-                        ref = {inputLeft}
-                        type="number"
-                        value={whereGetValueLeft ? leftPointX * 50 : leftInputValue}
-                        onChange={(e) => getValueLeft(e)}
-                        onKeyDown={(e) => inputValueLeft(e)}
-                        className="input-price"
-                    />
+            <div className="box-input">
+                <input
+                    ref={inputLeft}
+                    type="number"
+                    value={whereGetValueLeft ? leftPointX * 50 : leftInputValue}
+                    onChange={(e) => getValueLeft(e)}
+                    onKeyDown={(e) => inputValueLeft(e)}
+                    className="input-price"
+                />
 
-                    <input
-                        ref = {inputRight}
-                        type="number"
-                        value = {whereGetValueRight ?  Math.ceil((-(rightPointX-50) * 50)) : rightInputValue}
-                        onChange={(e) => getValueRight(e)}
-                        onKeyDown={(e) => inputValueRight(e)}
-                        className="input-price"
-                    />
-                </div>
+                <input
+                    ref={inputRight}
+                    type="number"
+                    value={whereGetValueRight ?  Math.ceil((-(rightPointX-50) * 50)) : rightInputValue}
+                    onChange={(e) => getValueRight(e)}
+                    onKeyDown={(e) => inputValueRight(e)}
+                    className="input-price"
+                />
+            </div>
 
-                <div className="line-price">
-                    <div className="into-line-price">
+            <div className="line-price">
+                <div className="into-line-price">
+                    <div
+                        ref={lineRef}
+                        onMouseUp={() => leaveMouse()}
+                        onMouseDown={(e) => moveClosestButton(e)}
+                        onMouseMove={(e) => handleLineMoving(e)}
+                        onMouseLeave={() => leaveMouse()}
+                        className="true-into-line-price">
+
                         <div
-                            ref = {lineRef}
-                            onMouseUp={() => leaveMouse()}
-                            onMouseDown={(e) => moveClosestButton(e)}
-                            onMouseMove={(e) => handleLineMoving(e)}
-                            onMouseLeave={() => leaveMouse()}
-                            className="true-into-line-price">
-
-                            <div
-                                ref = {widthPointLeft}
-                                onMouseUp={() => buttonUpReRenderOne()}
-                                onMouseDown={() => setIsMovingLeftButton(true)}
-                                style={
-                                    {
-                                        transform: `translateX(${leftPointX}px)`
-                                    }
+                            ref={widthPointLeft}
+                            onMouseUp={() => buttonUpReRenderOne()}
+                            onMouseDown={() => setIsMovingLeftButton(true)}
+                            style={
+                                {
+                                    transform: `translateX(${leftPointX}px)`
                                 }
-                                className={`first-point-line ${!isMovingLeftButton && fixMoveLeftButton ? 'transition-point' : ''}`}
+                            }
+                            className={`first-point-line ${!isMovingLeftButton && fixMoveLeftButton ? 'transition-point' : ''}`}
+                        >
+                        </div>
+
+                        <div
+                            ref={widthPointRight}
+                            onMouseUp={() => buttonUpReRenderTwo()}
+                            onMouseDown={() => setIsMovingRightButton(true)}
+                            style={
+                                {
+                                    transform: `translateX(${-rightPointX}px)`
+                                }
+                            }
+                            className={`end-point-line ${!isMovingRightButton && fixMoveRightButton ? 'transition-point' : ''}`}
                             >
-                            </div>
-
-                            <div
-                                ref = {widthPointRight}
-                                onMouseUp={() => buttonUpReRenderTwo()}
-                                onMouseDown={() => setIsMovingRightButton(true)}
-                                style={
-                                    {
-                                        transform: `translateX(${-rightPointX}px)`
-                                    }
-                                }
-                                className={`end-point-line ${!isMovingRightButton && fixMoveRightButton ? 'transition-point' : ''}`}
-                                >
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <select 
-                    className="js-select-type-product style-button-filter"
-                    onChange = {() => filterTypeFilter()}
-                >
-                    <option className="js-switch-period"> Показать всё</option>
-                    <option className="js-switch-period">Стулья</option>
-                    <option className="js-switch-period">Столы</option>
-                    <option className="js-switch-period">Комплекты</option>
-                </select>
+            <select 
+                className="js-select-type-product style-button-filter"
+                onChange={() => filterTypeFilter()}
+            >
+                <option className="js-switch-period">Показать всё</option>
+                <option className="js-switch-period">Стулья</option>
+                <option className="js-switch-period">Столы</option>
+                <option className="js-switch-period">Комплекты</option>
+            </select>
 
             <button 
                 className="sort-price-order style-button-filter"
-                onClick = {() => removeFilter()}
+                onClick={() => removeFilter()}
             >
                 Очистить фильтры
             </button>

@@ -14,14 +14,12 @@ const buyItem = () => {
 
             if (isBasketOpen){
                 document.querySelector('.js-trigger-charts').click();
-            } else{
-
+            } else{ 
             saveProductArrayState.map((product) => {
             if (product.productId === productId){
                 if (product.ordered === true){
                     checkAddItems =! checkAddItems;
-                    document.querySelector('.js-trigger-item-dont-added').click();
-                    document.querySelector('.trigger-check-added-item').click(); 
+                    document.querySelector('.js-trigger-item-dont-added').click();    
                     return;
                 }
             }
@@ -55,9 +53,7 @@ const findProduct = () => {
             productId = item.id;
             ordered = true;
             pathImage = item.img
-        } else {
-            return;
-        }
+        } else {return;}
     });
 }
 
