@@ -23,21 +23,34 @@ const BoxOrder = ({
 	const [phoneUserCorrect, setPhoneUserCorrect] = useState(true);
 	const [nameUserCorrect, setNameUserCorrect] = useState(true);
 	const [emailUserCorrect, setEmailUserCorrect] = useState(true);
-	const [warningMessage, setWarningMessage] = useState(null);
+	const [warningMessage, setWarningMessage] = useState(false);
 
 	const [seeCloseOrder, setSeeCloseOrder] = useState(false);
 	const [discountGive, setDiscountGive] = useState(saveDiscount);
 
  	useEffect(() => {
-		saveEmailUsers = emailUser;
+	 	saveEmailUsers = emailUser;
 		savePhoneUser = phoneUser;
 		saveNameUser = nameUser;
 		saveAdressUser = adressUser;
 		savePaymentMethod = paymentMethod;
 		saveCommitOrder = commitOrder;
-		saveDiscount = discountGive;
-		researchMessage();
+		saveDiscount = discountGive;  
 	}); 
+
+	useEffect(() => {
+		researchMessage();
+	}, [
+		phoneUserCorrect, 
+		nameUserCorrect, 
+		emailUserCorrect,
+	]);
+
+	useEffect(() => {
+		checkCorrectValue();
+		window.addEventListener('keydown', close);
+		return () => window.removeEventListener('keydown', close);
+	}, [])
 
 	const inputGiveDiscount= (e) => {
 		if (
@@ -50,77 +63,64 @@ const BoxOrder = ({
 			setDiscountGive(false);
 			alert('Ваша скидка 10 процентов');
 		}
-	}
+	};
 
 	const checkCorrectValue = () => {
 		checkAllRegular();
-	}
+
+		if (warningMessage.length !== 0) { return; }
+
+		setSeeCloseOrder(!seeCloseOrder);
+	};
 
 	const closeOrder = () => {
 		setOrderState(false);
 		document.querySelector('.box-basket').classList.remove('overflow-hidden');
 		document.querySelector('.js-trigger-message-alert-hide').click();
-	}
+	};
 
 	const close = (e) => {
 		if (e.keyCode !== 27) { return; };
 		closeOrder();
-	}
+	};
 
 	const checkAllRegular = () => {
-		if (!firstRenderOrder) {firstRenderOrder = true;}
 		const phoneRegular = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
 		const emailRegular = /^\S+@\S+$/;
 		const nameRegular = /^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}\-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/;
+		
 		setPhoneUserCorrect(phoneRegular.test(phoneUser));
 		setEmailUserCorrect(emailRegular.test(emailUser));
 		setNameUserCorrect(nameRegular.test(nameUser));
-	}
+	};
 
 	const researchMessage = () => {
 		const phoneWarning = !phoneUserCorrect ? 'Телефон не верен' : '';
 		const emailWarning = !emailUserCorrect ? 'Email не верен' : '';
 		const nameUserWarning = !nameUserCorrect ? 'ФИО не верно' : '';
 		const quanityWarning = quanityItems === null ? 'Ничего не добавлено' : '';
-		
-		let messageFromArray = '';
-		let arrayMessage = [];
-		let arrayMessageСommas = [];
-
-		if (firstRenderOrder){
-			arrayMessageСommas = [];
-			arrayMessage = [];
-			arrayMessage.push(phoneWarning, emailWarning, nameUserWarning, quanityWarning);
-
-			arrayMessage.map(function(item, index) {
-		
-				if (item === ''){
-					return;
-				} 
-
-				arrayMessageСommas.push(item);
-		
-				if (index + 1 === arrayMessage.length){
-					arrayMessageСommas.push('!');
-					return;
-				}
-				if (item !== 0) arrayMessageСommas.push(', ');
-				
-			});
-
-			arrayMessageСommas.forEach(function(item, index) {
-				messageFromArray += item;
-			});
-
-		}
 	
-		setWarningMessage(messageFromArray);
-	}
+		const arrayMessageOne = [phoneWarning, emailWarning, nameUserWarning, quanityWarning];
+		let arrayMessage = [];
 
-	useEffect(() => {
-		window.addEventListener('keydown', close);
-		return () => window.removeEventListener('keydown', close);
-	}, [])
+		arrayMessage = arrayMessageOne.filter(element => element !== '');
+
+		const arrayMessageСommas = arrayMessage.map((item, index) => {
+			if (item === '') { return; } 
+
+			if (index + 1 === arrayMessage.length) {
+				return `${item}!`;
+			}
+
+			if (index + 1 < arrayMessage.length) {
+				return `${item}, `;
+			}
+
+			return item;
+		});
+		
+		setWarningMessage(arrayMessageСommas);
+	};
 
 	return (
 		<div>
@@ -132,219 +132,200 @@ const BoxOrder = ({
 				endPriceState={endPriceState}
 				quanityItems={quanityItems}
 				paymentMethod={paymentMethod}
-			/>}
+		/>}
 
-		<div className="order-wrapper">
-			<button
-				className="dn trigger-close-last-order"
-				onClick={() => setSeeCloseOrder(!seeCloseOrder)}
-			/>
-
-			<button
-				className="dn trigger-fillingOrder"
-				onClick={() => giveDataOrder()}
-			/>
-
-			<div ref={boxOrderRef} className="container-order">
-				<div className="box-order">
-					<div className="wrapper-order-title">
-						<span className="text-order-title">
-							Оформление заказа
-						</span>
-						<div
-							className="close-order"
-							onClick={() => closeOrder()}
-						>
-							Закрыть
-						</div>
-					</div>
-
-					<div className="container-main-order">
-						<div className="container-busket-order">
-							<div className="wrapper-text-order-title-items">
-								<span className="text-order-title-items">
-									Ваш заказ
-								</span>
+			<div className="order-wrapper">
+				<button
+					className="dn trigger-close-last-order"
+					onClick={() => setSeeCloseOrder(!seeCloseOrder)}
+				/>
+				<button
+					className="dn trigger-fillingOrder"
+					onClick={() => giveDataOrder()}
+				/>
+				<button
+					className="dn trigger-check-correct-value"
+					onClick={() => researchMessage()}
+				/>
+				<div ref={boxOrderRef} className="container-order">
+					<div className="box-order">
+						<div className="wrapper-order-title">
+							<span className="text-order-title">
+								Оформление заказа
+							</span>
+							<div
+								className="close-order"
+								onClick={() => closeOrder()}
+							>
+								Закрыть
 							</div>
-
-							<table className="table-basket-border-order-main">
-								<tr className="table-basket-border-order">
-									<th className="column-id-order"> Артикул </th>
-									<th className="column-img-order"> Картинка </th>
-									<th className="column-name-product-order">Наименование товара</th>
-									<th className="column-price-order">Цена за шт.</th>
-									<th className="column-quanity-product-order">Кол.</th>
-									<th className="column-end-price-order">Цена</th>
-								</tr>
-
-								{productArrayState.map((item) => (
-									<tr className="table-basket-border-order container-product-basket-order">
-										<td>
-											<span className="idtable-order">
-												{item.productId}
-											</span>
-										</td>
-
-										<td>
-											<div className="wrapper-box-img-order">
-												<img
-													className="img-order"
-													src={`img/photoBase/${item.pathImage}`}>
-												</img>
-											</div>
-										</td>
-
-										<td className="product-name-text-order">
-											<span>
-												{item.productName}
-											</span>
-										</td>
-										<td className="product-price-text-order">
-											<span>
-												{item.productPrice / item.quanityProduct} р
-											</span>
-										</td>
-										<td className="product-quanity-text-order">
-											<span>
-												{item.quanityProduct}
-											</span>
-										</td>
-										<td className="product-price-text-order">
-											<span>
-												{item.productPrice} р
-											</span>
-										</td>
+						</div>
+						<div className="container-main-order">
+							<div className="container-busket-order">
+								<div className="wrapper-text-order-title-items">
+									<span className="text-order-title-items">
+										Ваш заказ
+									</span>
+								</div>
+								<table className="table-basket-border-order-main">
+									<tr className="table-basket-border-order">
+										<th className="column-id-order">Артикул</th>
+										<th className="column-img-order">Картинка</th>
+										<th className="column-name-product-order">Наименование товара</th>
+										<th className="column-price-order">Цена за шт.</th>
+										<th className="column-quanity-product-order">Кол.</th>
+										<th className="column-end-price-order">Цена</th>
 									</tr>
-								))}
-							</table>
-
-						</div>
-						<div className="container-details-order">
-							<div className="wrapper-text-order-title-items">
-								<span className="text-order-title">
-									Детали заказа
-								</span>
-								<span className="warning-mesage-text">
-									{warningMessage}
-								</span>
+									{productArrayState.map((item) => (
+										<tr className="table-basket-border-order container-product-basket-order">
+											<td>
+												<span className="idtable-order">
+													{item.productId}
+												</span>
+											</td>
+											<td>
+												<div className="wrapper-box-img-order">
+													<img
+														className="img-order"
+														src={`img/photoBase/${item.pathImage}`}
+													/>
+												</div>
+											</td>
+											<td className="product-name-text-order">
+												<span>
+													{item.productName}
+												</span>
+											</td>
+											<td className="product-price-text-order">
+												<span>
+													{item.productPrice / item.quanityProduct} р
+												</span>
+											</td>
+											<td className="product-quanity-text-order">
+												<span>
+													{item.quanityProduct}
+												</span>
+											</td>
+											<td className="product-price-text-order">
+												<span>
+													{item.productPrice} р
+												</span>
+											</td>
+										</tr>
+									))}
+								</table>
 							</div>
-							<div className="grid">
-
-								<div className="order-phone">  Телефон
-									<span className={!phoneUserCorrect ? "incorect-value" : "dn"}>
-											*
+							<div className="container-details-order">
+								<div className="wrapper-text-order-title-items">
+									<span className="text-order-title">
+										Детали заказа
+									</span>
+									<span className="warning-mesage-text">
+										{warningMessage}
 									</span>
 								</div>
-								<input
-									defaultValue = {phoneUser}
-									onChange={(e) => setPhoneUser(e.target.value)}
-									type="number"
-									maxlength="11"
-									className={!phoneUserCorrect ? "incorect-value" : "input-phone"}
-								/>
-								<div> Населенный пункт
-
+								<div className="grid">
+									<div className="order-phone"> 
+										Телефон
+										{!phoneUserCorrect && <span className="incorect-value">*</span>}
+									</div>
+									<input
+										defaultValue={phoneUser}
+										onChange={(e) => setPhoneUser(e.target.value)}
+										type="number"
+										maxlength="11"
+										className="input-phone"
+									/>
+									<div> 
+										Населенный пункт
+									</div>
+									<input 
+										type="text" 
+										defaultValue={adressUser}
+										onChange={(e) => setAdressUser(e.target.value)}
+										className="input-phone"
+									/>
+									<div> 
+										ФИО
+										{!nameUserCorrect && <span className="incorect-value">*</span>}
+									</div>
+									<input 
+										type="text" 
+										defaultValue={nameUser}
+										onChange={(e) => setNameUser(e.target.value)}
+										className="input-phone"
+									/>
+									<div>
+										Электронная почта
+										{!emailUserCorrect && <span className="incorect-value">*</span>}
+									</div>
+									<input type="text"
+										defaultValue={emailUser}
+										onChange={(e) => setEmailUser(e.target.value)}
+										className="input-phone"
+									/>
+									<div>Комментарий</div>
+									<textarea
+										defaultValue={saveCommitOrder}
+										className="input-comment"
+										onChange={(e) => setCommitOrder(e.target.value)}>
+									</textarea>
 								</div>
-								<input type="text" className=""
-									defaultValue = {adressUser}
-									onChange={(e) => setAdressUser(e.target.value)}
-									className="input-phone"
-								/>
-
-								<div> Имя
-									<span className={!nameUserCorrect ? "incorect-value" : "dn"}>
-											*
-									</span>
-								</div>
-								<input type="text" className=""
-									defaultValue = {nameUser}
-									onChange={(e) => setNameUser(e.target.value)}
-									className={!nameUserCorrect ? "incorect-value" : "input-phone"}
-								/>
-
-								<div>
-									Электронная почта
-									<span className={!emailUserCorrect ? "incorect-value" : "dn"}>
-										*
-									</span>
-								</div>
-								<input type="text" className=""
-									defaultValue = {emailUser}
-									onChange={(e) => setEmailUser(e.target.value)}
-									className={!emailUserCorrect ? "incorect-value" : "input-phone"}
-								/>
-
-								<div> Комментарий </div>
-
-								<textarea
-									defaultValue={saveCommitOrder}
-									className="input-comment"
-									onChange={(e) => setCommitOrder(e.target.value)}>
-								</textarea>
-
-							</div>
-
-							<div className="bottom-order">
-								<div className="wrapper-title-bottom-order title-bottom-order">
-									<span className={quanityItems || "if-dont-have-items-ins-busket"}>
-										{quanityItems && `Итого: ${quanityItems}
-										товаров на сумму  ${endPriceState} р`}
-									</span>
-								</div>
-
-								<div className="wrapper-payment-bottom-order">
-
-									<div className="wrapper-payment-bottom-order-two">
-										<div className="wrapper-promo-code">
-											<span className="text-bottom-order"> Ввод промокода: </span>
-											<input
-												defaultValue="discount"
-												ref={inputPromo}
-												className="input-promo"
-												onKeyDown={(e) => inputGiveDiscount(e)}
-											>
-											</input>
-										</div>
-										<div className="wraper-payment">
-											<span className="text-bottom-order"> Выберите способ оплаты: </span>
-											<select
-											defaultValue={savePaymentMethod}
-												ref={selectRef}
-												className="select-payment-method"
-												onClick={(e) => setPaymentMethod(selectRef.current.value)}>
-												<option className="">
-													При получении
+								<div className="bottom-order">
+									<div className="wrapper-title-bottom-order title-bottom-order">
+										<span className={quanityItems || "if-dont-have-items-ins-busket"}>
+											{quanityItems && 
+											`Итого: ${quanityItems} товаров на сумму ${endPriceState} р`}
+										</span>
+									</div>
+									<div className="wrapper-payment-bottom-order">
+										<div className="wrapper-payment-bottom-order-two">
+											<div className="wrapper-promo-code">
+												<span className="text-bottom-order">Ввод промокода:</span>
+												<input
+													defaultValue="discount"
+													ref={inputPromo}
+													className="input-promo"
+													onKeyDown={(e) => inputGiveDiscount(e)}
+												>
+												</input>
+											</div>
+											<div className="wraper-payment">
+												<span className="text-bottom-order">Выберите способ оплаты:</span>
+												<select
+													defaultValue={savePaymentMethod}
+													ref={selectRef}
+													className="select-payment-method"
+													onClick={() => setPaymentMethod(selectRef.current.value)}
+												>
+													<option>
+														При получении
 													</option>
-
-												<option className="">
-													Онлайн</option>
-											</select>
-
+													<option>
+														Онлайн
+													</option>
+												</select>
+											</div>
 										</div>
-
-										{/*  <div className="wrapper-details-order">
-											<span className="text-bottom-order"> Детали заказа: </span>
-
-										</div> */}
 									</div>
+									<div className="wrapper-payment-bottom-order-two-section">
+										<span className="text-doc">
+											Нажимая на кнопку оформить заказ вы принимаете условие публичной оферты.
+										</span>
+										<button 
+											className="button-close-order"
+											onClick={() => checkCorrectValue()}
+										>
+											Оформление заказа
+										</button>
+										</div>
 								</div>
-								<div className="wrapper-payment-bottom-order-two-section">
-									<span className="text-doc">
-										Нажимая на кнопку оформить заказ вы принимаете условие публичной оферты.
-									</span>
-									<button className="button-close-order"
-										onClick={(e) => checkCorrectValue()}
-									>
-										Оформление заказа
-									</button>
-									</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-	   </div>
-	  </div>
+		</div>
 	);
 };
 

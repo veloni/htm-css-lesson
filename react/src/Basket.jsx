@@ -116,7 +116,6 @@ const Basket = () => {
 	const boxOrderOpen = () => {
 		document.querySelector('.box-basket').classList.add('overflow-hidden'); 
 		document.querySelector('.js-trigger-message-alert-hide').click();
-
 		clearVariable();
 
 		productArrayState.map((item) => {
@@ -125,7 +124,7 @@ const Basket = () => {
 
 		quanityItems = newFilterArray.length;
 		quanityItems === 0 ? quanityItems = null : ''; 
-		setOrderState(true);
+		setOrderState(true); 	
 	};
 
 	const renderBasketItems = () => {
