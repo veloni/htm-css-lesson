@@ -5,7 +5,7 @@ const CloseOrder = ({
 	nameUser,
 	adressUser,
 	emailUser,
-	endPriceState,
+	_endPriceState,
 	paymentMethod,
 }) => {
 	const closeLastOrder = () => {
@@ -26,7 +26,7 @@ const CloseOrder = ({
 						<li>Ваш адресс: {adressUser}</li>
 						<li>Ваша почта: {emailUser}</li>
 						<li>Способ оплаты: {paymentMethod}</li>
-						<li>Сумма к оплате: {endPriceState} р</li>
+						<li>Сумма к оплате: {_endPriceState} р</li>
 					</ul>
 				</div>
 				<button

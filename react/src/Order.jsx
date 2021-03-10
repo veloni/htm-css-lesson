@@ -4,21 +4,21 @@ import CloseOrder from './CloseOrder.jsx';
 const BoxOrder = ({
 	productArrayState,
 	setOrderState,
-	quanityItems,
-	endPriceForOrder,
+	_quanityItems,
+	_endPriceForOrder,
 }) => {
 	const boxOrderRef = useRef(null);
 	const selectRef = useRef(null);
 	const inputPromo = useRef(null);
 
-	const [endPriceState, setEndPriceState] = useState(saveDiscount ? endPriceForOrder : endPriceForOrder * 0.9);
+	const [_endPriceState, set_endPriceState] = useState(_saveDiscount ? _endPriceForOrder : _endPriceForOrder * 0.9);
 
-	const [phoneUser, setPhoneUser] = useState(savePhoneUser);
-	const [nameUser, setNameUser] = useState(saveNameUser);
-	const [adressUser, setAdressUser] = useState(saveAdressUser);
-	const [emailUser, setEmailUser] = useState(saveEmailUsers);
-	const [paymentMethod, setPaymentMethod] = useState(savePaymentMethod);
-	const [commitOrder, setCommitOrder] = useState(saveCommitOrder);
+	const [phoneUser, setPhoneUser] = useState(_savePhoneUser);
+	const [nameUser, setNameUser] = useState(_saveNameUser);
+	const [adressUser, setAdressUser] = useState(_saveAdressUser);
+	const [emailUser, setEmailUser] = useState(_saveEmailUsers);
+	const [paymentMethod, setPaymentMethod] = useState(_savePaymentMethod);
+	const [commitOrder, setCommitOrder] = useState(_saveCommitOrder);
 
 	const [phoneUserCorrect, setPhoneUserCorrect] = useState(true);
 	const [nameUserCorrect, setNameUserCorrect] = useState(true);
@@ -26,16 +26,16 @@ const BoxOrder = ({
 	const [warningMessage, setWarningMessage] = useState(false);
 
 	const [seeCloseOrder, setSeeCloseOrder] = useState(false);
-	const [discountGive, setDiscountGive] = useState(saveDiscount);
+	const [discountGive, setDiscountGive] = useState(_saveDiscount);
 
  	useEffect(() => {
-	 	saveEmailUsers = emailUser;
-		savePhoneUser = phoneUser;
-		saveNameUser = nameUser;
-		saveAdressUser = adressUser;
-		savePaymentMethod = paymentMethod;
-		saveCommitOrder = commitOrder;
-		saveDiscount = discountGive;  
+	 	_saveEmailUsers = emailUser;
+		_savePhoneUser = phoneUser;
+		_saveNameUser = nameUser;
+		_saveAdressUser = adressUser;
+		_savePaymentMethod = paymentMethod;
+		_saveCommitOrder = commitOrder;
+		_saveDiscount = discountGive;  
 	}); 
 
 	useEffect(() => {
@@ -57,9 +57,9 @@ const BoxOrder = ({
 			e.key === 'Enter' && 
 			inputPromo.current.value === 'discount' &&
 			discountGive && 
-			quanityItems !== null
+			_quanityItems !== null
 		)	{
-			setEndPriceState(endPriceState * 0.9);
+			set_endPriceState(_endPriceState * 0.9);
 			setDiscountGive(false);
 			alert('Ваша скидка 10 процентов');
 		}
@@ -98,7 +98,7 @@ const BoxOrder = ({
 		const phoneWarning = !phoneUserCorrect ? 'Телефон не верен' : '';
 		const emailWarning = !emailUserCorrect ? 'Email не верен' : '';
 		const nameUserWarning = !nameUserCorrect ? 'ФИО не верно' : '';
-		const quanityWarning = quanityItems === null ? 'Ничего не добавлено' : '';
+		const quanityWarning = _quanityItems === null ? 'Ничего не добавлено' : '';
 	
 		const arrayMessageOne = [phoneWarning, emailWarning, nameUserWarning, quanityWarning];
 		let arrayMessage = [];
@@ -129,8 +129,8 @@ const BoxOrder = ({
 				nameUser={nameUser}
 				adressUser={adressUser}
 				emailUser={emailUser}
-				endPriceState={endPriceState}
-				quanityItems={quanityItems}
+				_endPriceState={_endPriceState}
+				_quanityItems={_quanityItems}
 				paymentMethod={paymentMethod}
 		/>}
 
@@ -187,28 +187,28 @@ const BoxOrder = ({
 												<div className="wrapper-box-img-order">
 													<img
 														className="img-order"
-														src={`img/photoBase/${item.pathImage}`}
+														src={`img/photoBase/${item._pathImage}`}
 													/>
 												</div>
 											</td>
 											<td className="product-name-text-order">
 												<span>
-													{item.productName}
+													{item._productName}
 												</span>
 											</td>
 											<td className="product-price-text-order">
 												<span>
-													{item.productPrice / item.quanityProduct} р
+													{item._productPrice / item._quanityProduct} р
 												</span>
 											</td>
 											<td className="product-quanity-text-order">
 												<span>
-													{item.quanityProduct}
+													{item._quanityProduct}
 												</span>
 											</td>
 											<td className="product-price-text-order">
 												<span>
-													{item.productPrice} р
+													{item._productPrice} р
 												</span>
 											</td>
 										</tr>
@@ -266,16 +266,16 @@ const BoxOrder = ({
 									/>
 									<div>Комментарий</div>
 									<textarea
-										defaultValue={saveCommitOrder}
+										defaultValue={_saveCommitOrder}
 										className="input-comment"
 										onChange={(e) => setCommitOrder(e.target.value)}>
 									</textarea>
 								</div>
 								<div className="bottom-order">
 									<div className="wrapper-title-bottom-order title-bottom-order">
-										<span className={quanityItems || "if-dont-have-items-ins-busket"}>
-											{quanityItems && 
-											`Итого: ${quanityItems} товаров на сумму ${endPriceState} р`}
+										<span className={_quanityItems || "if-dont-have-items-ins-busket"}>
+											{_quanityItems && 
+											`Итого: ${_quanityItems} товаров на сумму ${_endPriceState} р`}
 										</span>
 									</div>
 									<div className="wrapper-payment-bottom-order">
@@ -293,7 +293,7 @@ const BoxOrder = ({
 											<div className="wraper-payment">
 												<span className="text-bottom-order">Выберите способ оплаты:</span>
 												<select
-													defaultValue={savePaymentMethod}
+													defaultValue={_savePaymentMethod}
 													ref={selectRef}
 													className="select-payment-method"
 													onClick={() => setPaymentMethod(selectRef.current.value)}

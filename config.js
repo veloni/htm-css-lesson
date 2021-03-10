@@ -1,40 +1,27 @@
-let idDataBuyItem = [];
-let productPrice;
-let productName;
-let dataSort = [];
-let sortingData;
-let data;
-let deleteProduct;
-let tesDataDescending;
-let test = false;
-let whoAddBasket = [];
-let quanityProduct = 1;
-let endProductArray = [];
-let endPrice = 0;
-let newFilterArray = [];
-let quanityItems;
-let endPriceForOrder = null;
-let itemFind = true;
+let _idDataBuyItem = [];
+let _productPrice;
+let _productName;
+let _dataSort = [];
+let _sortingData;
+let _deleteProduct;
+let _quanityProduct = 1;
+let _endPrice = 0;
+let _newFilterArray = [];
+let _quanityItems;
+let _endPriceForOrder = null;
+let _itemFind = true;
+let _pathImage = [];
+let _onlyOneCreateMessageAlert = true
+let _isBasketOpen = false;
+let _saveProductArrayState = [];
 
-let saveEmailUsers = null;
-let savePhoneUser = null;
-let saveNameUser = null;
-let saveAdressUser = null;
-let savePaymentMethod = 'При получении';
-let saveCommitOrder = null;
-let saveDiscount = true;
-let saveMessage = [];
+let _saveEmailUsers = null;
+let _savePhoneUser = null;
+let _saveNameUser = null;
+let _saveAdressUser = null;
+let _savePaymentMethod = 'При получении';
+let _saveCommitOrder = null;
+let _saveDiscount = true;
 
-let pathImage = [];
-let onlyOneCreateMessageAlert = true
-let isBasketOpen = false;
-let saveProductArrayState = [];
 
-/* 
-let saveEmailUsers = "dasdasgfd@gmail.com";
-let savePhoneUser = "8916666666";
-let saveNameUser = "Иван Иваныч Иванов";
-let saveAdressUser = "sasa";
-let savePaymentMethod = 'При получении';
-let saveCommitOrder = null;
-let saveDiscount = true; */
+

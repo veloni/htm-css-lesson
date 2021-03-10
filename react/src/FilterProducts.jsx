@@ -3,473 +3,345 @@ import React, { useState , useRef } from 'react';
 // all states and functiions to hooks
 const FilterProducts = () => {
 
-    const lineRef = useRef(null);
-    const widthPointRight = useRef(null);
-    const widthPointLeft = useRef(null);
-    const inputLeft = useRef(null);
-    const inputRight = useRef(null);
+	const lineRef = useRef(null);
+	const widthPointRight = useRef(null);
+	const widthPointLeft = useRef(null);
+	const inputLeft = useRef(null);
+	const inputRight = useRef(null);
 
-    const [whereGetValueLeft, setWhereGetValueLeft] = useState(true); 
-    const [whereGetValueRight, setWhereGetValueRight] = useState(true);
+	const [whereGetValueLeft, setWhereGetValueLeft] = useState(true); 
+	const [whereGetValueRight, setWhereGetValueRight] = useState(true);
 
-    const [leftInputValue, setLeftInputValue] = useState(null);
-    const [rightInputValue, setRightInputValue] = useState(null);
+	const [leftInputValue, setLeftInputValue] = useState(null);
+	const [rightInputValue, setRightInputValue] = useState(null);
 
-    const [leftPointX, setLeftPointX] = useState(0);
-    const [rightPointX, setRightPointX] = useState(-222);
-    const [positionButtonOne, setPositionButtonOne] = useState(0);
-    const [positionButtonTwo, setPositionButtonTwo] = useState(0);
-    const [isMovingLeftButton, setIsMovingLeftButton] = useState(false);
-    const [isMovingRightButton, setIsMovingRightButton] = useState(false);
-    const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
-    const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
+	const [leftPointX, setLeftPointX] = useState(0);
+	const [rightPointX, setRightPointX] = useState(-222);
+	const [positionButtonOne, setPositionButtonOne] = useState(0);
+	const [positionButtonTwo, setPositionButtonTwo] = useState(0);
+	const [isMovingLeftButton, setIsMovingLeftButton] = useState(false);
+	const [isMovingRightButton, setIsMovingRightButton] = useState(false);
+	const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
+	const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
-    const [fixMoveRightButton, setFixMoveRightButton] = useState(false)
-    const [fixMoveLeftButton, setFixMoveLeftButton] = useState(false);
+	const [fixMoveRightButton, setFixMoveRightButton] = useState(false)
+	const [fixMoveLeftButton, setFixMoveLeftButton] = useState(false);
 
-    const moveClosestButton = (e) => {
-        if (e.target === widthPointRight.current) { return; };
+	const stepMoveCircle = 50;
 
-        const { clientWidth } = widthPointRight.current;
-        const { offsetX } = e.nativeEvent;
-        const checkLeftPositionButton = offsetX - leftPointX - clientWidth < -offsetX - rightPointX + clientWidth; // unreadable constuction
-        setFixMoveLeftButton(true);
-   
-        if (checkLeftPositionButton) { 
-            // remake without nesting , nope 
-            if (offsetX <= rightPointX - 2 * clientWidth) {
-                setLeftPointX(-rightPointX + 1.5 * clientWidth);
-                removeMoveOutLeftButton();
-                return;
-            }
+	const moveClosestButton = (e) => {
+		if (e.target === widthPointRight.current) { return; };
 
-            if (positionButtonOne-clientWidth < clientWidth) {
-                setLeftPointX(0);
-                removeMoveOutLeftButton();
-                return;
-            }
-            removeMoveOutLeftButton();
-            setLeftPointX(positionButtonOne - clientWidth);
-            return;
-        }
+		const { clientWidth } = widthPointRight.current;
+		const { offsetX } = e.nativeEvent;
+		const checkLeftPositionButton = offsetX - leftPointX - clientWidth < -offsetX - rightPointX + clientWidth; // unreadable constuction
+		
+		setFixMoveLeftButton(true);
 
-       setFixMoveRightButton(true); 
-       
-       if (offsetX <= leftPointX + 2 * clientWidth){ 
-            setRightPointX(-(leftPointX));
-            removeMoveOutRightButton();
-            return;
-        }
+		if (checkLeftPositionButton) {
+			handleLeftPositionButton(offsetX);
+			return;
+		}
 
-        if (positionButtonTwo >= 300) {
-            setRightPointX(-222);
-            removeMoveOutRightButton();
-            return;
-        }
+		setFixMoveRightButton(true); 
 
-        removeMoveOutRightButton();
-        setRightPointX(-positionButtonTwo +  2 * clientWidth);
-        return;
-    }
+	  if (offsetX <= leftPointX + 2 * clientWidth){ 
+			setRightPointX(-(leftPointX));
+			removeMoveOutRightButton();
+			return;
+		}
 
-    const removeMoveOutRightButton = () => {
-        setTimeout(() => {
-            setFixMoveRightButton(false);
-        }, 2000);
-    }
+		if (positionButtonTwo >= 300) {
+			setRightPointX(-222);
+			removeMoveOutRightButton();
+			return;
+		}
 
-    const removeMoveOutLeftButton = () => {
-        setTimeout(() => {
-            setFixMoveLeftButton(false);
-        }, 2000);
-    }
+		removeMoveOutRightButton();
+		setRightPointX(-positionButtonTwo +  2 * clientWidth);
+		return;
+	};
 
-    const leaveMouse = () => {
-        setIsMovingRightButton(false);
-        setIsMovingLeftButton(false);
-    }
+	const removeMoveOutRightButton = () => {
+		setTimeout(() => {
+			setFixMoveRightButton(false);
+		}, 2000);
+	};
 
-    const handleLineMoving = (e) => { 
-        const layerX = e.nativeEvent.layerX;
-        setPositionButtonOne(layerX);
-        setPositionButtonTwo(layerX);
-        selectButtonMove();
-        sortPriceChange();
-    }
+	const removeMoveOutLeftButton = () => {
+		setTimeout(() => {
+			setFixMoveLeftButton(false);
+		}, 2000);
+	};
 
-    const selectButtonMove = () => { 
-        isMovingLeftButton && buttonMoveOne();
-        isMovingRightButton && buttonMoveTwo();
-    }
+	const leaveMouse = () => {
+		setIsMovingRightButton(false);
+		setIsMovingLeftButton(false);
+	};
 
-    const buttonMoveOne = () => {
-        const widthButton = widthPointRight.current.clientWidth / 2;
+	const handleLineMoving = (e) => { 
+		const { layerX } = e.nativeEvent;
+		
+		setPositionButtonOne(layerX);
+		setPositionButtonTwo(layerX);
 
-        if (positionButtonOne <= widthButton * 2) {
-            setLeftPointX(0);
-            return;
-        };
-        if (positionButtonOne - widthButton  >= -rightPointX) { return; };
+		selectButtonMove();
+		filterTypeFilter();
 
-        setLeftPointX(positionButtonOne - widthButton);
-    }
+	};
 
-    const buttonMoveTwo = () => {
-        const widthButton = widthPointRight.current.clientWidth / 2;
+	const selectButtonMove = () => { 
+		isMovingLeftButton && buttonMoveOne();
+		isMovingRightButton && buttonMoveTwo();
+	};
 
-        if (positionButtonTwo >= 246) {
-            setRightPointX(-222);
-            return;
-        }
-        if (positionButtonTwo - widthButton  <= leftPointX) { return; };
-        setRightPointX(-positionButtonTwo + widthButton);
-    }
+	const buttonMoveOne = () => {
+		const widthButton = widthPointRight.current.clientWidth / 2;
 
-    const buttonSortAscendingOrder = () => {
-        setCheckAscendingOrder(true);
-        setCheckDescendingOrder(false);
-        const sorting = productList.slice();
-        sorting.sort(function(a,b) {
-            let x = parseInt(a.price.replace(/\D/g,''));
-            let y = parseInt(b.price.replace(/\D/g,''));
-            return x < y ? -1 : x > y ? 1 : 0;
-        });
+		if (positionButtonOne <= widthButton * 2) {
+			setLeftPointX(0);
+			return;
+		};
 
-        const inputPriceFirst = inputLeft.current;
-        const inputPriceEnd = inputRight.current;
-        const inputValueFirst = parseInt(inputPriceFirst.value);
-        const inputValueEnd = parseInt(inputPriceEnd.value);
+		if (positionButtonOne - widthButton  >= -rightPointX) { return; };
 
-        let sortingTwo = []
+		setLeftPointX(positionButtonOne - widthButton);
+	};
 
-        sorting.forEach(function(item) {
+	const buttonMoveTwo = () => {
+		const widthButton = widthPointRight.current.clientWidth / 2;
 
-            if(parseInt(item.price) < inputValueEnd)
-            {
-                if(parseInt(item.price) > inputValueFirst)
-                {
-                    sortingTwo.push(item);
-                }
-            }
+		if (positionButtonTwo >= 246) {
+			setRightPointX(-222);
+			return;
+		}
 
-        });
+		if (positionButtonTwo - widthButton  <= leftPointX) { return; };
 
-        const selectType = document.querySelector('.js-select-type-product');
-        let sortingThree = [];
-        switch (selectType.value) {
-            case "Показать всё":
-                sortingThree = sortingTwo;
-              break;
-            case "Стулья":
-                sortingTwo.forEach(function(item) {
-                    if (item.classProduct === "chair"){
-                        sortingThree.push(item);
-                    }
-                });
+		setRightPointX(-positionButtonTwo + widthButton);
+	};
 
-              break;
-            case "Столы":
-                sortingTwo.forEach(function(item) {
-                    if (item.classProduct === "table"){
-                        sortingThree.push(item);
-                    }
-                });
+	///Sorting function
+	const buttonSortAscendingOrder = () => {
+		setCheckAscendingOrder(true);
+		setCheckDescendingOrder(false);
 
-              break;
-            case "Комплекты":
-                sortingTwo.forEach(function(item) {
-                    if (item.classProduct === "set"){
-                        sortingThree.push(item);
-                    }
-                });
-              break;
-          }
+		sortingPriceAscendingOrDescending(1);
+	};
 
-        sortingData = sortingThree;
-        document.querySelector('.trigger-filter').click();
-    }
+	const buttonSortDescendingOrder = () => {
+		setCheckDescendingOrder(true);
+		setCheckAscendingOrder(false);
 
-    const buttonSortDescendingOrder = () =>{
-        setCheckDescendingOrder(true);
-        setCheckAscendingOrder(false);
-        const sorting = productList.slice();
-        sorting.sort(function(a,b) {
-            let x = parseInt(a.price.replace(/\D/g,''));
-            let y = parseInt(b.price.replace(/\D/g,''));
-            return x < y ? 1 : x > y ? -1 : 0;
-        });
+		sortingPriceAscendingOrDescending(-1);
+	};
 
-        const inputPriceFirst = inputLeft.current;
-        const inputPriceEnd = inputRight.current;
-        const inputValueFirst = parseInt(inputPriceFirst.value);
-        const inputValueEnd = parseInt(inputPriceEnd.value);
+	const filterTypeFilter = () => {
+		if (checkAscendingOrder) {
+			sortingPriceAscendingOrDescending(1);
+			return;
+		}
 
-        let sortingTwo = []
+		if (checkDescendingOrder) {
+			sortingPriceAscendingOrDescending(-1);
+			return;
+		}
 
-        sorting.forEach(function(item) {
+		sortingPriceAscendingOrDescending('', true);
+	};
 
-            if(parseInt(item.price) < inputValueEnd)
-            {
-                if(parseInt(item.price) > inputValueFirst)
-                {
-                    sortingTwo.push(item);
-                }
-            }
+	const sortingPriceAscendingOrDescending = (sign, dontHaveFilter) => {
+		const sorting = productList.slice();
 
-        });
+		const filteredList = sorting.filter(filterSortedProducts);
 
-        const selectType = document.querySelector('.js-select-type-product');
-        let sortingThree = [];
-        switch (selectType.value) {
-            case "Показать всё":
-                sortingThree = sortingTwo;
-              break;
-            case "Стулья":
-                sortingTwo.forEach(function(item) {
-                    if (item.classProduct === "chair"){
-                        sortingThree.push(item);
-                    }
-                });
-              break;
-            case "Столы":
-                sortingTwo.forEach(function(item) {
-                    if (item.classProduct === "table"){
-                        sortingThree.push(item);
-                    }
-                });
-              break;
-            case "Комплекты":
-                sortingTwo.forEach(function(item) {
-                    if (item.classProduct === "set"){
-                        sortingThree.push(item);
-                    }
-                });
-              break;
-          }
+		if (dontHaveFilter) {
+			_sortingData = filteredList;
 
-        sortingData = sortingThree;
-        document.querySelector('.trigger-filter').click();
-    }
+			document.querySelector('.trigger-filter').click();
+			return;
+		}
 
-    const sortPriceChange = () =>{
-        filterTypeFilter();
-    }
+		const sortedProductList = filteredList.sort((a, b) => {
+			const x = parseInt(a.price.replace(/\D/g,''));
+			const y = parseInt(b.price.replace(/\D/g,''));
+			return x < y ? -1 * sign : x > y ? 1 * sign : 0;
+		});
 
-    const removeFilter = ()=> {
-        sortingData = productList;
-        setCheckAscendingOrder(false);
-        setCheckDescendingOrder(false);
-        document.querySelector('.trigger-filter').click();
-    }
+		_sortingData = sortedProductList;
 
-    const filterTypeFilter = () => {
+		document.querySelector('.trigger-filter').click();
+	};
 
-        checkAscendingOrder && buttonSortAscendingOrder();
-        checkDescendingOrder && buttonSortDescendingOrder();
-        
-        if (!checkAscendingOrder && !checkDescendingOrder){
+	const filterSortedProducts = (item) => {
+		const selectType = document.querySelector('.js-select-type-product');
 
-            const inputPriceFirst = inputLeft.current;
-            const inputPriceEnd = inputRight.current;
-            const inputValueFirst = parseInt(inputPriceFirst.value);
-            const inputValueEnd = parseInt(inputPriceEnd.value);
-            
-            const sorting = productList.slice();
-            let sortingTwo = [];
+		const inputPriceFirst = parseInt(inputLeft.current.value);
+		const inputPriceEnd = parseInt(inputRight.current.value);
 
-            sorting.forEach(function(item) {
-                if(parseInt(item.price) < inputValueEnd)
-                {
-                    if(parseInt(item.price) > inputValueFirst)
-                    {
-                        sortingTwo.push(item);
-                    }
-                }
-            });
+		if (parseInt(item.price) > inputPriceEnd || parseInt(item.price) < inputPriceFirst) { return; }
+		if (selectType.value === 'Показать всё') { return item; }
+		if (selectType.value === 'Стулья' && item.classProduct === 'chair') { return item; }
+		if (selectType.value === 'Столы' && item.classProduct === 'table') { return item; }
+		if (selectType.value === 'Комплекты' && item.classProduct === 'set') { return item; }
+	};
 
-            const selectType = document.querySelector('.js-select-type-product');
-            let sortingThree = [];
+	const removeFilter = ()=> {
+		_sortingData = productList;
 
-            switch (selectType.value) {
-                case "Показать всё":
-                    sortingThree = sortingTwo;
-                    break;
-                case "Стулья":
-                    sortingTwo.forEach(function(item) {
-                        if (item.classProduct === "chair"){
-                            sortingThree.push(item);
-                        }
-                    });
-                    break;
-                case "Столы":
-                    sortingTwo.forEach(function(item) {
-                        if (item.classProduct === "table"){
-                            sortingThree.push(item);
-                        }
-                    });
-                    break;
-                case "Комплекты":
-                    sortingTwo.forEach(function(item) {
-                        if (item.classProduct === "set"){
-                            sortingThree.push(item);
-                        }
-                    });
-                    break;
-              }
-            sortingData = sortingThree;
-            document.querySelector('.trigger-filter').click();
-        }
-    }
+		setCheckAscendingOrder(false);
+		setCheckDescendingOrder(false);
 
-    const buttonUpReRenderOne = () => {
-        setIsMovingLeftButton(false);
-        filterTypeFilter();
-    }
+		document.querySelector('.trigger-filter').click();
+	};
 
-    const buttonUpReRenderTwo = () => {
-        setIsMovingRightButton(false);
-        filterTypeFilter();
-    }
+	const buttonUpReRenderOne = () => {
+		setIsMovingLeftButton(false);
+		filterTypeFilter();
+	};
 
-    const getValueLeft = (e) =>{
-        setLeftInputValue(e.target.value);
-        setWhereGetValueLeft(false);
-    }
+	const buttonUpReRenderTwo = () => {
+		setIsMovingRightButton(false);
+		filterTypeFilter();
+	};
 
-    const inputValueLeft = (e) => {
-        if (e.key === 'Enter') {
-            if (parseInt(inputLeft.current.value) + 1500 < parseInt(inputRight.current.value)){
-                setLeftPointX(Math.abs(leftInputValue/50));
-                setWhereGetValueLeft(true);
-                sortPriceChange();
-                return;
-            }
-            setLeftPointX(-rightPointX);
-            setWhereGetValueLeft(true);
-            sortPriceChange();
-          }
-    }
+	const getValueLeft = (e) =>{
+		setLeftInputValue(e.target.value);
+		setWhereGetValueLeft(false);
+	};
 
-    const getValueRight = (e) =>{
-        setRightInputValue(e.target.value);
-        setWhereGetValueRight(false);
-    }
+	const inputValueLeft = (e) => {
+		if (e.key === 'Enter') {
 
-    const inputValueRight = (e) => {
-        if (e.key === 'Enter') {
-            if(parseInt(inputRight.current.value)>13300) { setRightPointX(-222); return; }
-                if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value) + 1500){
-                        setRightPointX((-(rightInputValue)/50+50));
-                        setWhereGetValueRight(true);
-                        sortPriceChange();
-                        return;
-                }
-            setRightPointX(-leftPointX);
-            setWhereGetValueRight(true);
-            sortPriceChange();
-        }
-    }
+			if (parseInt(inputLeft.current.value) + 1500 < parseInt(inputRight.current.value)) {
+				setLeftPointX(Math.abs(leftInputValue / stepMoveCircle));
+				setWhereGetValueLeft(true);
+				filterTypeFilter();
+				return;
+			}
 
-    return (
-        <div className="box-filter-products">
-            <button 
-                className="sort-ascending-order style-button-filter"
-                onClick={() => buttonSortAscendingOrder()}
-            >
-                Сортировка по возрастанию
-            </button>
+			setLeftPointX(-rightPointX);
+			setWhereGetValueLeft(true);
+			filterTypeFilter();
+		}
+	};
 
-            <button 
-                className="sort-descending-order style-button-filter"
-                onClick={() => buttonSortDescendingOrder()}
-            >
-                Сортировка по убыванию
-            </button>
+	const inputValueRight = (e) => {
+		if (e.key === 'Enter') {
 
-            <button 
-                className="sort-price-order style-button-filter"
-                onClick={() => sortPriceChange()}
-            >
-                Сортировка по выбраной стоимости
-            </button>
+			if (parseInt(inputRight.current.value) > 13300) { 
+				setRightPointX(-222); 
+				return; 
+			}
 
-            <div className="box-input">
-                <input
-                    ref={inputLeft}
-                    type="number"
-                    value={whereGetValueLeft ? leftPointX * 50 : leftInputValue}
-                    onChange={(e) => getValueLeft(e)}
-                    onKeyDown={(e) => inputValueLeft(e)}
-                    className="input-price"
-                />
+			if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value) + 1500) {
+					setRightPointX((-(rightInputValue) / stepMoveCircle+stepMoveCircle));
+					setWhereGetValueRight(true);
+					filterTypeFilter();
+					return;
+			}
 
-                <input
-                    ref={inputRight}
-                    type="number"
-                    value={whereGetValueRight ?  Math.ceil((-(rightPointX-50) * 50)) : rightInputValue}
-                    onChange={(e) => getValueRight(e)}
-                    onKeyDown={(e) => inputValueRight(e)}
-                    className="input-price"
-                />
-            </div>
+			setRightPointX(-leftPointX);
+			setWhereGetValueRight(true);
+			filterTypeFilter();
+		}
+	};
 
-            <div className="line-price">
-                <div className="into-line-price">
-                    <div
-                        ref={lineRef}
-                        onMouseUp={() => leaveMouse()}
-                        onMouseDown={(e) => moveClosestButton(e)}
-                        onMouseMove={(e) => handleLineMoving(e)}
-                        onMouseLeave={() => leaveMouse()}
-                        className="true-into-line-price">
+	const getValueRight = (e) =>{
+		setRightInputValue(e.target.value);
+		setWhereGetValueRight(false);
+	};
 
-                        <div
-                            ref={widthPointLeft}
-                            onMouseUp={() => buttonUpReRenderOne()}
-                            onMouseDown={() => setIsMovingLeftButton(true)}
-                            style={
-                                {
-                                    transform: `translateX(${leftPointX}px)`
-                                }
-                            }
-                            className={`first-point-line ${!isMovingLeftButton && fixMoveLeftButton ? 'transition-point' : ''}`}
-                        >
-                        </div>
+	const handleLeftPositionButton = (offsetX) => {
+		const { clientWidth } = widthPointRight.current;
 
-                        <div
-                            ref={widthPointRight}
-                            onMouseUp={() => buttonUpReRenderTwo()}
-                            onMouseDown={() => setIsMovingRightButton(true)}
-                            style={
-                                {
-                                    transform: `translateX(${-rightPointX}px)`
-                                }
-                            }
-                            className={`end-point-line ${!isMovingRightButton && fixMoveRightButton ? 'transition-point' : ''}`}
-                            >
-                        </div>
-                    </div>
-                </div>
-            </div>
+		offsetX <= rightPointX - 2 * clientWidth && setLeftPointX(-rightPointX + 1.5 * clientWidth)
+		positionButtonOne - clientWidth < clientWidth && setLeftPointX(0);
+	
+		removeMoveOutLeftButton();
+		setLeftPointX(positionButtonOne - clientWidth);
+	};
 
-            <select 
-                className="js-select-type-product style-button-filter"
-                onChange={() => filterTypeFilter()}
-            >
-                <option className="js-switch-period">Показать всё</option>
-                <option className="js-switch-period">Стулья</option>
-                <option className="js-switch-period">Столы</option>
-                <option className="js-switch-period">Комплекты</option>
-            </select>
+	return (
+		<div className="box-filter-products">
+			<button 
+				className="sort-ascending-order style-button-filter"
+				onClick={() => buttonSortAscendingOrder()}
+			>
+				Сортировка по возрастанию
+			</button>
+			<button 
+				className="sort-descending-order style-button-filter"
+				onClick={() => buttonSortDescendingOrder()}
+			>
+				Сортировка по убыванию
+			</button>
+			<button className="style-button-filter-dont-active">
+				Сортировка по выбраной стоимости
+			</button>
+			<div className="box-input">
+				<input
+					ref={inputLeft}
+					type="number"
+					value={whereGetValueLeft ? leftPointX * stepMoveCircle : leftInputValue}
+					onChange={(e) => getValueLeft(e)}
+					onKeyDown={(e) => inputValueLeft(e)}
+					className="input-price"
+				/>
+				<input
+					ref={inputRight}
+					type="number"
+					value={whereGetValueRight ?  Math.ceil((-(rightPointX-stepMoveCircle) * stepMoveCircle)) : rightInputValue}
+					onChange={(e) => getValueRight(e)}
+					onKeyDown={(e) => inputValueRight(e)}
+					className="input-price"
+				/>
+			</div>
+			<div className="line-price">
+				<div className="into-line-price">
+					<div
+						ref={lineRef}
+						onMouseUp={() => leaveMouse()}
+						onMouseDown={(e) => moveClosestButton(e)}
+						onMouseMove={(e) => handleLineMoving(e)}
+						onMouseLeave={() => leaveMouse()}
+						className="true-into-line-price"
+					>
+						<div
+							ref={widthPointLeft}
+							onMouseUp={() => buttonUpReRenderOne()}
+							onMouseDown={() => setIsMovingLeftButton(true)}
+							style={{transform: `translateX(${leftPointX}px)`}}
+							className={`first-point-line ${!isMovingLeftButton && fixMoveLeftButton ? 'transition-point' : ''}`}
+						/>
+						<div
+							ref={widthPointRight}
+							onMouseUp={() => buttonUpReRenderTwo()}
+							onMouseDown={() => setIsMovingRightButton(true)}
+							style={{transform: `translateX(${-rightPointX}px)`}}
+							className={`end-point-line ${!isMovingRightButton && fixMoveRightButton ? 'transition-point' : ''}`}
+						/>
+					</div>
+				</div>
+			</div>
+			<select 
+				className="js-select-type-product style-button-filter"
+				onChange={() => filterTypeFilter()}
+			>
+				<option>Показать всё</option>
+				<option>Стулья</option>
+				<option>Столы</option>
+				<option>Комплекты</option>
+			</select>
 
-            <button 
-                className="sort-price-order style-button-filter"
-                onClick={() => removeFilter()}
-            >
-                Очистить фильтры
-            </button>
-        </div>
-    );
+			<button 
+				className="sort-price-order style-button-filter"
+				onClick={() => removeFilter()}
+			>
+				Очистить фильтры
+			</button>
+		</div>
+	);
 };
 
 export default FilterProducts;

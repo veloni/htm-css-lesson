@@ -7,15 +7,15 @@ const buyItem = () => {
             document.querySelector('.js-trigger-item-added').click();
            
             const productId = findId[index].innerHTML;
-            idDataBuyItem.push(productId);
+            _idDataBuyItem.push(productId);
             let checkAddItems = false;
 
             findProduct();
 
-            if (isBasketOpen){
+            if (_isBasketOpen){
                 document.querySelector('.js-trigger-charts').click();
             } else{ 
-            saveProductArrayState.map((product) => {
+            _saveProductArrayState.map((product) => {
             if (product.productId === productId){
                 if (product.ordered === true){
                     checkAddItems =! checkAddItems;
@@ -26,13 +26,13 @@ const buyItem = () => {
             });  
 
             if (!checkAddItems) {
-                saveProductArrayState.push({
-                    productName,
-                    quanityProduct,
-                    productPrice,
+                _saveProductArrayState.push({
+                    _productName,
+                    _quanityProduct,
+                    _productPrice,
                     productId,
                     ordered,
-                    pathImage,
+                    _pathImage,
                 });
             }
             }
@@ -43,16 +43,16 @@ const buyItem = () => {
 buyItem();
 
 const findProduct = () => {
-    const lastItem = idDataBuyItem[idDataBuyItem.length - 1];
-    let itemFind = true;
+    const lastItem = _idDataBuyItem[_idDataBuyItem.length - 1];
+    let _itemFind = true;
     productList.forEach(function(item) {
-        if (item.id === lastItem && itemFind === true) {
-            productPrice = item.price;
-            productName = item.product;
-            itemFind = false;
+        if (item.id === lastItem && _itemFind === true) {
+            _productPrice = item.price;
+            _productName = item.product;
+            _itemFind = false;
             productId = item.id;
             ordered = true;
-            pathImage = item.img
+            _pathImage = item.img
         } else {return;}
     });
 }

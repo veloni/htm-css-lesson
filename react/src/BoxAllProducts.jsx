@@ -4,7 +4,7 @@ const BoxAllProducts = () => {
   const [dataItemsState, setDataItemsState] = useState(productList);
 
   const giveData = () =>{
-    setDataItemsState([...sortingData]);
+    setDataItemsState([..._sortingData]);
   }
 
   return (
