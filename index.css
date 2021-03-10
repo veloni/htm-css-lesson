@@ -1,10 +1,14 @@
 @font-face  {
 	font-family: 'Roboto';
-	src: url("fonts/Roboto-Regular.ttf");
+	src: url("fonts/Roboto-Regular.ttf") format('ttf');
+	font-weight: normal;
+	font-style: normal;
 }
 @font-face  {
 	font-family: 'Roboto-rebet';
-	src: url("fonts/Roboto-Bold.ttf");
+	src: url("fonts/Roboto-Bold.ttf") format('ttf');
+	font-weight: normal;
+	font-style: normal;
 }
 .navigation-background  {
 	width: 1920px;
@@ -92,7 +96,7 @@
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	right: -230px;
+	right: -625px;
 }
 .opacity-slider-zero{
 	transition: opacity 1s ease-out 0.05s; 
@@ -147,6 +151,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 100%;
+	width: 100%;
 }
 .column-delete {
 	width: 10%;
@@ -884,6 +890,7 @@ body {
 }
 .input-price {
 	width: 45%;
+	height: 100%;
 	background-color: #F13C6E;
 	border-color: grey;
 	outline: none;
@@ -1009,7 +1016,7 @@ body {
 	letter-spacing: 0em;
 }
 .input-promo {
-	height: 30%;
+	height: 50%;
 	font-size: 1vw;
 }
 .wrapper-text-order-title-items {
@@ -1086,18 +1093,19 @@ body {
 }
 .wrapper-ul-data {
 	width: 100%;
-	height: 65%;
 	padding-top: 20px;
 	padding-left: 20px;
 }
 .close-order-close {
 	margin-left: 65%;
 	width: 30%;
-	height: 12%;
+	height: 35%;
 	font-size: 1vw;
 	border-color: grey;
 	outline: none;
 	border-radius: 30px 30px 30px 30px;
+	margin-bottom: 20px;
+
 }
 .ul-data > li {
 	text-decoration: none;
@@ -1349,18 +1357,16 @@ body {
 	background-color: #FAF0E6;
 	border: 1px solid black;
 	width: 45%;
-	height: 30%;
 }
 .select-payment-method {
-	font-size: 1vw;
-	height: 30%;
+	font-size: 1.2vw;
+	height: 50%;
 }
 .title-close-order {
-	height: 15%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 1.5vw;
+	font-size: 1.4vw;
 }
 .wrapper-for-message {
 	position: fixed;
@@ -1381,7 +1387,6 @@ body {
 	text-align: center;
 	padding: 15px;
 }
-
 .text-message-alert-item-added{
 	opacity: 1;
 }
@@ -1394,6 +1399,11 @@ body {
 	font-size: 1vw;
 	font-style: normal;
 	color: #EFEFEF;
-
+}
+.container-close-order{
+	display: flex;
+	width: 90%;
+	justify-content: center;
+	align-items: center;
 }
 

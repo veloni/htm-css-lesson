@@ -5,7 +5,7 @@ const CloseOrder = ({
 	nameUser,
 	adressUser,
 	emailUser,
-	_endPriceState,
+	endPriceState,
 	paymentMethod,
 }) => {
 	const closeLastOrder = () => {
@@ -14,27 +14,29 @@ const CloseOrder = ({
 	}
 
 	return (
-		<div className='box-close-order'>
-			<div className='wrapper-close-order'>
-				<div className='title-close-order'>
-					Поздравляем {nameUser} ваш заказ оформлен
+		<div className="box-close-order">	
+			<div className="container-close-order">
+				<div className="wrapper-close-order">
+					<div className="title-close-order">
+						Поздравляем {nameUser} ваш заказ оформлен
+					</div>
+					<div className="wrapper-ul-data">
+						<ul className="ul-data">
+							<li>Ваш телефон: {phoneUser}</li>
+							<li>Ваше ФИО: {nameUser}</li>
+							<li>Ваш адресс: {adressUser}</li>
+							<li>Ваша почта: {emailUser}</li>
+							<li>Способ оплаты: {paymentMethod}</li>
+							<li>Сумма к оплате: {endPriceState} р</li>
+						</ul>
+					</div>
+					<button
+						className="close-order-close"
+						onClick={() => closeLastOrder()}
+					>
+						Закрыть
+					</button>
 				</div>
-				<div className="wrapper-ul-data">
-					<ul className="ul-data">
-						<li>Ваш телефон: {phoneUser}</li>
-						<li>Ваше ФИО: {nameUser}</li>
-						<li>Ваш адресс: {adressUser}</li>
-						<li>Ваша почта: {emailUser}</li>
-						<li>Способ оплаты: {paymentMethod}</li>
-						<li>Сумма к оплате: {_endPriceState} р</li>
-					</ul>
-				</div>
-				<button
-					className="close-order-close"
-					onClick={() => closeLastOrder()}
-				>
-					Закрыть
-				</button>
 			</div>
 		</div>
 	);

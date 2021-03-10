@@ -10,8 +10,9 @@ const BoxOrder = ({
 	const boxOrderRef = useRef(null);
 	const selectRef = useRef(null);
 	const inputPromo = useRef(null);
+	const closeOrderRef = useRef(null);
 
-	const [_endPriceState, set_endPriceState] = useState(_saveDiscount ? _endPriceForOrder : _endPriceForOrder * 0.9);
+	const [endPriceState, setEndPriceState] = useState(_saveDiscount ? _endPriceForOrder : _endPriceForOrder * 0.9);
 
 	const [phoneUser, setPhoneUser] = useState(_savePhoneUser);
 	const [nameUser, setNameUser] = useState(_saveNameUser);
@@ -23,7 +24,7 @@ const BoxOrder = ({
 	const [phoneUserCorrect, setPhoneUserCorrect] = useState(true);
 	const [nameUserCorrect, setNameUserCorrect] = useState(true);
 	const [emailUserCorrect, setEmailUserCorrect] = useState(true);
-	const [warningMessage, setWarningMessage] = useState(false);
+	const [warningMessage, setWarningMessage] = useState([]);
 
 	const [seeCloseOrder, setSeeCloseOrder] = useState(false);
 	const [discountGive, setDiscountGive] = useState(_saveDiscount);
@@ -37,17 +38,8 @@ const BoxOrder = ({
 		_saveCommitOrder = commitOrder;
 		_saveDiscount = discountGive;  
 	}); 
-
+		
 	useEffect(() => {
-		researchMessage();
-	}, [
-		phoneUserCorrect, 
-		nameUserCorrect, 
-		emailUserCorrect,
-	]);
-
-	useEffect(() => {
-		checkCorrectValue();
 		window.addEventListener('keydown', close);
 		return () => window.removeEventListener('keydown', close);
 	}, [])
@@ -59,18 +51,16 @@ const BoxOrder = ({
 			discountGive && 
 			_quanityItems !== null
 		)	{
-			set_endPriceState(_endPriceState * 0.9);
+			setEndPriceState(endPriceState * 0.9);
 			setDiscountGive(false);
 			alert('Ваша скидка 10 процентов');
 		}
 	};
 
 	const checkCorrectValue = () => {
-		checkAllRegular();
+		if (researchMessage()) { return; };
 
-		if (warningMessage.length !== 0) { return; }
-
-		setSeeCloseOrder(!seeCloseOrder);
+		setSeeCloseOrder(true);
 	};
 
 	const closeOrder = () => {
@@ -84,21 +74,19 @@ const BoxOrder = ({
 		closeOrder();
 	};
 
-	const checkAllRegular = () => {
+	const researchMessage = () => {
 		const phoneRegular = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
 		const emailRegular = /^\S+@\S+$/;
 		const nameRegular = /^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}\-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/;
-		
+
+		const phoneWarning = !phoneRegular.test(phoneUser) ? 'Телефон не верен' : '';
+		const emailWarning = !emailRegular.test(emailUser) ? 'Email не верен' : '';
+		const nameUserWarning = !nameRegular.test(nameUser) ? 'ФИО не верно' : '';
+		const quanityWarning = _quanityItems === null ? 'Ничего не добавлено' : '';
+
 		setPhoneUserCorrect(phoneRegular.test(phoneUser));
 		setEmailUserCorrect(emailRegular.test(emailUser));
 		setNameUserCorrect(nameRegular.test(nameUser));
-	};
-
-	const researchMessage = () => {
-		const phoneWarning = !phoneUserCorrect ? 'Телефон не верен' : '';
-		const emailWarning = !emailUserCorrect ? 'Email не верен' : '';
-		const nameUserWarning = !nameUserCorrect ? 'ФИО не верно' : '';
-		const quanityWarning = _quanityItems === null ? 'Ничего не добавлено' : '';
 	
 		const arrayMessageOne = [phoneWarning, emailWarning, nameUserWarning, quanityWarning];
 		let arrayMessage = [];
@@ -120,6 +108,8 @@ const BoxOrder = ({
 		});
 		
 		setWarningMessage(arrayMessageСommas);
+
+		return !!arrayMessageСommas.length;
 	};
 
 	return (
@@ -129,11 +119,10 @@ const BoxOrder = ({
 				nameUser={nameUser}
 				adressUser={adressUser}
 				emailUser={emailUser}
-				_endPriceState={_endPriceState}
+				endPriceState={endPriceState}
 				_quanityItems={_quanityItems}
 				paymentMethod={paymentMethod}
-		/>}
-
+			/>}
 			<div className="order-wrapper">
 				<button
 					className="dn trigger-close-last-order"
@@ -142,10 +131,6 @@ const BoxOrder = ({
 				<button
 					className="dn trigger-fillingOrder"
 					onClick={() => giveDataOrder()}
-				/>
-				<button
-					className="dn trigger-check-correct-value"
-					onClick={() => researchMessage()}
 				/>
 				<div ref={boxOrderRef} className="container-order">
 					<div className="box-order">
@@ -168,51 +153,58 @@ const BoxOrder = ({
 									</span>
 								</div>
 								<table className="table-basket-border-order-main">
-									<tr className="table-basket-border-order">
-										<th className="column-id-order">Артикул</th>
-										<th className="column-img-order">Картинка</th>
-										<th className="column-name-product-order">Наименование товара</th>
-										<th className="column-price-order">Цена за шт.</th>
-										<th className="column-quanity-product-order">Кол.</th>
-										<th className="column-end-price-order">Цена</th>
-									</tr>
-									{productArrayState.map((item) => (
-										<tr className="table-basket-border-order container-product-basket-order">
-											<td>
-												<span className="idtable-order">
-													{item.productId}
-												</span>
-											</td>
-											<td>
-												<div className="wrapper-box-img-order">
-													<img
-														className="img-order"
-														src={`img/photoBase/${item._pathImage}`}
-													/>
-												</div>
-											</td>
-											<td className="product-name-text-order">
-												<span>
-													{item._productName}
-												</span>
-											</td>
-											<td className="product-price-text-order">
-												<span>
-													{item._productPrice / item._quanityProduct} р
-												</span>
-											</td>
-											<td className="product-quanity-text-order">
-												<span>
-													{item._quanityProduct}
-												</span>
-											</td>
-											<td className="product-price-text-order">
-												<span>
-													{item._productPrice} р
-												</span>
-											</td>
+									<thead>
+										<tr className="table-basket-border-order">
+											<th className="column-id-order">Артикул</th>
+											<th className="column-img-order">Картинка</th>
+											<th className="column-name-product-order">Наименование товара</th>
+											<th className="column-price-order">Цена за шт.</th>
+											<th className="column-quanity-product-order">Кол.</th>
+											<th className="column-end-price-order">Цена</th>
 										</tr>
-									))}
+									</thead>
+									<tbody>
+										{productArrayState.map((item, index) => (
+											<tr 
+												className="table-basket-border-order container-product-basket-order"
+												key={index}
+											>
+												<td>
+													<span className="idtable-order">
+														{item.productId}
+													</span>
+												</td>
+												<td>
+													<div className="wrapper-box-img-order">
+														<img
+															className="img-order"
+															src={`img/photoBase/${item._pathImage}`}
+														/>
+													</div>
+												</td>
+												<td className="product-name-text-order">
+													<span>
+														{item._productName}
+													</span>
+												</td>
+												<td className="product-price-text-order">
+													<span>
+														{item._productPrice / item._quanityProduct} р
+													</span>
+												</td>
+												<td className="product-quanity-text-order">
+													<span>
+														{item._quanityProduct}
+													</span>
+												</td>
+												<td className="product-price-text-order">
+													<span>
+														{item._productPrice} р
+													</span>
+												</td>
+											</tr>
+										))}
+									</tbody>
 								</table>
 							</div>
 							<div className="container-details-order">
@@ -233,7 +225,6 @@ const BoxOrder = ({
 										defaultValue={phoneUser}
 										onChange={(e) => setPhoneUser(e.target.value)}
 										type="number"
-										maxlength="11"
 										className="input-phone"
 									/>
 									<div> 
@@ -275,7 +266,7 @@ const BoxOrder = ({
 									<div className="wrapper-title-bottom-order title-bottom-order">
 										<span className={_quanityItems || "if-dont-have-items-ins-busket"}>
 											{_quanityItems && 
-											`Итого: ${_quanityItems} товаров на сумму ${_endPriceState} р`}
+											`Итого: ${_quanityItems} товаров на сумму ${endPriceState} р`}
 										</span>
 									</div>
 									<div className="wrapper-payment-bottom-order">
@@ -312,7 +303,8 @@ const BoxOrder = ({
 										<span className="text-doc">
 											Нажимая на кнопку оформить заказ вы принимаете условие публичной оферты.
 										</span>
-										<button 
+										<button
+											ref={closeOrderRef}
 											className="button-close-order"
 											onClick={() => checkCorrectValue()}
 										>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import FillingBasket from './ FillingBasket';
-import BoxOrder from './Order';
+import BoxOrder from './BoxOrder';
 
 const Basket = () => {
 	const [productArrayState, setProductArrayState] = useState(_saveProductArrayState);
@@ -129,8 +129,9 @@ const Basket = () => {
 	};
 
 	const renderBasketItems = () => {
-		const productsDataState = productArrayState.map((data) => (
+		const productsDataState = productArrayState.map((data, index) => (
 			data.ordered) && <FillingBasket
+				key={index}
 				data={data}
 				_deleteProduct={_deleteProduct}
 				addQuanityInArray={addQuanityInArray}
@@ -164,16 +165,18 @@ const Basket = () => {
 				className="js-trigger-charts dn"
 				onClick={() => getItem()}
 			/>
-			<table className="table-basket-border">
-				<tr className="table-basket-border table-title">
-					<th className="column-delete"></th>
-					<th className="column-img"></th>
-					<th className="column-name-product">Наименование товара</th>
-					<th className="column-price">Цена за шт.</th>
-					<th className="column-quanity-product">Количество</th>
-					<th className="column-end-price">Цена</th>
-				</tr>
-				{renderBasketItems()}
+			<table className="table-basket-border">	
+				<thead>
+					<tr className="table-basket-border table-title">
+						<th className="column-delete"></th>
+						<th className="column-img"></th>
+						<th className="column-name-product">Наименование товара</th>
+						<th className="column-price">Цена за шт.</th>
+						<th className="column-quanity-product">Количество</th>
+						<th className="column-end-price">Цена</th>
+					</tr>
+				</thead>
+				<tbody>{renderBasketItems()}</tbody>
 			</table>
 			<div className="wrapper-button-create-order">
 				<button

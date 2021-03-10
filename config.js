@@ -19,7 +19,7 @@ let _saveEmailUsers = null;
 let _savePhoneUser = null;
 let _saveNameUser = null;
 let _saveAdressUser = null;
-let _savePaymentMethod = 'При получении';
+let _savePaymentMethod = null;
 let _saveCommitOrder = null;
 let _saveDiscount = true;
 

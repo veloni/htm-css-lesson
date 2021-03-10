@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BoxAllProducts from './src/BoxAllProducts';
-import BoxOrder from './src/Order';
+import BoxOrder from './src/BoxOrder';
 /* import Basket from './src/Basket'; */
 import FilterProducts from './src/FilterProducts';
 import Slider from './src/Slider';

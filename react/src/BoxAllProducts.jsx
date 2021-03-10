@@ -13,8 +13,11 @@ const BoxAllProducts = () => {
         className="dn trigger-filter"
         onClick={() => giveData()}
       />
-      {dataItemsState && dataItemsState.map((item) => (
-        <div className="box-product">
+      {dataItemsState && dataItemsState.map((item, index) => (
+        <div 
+          className="box-product"
+          key={index}
+        >
           <span className="find-id dn">
             {item.id}
           </span>

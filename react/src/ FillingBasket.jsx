@@ -17,17 +17,17 @@ const FillingBasket = ({
 
 	const productIdRef = useRef(null);
 
-	const [_quanityProductState, set_quanityProduct] = useState(1);
-	const [_endPriceState, set_endPriceState] = useState(_productPrice);
-	const [_productPriceState, set_productPriceState] = useState(_productPrice);
+	const [quanityProductState, setQuanityProduct] = useState(1);
+	const [endPriceState, setEndPriceState] = useState(_productPrice);
+	const [productPriceState, setProductPriceState] = useState(_productPrice);
 
 	useEffect(() => {
-		set_quanityProduct(_quanityProduct);
-		set_endPriceState(_productPrice);
+		setQuanityProduct(_quanityProduct);
+		setEndPriceState(_productPrice);
 	});
 
 	const downQunity = () => {
-		_quanityProductState >= 2 && addQuanityInArray(-1, productId);
+		quanityProductState >= 2 && addQuanityInArray(-1, productId);
 	};
 
 	return (
@@ -58,7 +58,7 @@ const FillingBasket = ({
 				{ordered}
 			</td>
 			<td className="product-price-text">
-				{_productPriceState} р
+				{productPriceState} р
 			</td>
 			<td className="product-quanity-text">
 				<div className="product-quanity-text-content">
@@ -67,7 +67,7 @@ const FillingBasket = ({
 						className="arrow-svg"
 						src="./img/up-arrow.svg"
 					/>
-					{_quanityProductState}
+					{quanityProductState}
 					<img
 						onClick={() => downQunity()}
 						className="arrow-svg-down"
@@ -76,7 +76,7 @@ const FillingBasket = ({
 				</div>
 			</td>
 			<td className="product-price-text">
-				{_endPriceState} р
+				{endPriceState} р
 			</td>
 		</tr>
 	);
