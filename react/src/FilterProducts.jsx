@@ -1,6 +1,5 @@
 import React, { useState , useRef } from 'react';
 
-// all states and functiions to hooks
 const FilterProducts = () => {
 
 	const lineRef = useRef(null);
@@ -24,7 +23,7 @@ const FilterProducts = () => {
 	const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
 	const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
-	const [fixMoveRightButton, setFixMoveRightButton] = useState(false)
+	const [fixMoveRightButton, setFixMoveRightButton] = useState(false);
 	const [fixMoveLeftButton, setFixMoveLeftButton] = useState(false);
 
 	const stepMoveCircle = 50;
@@ -34,7 +33,10 @@ const FilterProducts = () => {
 
 		const { clientWidth } = widthPointRight.current;
 		const { offsetX } = e.nativeEvent;
-		const checkLeftPositionButton = offsetX - leftPointX - clientWidth < -offsetX - rightPointX + clientWidth; // unreadable constuction
+		const calculationLeftButtonPosition = offsetX - leftPointX - clientWidth;
+		const calculationRightButtonPosition = -offsetX - rightPointX + clientWidth;
+
+		const checkLeftPositionButton = calculationLeftButtonPosition < calculationRightButtonPosition;
 		
 		setFixMoveLeftButton(true);
 
@@ -45,7 +47,7 @@ const FilterProducts = () => {
 
 		setFixMoveRightButton(true); 
 
-	  if (offsetX <= leftPointX + 2 * clientWidth){ 
+	  if (offsetX <= leftPointX + 2 * clientWidth) { 
 			setRightPointX(-(leftPointX));
 			removeMoveOutRightButton();
 			return;
@@ -109,7 +111,7 @@ const FilterProducts = () => {
 	};
 
 	const buttonMoveTwo = () => {
-		const widthButton = widthPointRight.current.clientWidth / 2;
+		const widthButton = Math.round(widthPointRight.current.clientWidth / 2);
 
 		if (positionButtonTwo >= 246) {
 			setRightPointX(-222);
@@ -158,7 +160,7 @@ const FilterProducts = () => {
 		if (dontHaveFilter) {
 			_sortingData = filteredList;
 
-			document.querySelector('.trigger-filter').click();
+			document.querySelector('.js-trigger-filter').click();
 			return;
 		}
 
@@ -170,7 +172,7 @@ const FilterProducts = () => {
 
 		_sortingData = sortedProductList;
 
-		document.querySelector('.trigger-filter').click();
+		document.querySelector('.js-trigger-filter').click();
 	};
 
 	const filterSortedProducts = (item) => {
@@ -192,7 +194,7 @@ const FilterProducts = () => {
 		setCheckAscendingOrder(false);
 		setCheckDescendingOrder(false);
 
-		document.querySelector('.trigger-filter').click();
+		document.querySelector('.js-trigger-filter').click();
 	};
 
 	const buttonUpReRenderOne = () => {
@@ -235,10 +237,10 @@ const FilterProducts = () => {
 			}
 
 			if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value) + 1500) {
-					setRightPointX((-(rightInputValue) / stepMoveCircle+stepMoveCircle));
-					setWhereGetValueRight(true);
-					filterTypeFilter();
-					return;
+				setRightPointX((-(rightInputValue) / stepMoveCircle+stepMoveCircle));
+				setWhereGetValueRight(true);
+				filterTypeFilter();
+				return;
 			}
 
 			setRightPointX(-leftPointX);
@@ -333,7 +335,6 @@ const FilterProducts = () => {
 				<option>Столы</option>
 				<option>Комплекты</option>
 			</select>
-
 			<button 
 				className="sort-price-order style-button-filter"
 				onClick={() => removeFilter()}

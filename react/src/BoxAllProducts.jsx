@@ -10,7 +10,7 @@ const BoxAllProducts = () => {
   return (
     <div className="box-products">
       <button 
-        className="dn trigger-filter"
+        className="dn js-trigger-filter"
         onClick={() => giveData()}
       />
       {dataItemsState && dataItemsState.map((item, index) => (

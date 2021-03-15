@@ -310,7 +310,7 @@ const BoxOrder = ({
 										>
 											Оформление заказа
 										</button>
-										</div>
+									</div>
 								</div>
 							</div>
 						</div>
