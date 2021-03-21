@@ -80,11 +80,8 @@ const FilterProducts = () => {
 			return;
 		}
 
-		if (positionButtonOne - widthButton  >= -rightPointX) { 
+		if (positionButtonOne - widthButton  >= -rightPointX) { return; };
 		
-			return; 
-		};
-
 		setIsMovingLeftButton(true);
 		setLeftPointX(positionButtonOne - widthButton);
 	};
@@ -98,7 +95,7 @@ const FilterProducts = () => {
 		}
 
 		if (positionButtonTwo - widthButton  <= leftPointX) { return; };
-	
+
 		setIsMovingRightButton(true);
 		setRightPointX(-positionButtonTwo + widthButton);
 	};
@@ -218,12 +215,14 @@ const FilterProducts = () => {
 			if (parseInt(inputRight.current.value) < parseInt(inputLeft.current.value) + 2500) { 
 				setRightInputValue(parseInt(inputLeft.current.value) + 2500);
 				setRightPointX(((-(parseInt(inputLeft.current.value) + 2500) / stepMoveCircle) + stepMoveCircle));
+				setWhereGetValueRight(true);
 				filterTypeFilter();
 				return;
 			}
 
 			if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value)) {
 				setRightPointX(((-(rightInputValue) / stepMoveCircle) + stepMoveCircle));
+				setWhereGetValueRight(true);
 				filterTypeFilter();
 				return;
 			}

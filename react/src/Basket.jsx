@@ -46,8 +46,8 @@ const Basket = () => {
 			if (item.productId === productId) {
 				document.querySelector('.js-trigger-item-dont-added').click();
 				newItem.ordered = true;
-				newItem._productPrice = newItem._productPrice / newItem._quanityProduct;
 				newItem._quanityProduct = 1;
+				newItem._productPrice = newItem._productPrice / item._quanityProduct;
 			}
 
 			return newItem;
