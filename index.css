@@ -1071,8 +1071,8 @@ body {
 }
 
 .transition-point {
-  transform: '';
-	transition: transform 1s ease-out 0.05s; 
+	transform: '';
+	transition: transform 0.2s linear; 
 }
 
 .test {

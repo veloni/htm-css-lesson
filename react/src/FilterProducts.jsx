@@ -23,9 +23,6 @@ const FilterProducts = () => {
 	const [checkAscendingOrder, setCheckAscendingOrder] = useState(false);
 	const [checkDescendingOrder, setCheckDescendingOrder] = useState(false);
 
-	const [fixMoveRightButton, setFixMoveRightButton] = useState(false);
-	const [fixMoveLeftButton, setFixMoveLeftButton] = useState(false);
-
 	const stepMoveCircle = 50;
 
 	const moveClosestButton = (e) => {
@@ -38,42 +35,22 @@ const FilterProducts = () => {
 
 		const checkLeftPositionButton = calculationLeftButtonPosition < calculationRightButtonPosition;
 		
-		setFixMoveLeftButton(true);
-
 		if (checkLeftPositionButton) {
 			handleLeftPositionButton(offsetX);
 			return;
 		}
 
-		setFixMoveRightButton(true); 
-
 	  if (offsetX <= leftPointX + 2 * clientWidth) { 
 			setRightPointX(-(leftPointX));
-			removeMoveOutRightButton();
 			return;
 		}
 
-		if (positionButtonTwo >= 300) {
+		if (positionButtonTwo >= 222) {
 			setRightPointX(-222);
-			removeMoveOutRightButton();
 			return;
 		}
 
-		removeMoveOutRightButton();
 		setRightPointX(-positionButtonTwo +  2 * clientWidth);
-		return;
-	};
-
-	const removeMoveOutRightButton = () => {
-		setTimeout(() => {
-			setFixMoveRightButton(false);
-		}, 2000);
-	};
-
-	const removeMoveOutLeftButton = () => {
-		setTimeout(() => {
-			setFixMoveLeftButton(false);
-		}, 2000);
 	};
 
 	const leaveMouse = () => {
@@ -83,13 +60,12 @@ const FilterProducts = () => {
 
 	const handleLineMoving = (e) => { 
 		const { layerX } = e.nativeEvent;
-		
+
 		setPositionButtonOne(layerX);
 		setPositionButtonTwo(layerX);
 
 		selectButtonMove();
 		filterTypeFilter();
-
 	};
 
 	const selectButtonMove = () => { 
@@ -119,8 +95,11 @@ const FilterProducts = () => {
 		}
 
 		if (positionButtonTwo - widthButton  <= leftPointX) { return; };
+	
+		setIsMovingRightButton(true);
 
 		setRightPointX(-positionButtonTwo + widthButton);
+
 	};
 
 	///Sorting function
@@ -242,8 +221,6 @@ const FilterProducts = () => {
 				filterTypeFilter();
 				return;
 			}
-
-			setRightPointX(-leftPointX);
 			setWhereGetValueRight(true);
 			filterTypeFilter();
 		}
@@ -256,11 +233,15 @@ const FilterProducts = () => {
 
 	const handleLeftPositionButton = (offsetX) => {
 		const { clientWidth } = widthPointRight.current;
+		offsetX <= rightPointX - 2 * clientWidth && setLeftPointX(-rightPointX + 1.5 * clientWidth);
 
-		offsetX <= rightPointX - 2 * clientWidth && setLeftPointX(-rightPointX + 1.5 * clientWidth)
-		positionButtonOne - clientWidth < clientWidth && setLeftPointX(0);
-	
-		removeMoveOutLeftButton();
+		if (positionButtonOne - clientWidth < clientWidth) { 
+			setLeftPointX(0); 
+
+			return;
+		}
+
+
 		setLeftPointX(positionButtonOne - clientWidth);
 	};
 
@@ -314,14 +295,14 @@ const FilterProducts = () => {
 							onMouseUp={() => buttonUpReRenderOne()}
 							onMouseDown={() => setIsMovingLeftButton(true)}
 							style={{transform: `translateX(${leftPointX}px)`}}
-							className={`first-point-line ${!isMovingLeftButton && fixMoveLeftButton ? 'transition-point' : ''}`}
+							className="first-point-line transition-point"
 						/>
 						<div
 							ref={widthPointRight}
 							onMouseUp={() => buttonUpReRenderTwo()}
 							onMouseDown={() => setIsMovingRightButton(true)}
 							style={{transform: `translateX(${-rightPointX}px)`}}
-							className={`end-point-line ${!isMovingRightButton && fixMoveRightButton ? 'transition-point' : ''}`}
+							className="end-point-line transition-point"
 						/>
 					</div>
 				</div>
