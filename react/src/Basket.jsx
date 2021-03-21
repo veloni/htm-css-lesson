@@ -4,6 +4,7 @@ import FillingBasket from './ FillingBasket';
 import BoxOrder from './BoxOrder';
 
 const Basket = () => {
+	
 	const [productArrayState, setProductArrayState] = useState(_saveProductArrayState);
 	const [idArrayState, setIdArrayState] = useState([]);
 	const [orderState, setOrderState] = useState(false);

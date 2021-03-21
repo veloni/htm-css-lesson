@@ -16,27 +16,27 @@ const buyItem = () => {
 				document.querySelector('.js-trigger-charts').click();
 			} else { 
 			_saveProductArrayState.map((product) => {
-				if (product.productId === productId) {
-					if (product.ordered === true) {
-						checkAddItems !== checkAddItems;   
-						document.querySelector('.js-trigger-item-dont-added').click();    
-						return;
+					if (product.productId === productId) {
+						if (product.ordered === true) {
+							checkAddItems !== checkAddItems;   
+							document.querySelector('.js-trigger-item-dont-added').click();    
+							return;
+						}
 					}
+				});  
+
+				if (!checkAddItems) {
+					_saveProductArrayState.push({
+						_productName,
+						_quanityProduct,
+						_productPrice,
+						productId,
+						ordered,
+						_pathImage,
+					});
 				}
-			});  
-
-			if (!checkAddItems) {
-				_saveProductArrayState.push({
-					_productName,
-					_quanityProduct,
-					_productPrice,
-					productId,
-					ordered,
-					_pathImage,
-				});
 			}
-
-			}
+			
 		});
 	});
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Basket from './Basket.jsx';
 
 const renderBasket = () => {
+	
 	const [openBasketState, setOpenBasketState] = useState(false);
 		
 	return (

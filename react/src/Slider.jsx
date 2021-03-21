@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 const Slider = () => {
-
+  
   const leftImage = useRef(null);
   const centerImage = useRef(null);
   const rightImage = useRef(null);
