@@ -65,7 +65,7 @@ const Basket = () => {
 		let itemAddedInBusket;
 
 		productArrayState.map((item) => {
-			if (parseInt(productId) === parseInt(item.productId)){
+			if (parseInt(productId) === parseInt(item.productId)) {
 				itemAddedInBusket = true;
 			}
 		});

@@ -15,6 +15,7 @@ const buyItem = () => {
 			if (_isBasketOpen) {
 				document.querySelector('.js-trigger-charts').click();
 			} else { 
+				
 			_saveProductArrayState.map((product) => {
 					if (product.productId === productId) {
 						if (product.ordered === true) {
@@ -26,17 +27,27 @@ const buyItem = () => {
 				});  
 
 				if (!checkAddItems) {
-					_saveProductArrayState.push({
-						_productName,
-						_quanityProduct,
-						_productPrice,
-						productId,
-						ordered,
-						_pathImage,
+					let itemAdded = false;
+
+					_saveProductArrayState.forEach(function(item) {
+						if (productId === item.productId && item.ordered) {
+							itemAdded = true;
+						}
+
 					});
+					
+					if (itemAdded === false) {
+						_saveProductArrayState.push({
+							_productName,
+							_quanityProduct,
+							_productPrice,
+							productId,
+							ordered,
+							_pathImage,
+						});
+					}
 				}
 			}
-			
 		});
 	});
 }
