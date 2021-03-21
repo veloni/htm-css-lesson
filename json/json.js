@@ -40,7 +40,7 @@ window.productList = [
             price: "8000" ,
             product: "Стул" ,
             classProduct: "chair" ,
-            img: "19.png" ,
+            img: "49.png" ,
             },
             {
             id: "7" ,

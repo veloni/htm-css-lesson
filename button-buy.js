@@ -35,7 +35,7 @@ const buyItem = () => {
 						}
 
 					});
-					
+
 					if (itemAdded === false) {
 						_saveProductArrayState.push({
 							_productName,
@@ -47,6 +47,7 @@ const buyItem = () => {
 						});
 					}
 				}
+				
 			}
 		});
 	});

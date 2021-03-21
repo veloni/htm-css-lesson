@@ -210,6 +210,7 @@ body {
 
 .table-basket-border-order {
 	width: 80%;
+	height: 4vw;
 }
 
 .table-basket-border-order-main {
@@ -1071,7 +1072,7 @@ body {
 }
 
 .transition-point {
-	transform: '';
+	transform: ' ';
 	transition: transform 0.2s linear; 
 }
 
@@ -1155,7 +1156,7 @@ body {
 
 .input-promo {
 	height: 50%;
-	font-size: 1vw;
+	font-size: 2vw;
 }
 
 .wrapper-text-order-title-items {
@@ -1290,7 +1291,7 @@ body {
 .button-close-order {
 	width: 30%;
 	height: 40%;
-	font-size: 1vw;
+	font-size: 1.5vw;
 	border-color: grey;
 	outline: none;
 	border-radius: 30px 30px 30px 30px;
@@ -1545,7 +1546,7 @@ body {
 }
 
 .select-payment-method {
-	font-size: 1.2vw;
+	font-size: 2vw;
 	height: 50%;
 }
 

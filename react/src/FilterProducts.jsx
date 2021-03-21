@@ -1,7 +1,6 @@
 import React, { useState , useRef } from 'react';
 
 const FilterProducts = () => {
-
 	const lineRef = useRef(null);
 	const widthPointRight = useRef(null);
 	const widthPointLeft = useRef(null);
@@ -79,10 +78,14 @@ const FilterProducts = () => {
 		if (positionButtonOne <= widthButton * 2) {
 			setLeftPointX(0);
 			return;
+		}
+
+		if (positionButtonOne - widthButton  >= -rightPointX) { 
+		
+			return; 
 		};
 
-		if (positionButtonOne - widthButton  >= -rightPointX) { return; };
-
+		setIsMovingLeftButton(true);
 		setLeftPointX(positionButtonOne - widthButton);
 	};
 
@@ -97,9 +100,7 @@ const FilterProducts = () => {
 		if (positionButtonTwo - widthButton  <= leftPointX) { return; };
 	
 		setIsMovingRightButton(true);
-
 		setRightPointX(-positionButtonTwo + widthButton);
-
 	};
 
 	///Sorting function
@@ -194,7 +195,7 @@ const FilterProducts = () => {
 	const inputValueLeft = (e) => {
 		if (e.key === 'Enter') {
 
-			if (parseInt(inputLeft.current.value) + 1500 < parseInt(inputRight.current.value)) {
+			if (parseInt(inputLeft.current.value) + 2500 < parseInt(inputRight.current.value)) {
 				setLeftPointX(Math.abs(leftInputValue / stepMoveCircle));
 				setWhereGetValueLeft(true);
 				filterTypeFilter();
@@ -215,12 +216,19 @@ const FilterProducts = () => {
 				return; 
 			}
 
-			if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value) + 1500) {
-				setRightPointX((-(rightInputValue) / stepMoveCircle+stepMoveCircle));
-				setWhereGetValueRight(true);
+			if (parseInt(inputRight.current.value) < parseInt(inputLeft.current.value + 2500)) {
+				setRightInputValue(parseInt(inputLeft.current.value) + 2500);
+				setRightPointX(((-(parseInt(inputLeft.current.value) + 2500) / stepMoveCircle) + stepMoveCircle));
 				filterTypeFilter();
 				return;
 			}
+
+			if (parseInt(inputRight.current.value) > parseInt(inputLeft.current.value)) {
+				setRightPointX(((-(rightInputValue) / stepMoveCircle) + stepMoveCircle));
+				filterTypeFilter();
+				return;
+			}
+
 			setWhereGetValueRight(true);
 			filterTypeFilter();
 		}
@@ -233,15 +241,17 @@ const FilterProducts = () => {
 
 	const handleLeftPositionButton = (offsetX) => {
 		const { clientWidth } = widthPointRight.current;
-		offsetX <= rightPointX - 2 * clientWidth && setLeftPointX(-rightPointX + 1.5 * clientWidth);
 
-		if (positionButtonOne - clientWidth < clientWidth) { 
-			setLeftPointX(0); 
-
+		if (offsetX <= rightPointX - 2 * clientWidth) {
+			setLeftPointX(-rightPointX + 1.5 * clientWidth);
 			return;
 		}
 
-
+		if (positionButtonOne - clientWidth < clientWidth) { 
+			setLeftPointX(0); 
+			return;
+		}
+		
 		setLeftPointX(positionButtonOne - clientWidth);
 	};
 
@@ -274,7 +284,7 @@ const FilterProducts = () => {
 				<input
 					ref={inputRight}
 					type="number"
-					value={whereGetValueRight ?  Math.ceil((-(rightPointX-stepMoveCircle) * stepMoveCircle)) : rightInputValue}
+					value={whereGetValueRight ? Math.ceil((-(rightPointX-stepMoveCircle) * stepMoveCircle)) : rightInputValue}
 					onChange={(e) => getValueRight(e)}
 					onKeyDown={(e) => inputValueRight(e)}
 					className="input-price"
