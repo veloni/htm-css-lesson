@@ -215,8 +215,7 @@ const FilterProducts = () => {
 				setRightPointX(-222); 
 				return; 
 			}
-
-			if (parseInt(inputRight.current.value) < parseInt(inputLeft.current.value + 2500)) {
+			if (parseInt(inputRight.current.value) < parseInt(inputLeft.current.value) + 2500) { 
 				setRightInputValue(parseInt(inputLeft.current.value) + 2500);
 				setRightPointX(((-(parseInt(inputLeft.current.value) + 2500) / stepMoveCircle) + stepMoveCircle));
 				filterTypeFilter();
@@ -241,9 +240,9 @@ const FilterProducts = () => {
 
 	const handleLeftPositionButton = (offsetX) => {
 		const { clientWidth } = widthPointRight.current;
-
-		if (offsetX <= rightPointX - 2 * clientWidth) {
-			setLeftPointX(-rightPointX + 1.5 * clientWidth);
+		
+		if (-rightPointX <= offsetX + clientWidth ) {
+			setLeftPointX(-rightPointX);
 			return;
 		}
 
@@ -251,7 +250,7 @@ const FilterProducts = () => {
 			setLeftPointX(0); 
 			return;
 		}
-		
+
 		setLeftPointX(positionButtonOne - clientWidth);
 	};
 
