@@ -120,8 +120,8 @@
 	opacity: 1;
 }
 
-.overflow-hidden-scrollbar {
-	scrollbar-width: 0px;
+.overflow-hidden::-webkit-scrollbar {
+	display: none; 
 }
 
 .table-basket-border {
@@ -1087,7 +1087,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 90;
+	z-index: 15;
 }
 
 .box-order {
@@ -1097,7 +1097,7 @@
 	z-index: 6;
 	display: flex;
 	flex-direction: column;
-	-moz-transform: scale(0.9);
+	transform: scale(0.85);
 }
 
 .wrapper-order-title {
@@ -1323,13 +1323,17 @@
 }
 
 .container-busket-order {
-	overflow-y: scroll;
-	height: 100%;
-	width: 45%;
+
 }
 
+.container-busket-order-for-table-items {
+	overflow-y: scroll;
+	width: 45%;
+	height: 50vw;
+}
+
+
 .container-details-order {
-	height: 100%;
 	width: 50%;
 	background-color:white;
 	display: flex;

@@ -146,7 +146,7 @@ const BoxOrder = ({
 							</div>
 						</div>
 						<div className="container-main-order">
-							<div className="container-busket-order">
+							<div className="container-busket-order container-busket-order-for-table-items">
 								<div className="wrapper-text-order-title-items">
 									<span className="text-order-title-items">
 										Ваш заказ

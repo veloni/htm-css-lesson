@@ -117,6 +117,8 @@ const Basket = () => {
 	const boxOrderOpen = () => {
 		document.querySelector('.box-basket').classList.add('overflow-hidden');
 		document.querySelector('.js-trigger-message-alert-hide').click();
+
+		
 		
 		clearVariable();
 
