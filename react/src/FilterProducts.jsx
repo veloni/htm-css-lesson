@@ -6,6 +6,7 @@ const FilterProducts = () => {
 	const widthPointLeft = useRef(null);
 	const inputLeft = useRef(null);
 	const inputRight = useRef(null);
+	const refSelect = useRef(null)
 
 	const [whereGetValueLeft, setWhereGetValueLeft] = useState(true); 
 	const [whereGetValueRight, setWhereGetValueRight] = useState(true);
@@ -171,6 +172,11 @@ const FilterProducts = () => {
 		setCheckAscendingOrder(false);
 		setCheckDescendingOrder(false);
 
+		setLeftPointX(0);
+		setRightPointX(-222);
+
+		refSelect.current.value = 'Показать всё';
+		
 		document.querySelector('.js-trigger-filter').click();
 	};
 
@@ -316,6 +322,7 @@ const FilterProducts = () => {
 				</div>
 			</div>
 			<select 
+				ref={refSelect}
 				className="js-select-type-product style-button-filter"
 				onChange={() => filterTypeFilter()}
 			>
