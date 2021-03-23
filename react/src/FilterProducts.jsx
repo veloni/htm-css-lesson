@@ -100,8 +100,7 @@ const FilterProducts = () => {
 		setIsMovingRightButton(true);
 		setRightPointX(-positionButtonTwo + widthButton);
 	};
-
-	///Sorting function
+	
 	const buttonSortAscendingOrder = () => {
 		setCheckAscendingOrder(true);
 		setCheckDescendingOrder(false);

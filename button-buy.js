@@ -33,7 +33,6 @@ const buyItem = () => {
 						if (productId === item.productId && item.ordered) {
 							itemAdded = true;
 						}
-
 					});
 
 					if (itemAdded === false) {

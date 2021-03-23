@@ -158,8 +158,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 5vw;
-	width: 5vw;
+	height: 100px;
+	width: 100px;
 }
 
 .img-order {
@@ -669,6 +669,16 @@
 }
 
 .buy-item {
+	height: 40px;
+	width: 170px;
+	border: 3px solid;
+	border-color: #F13C6E;
+	border-radius: 25px 25px 25px 25px;
+	background-color: #F13C6E;
+	outline: none;
+}
+
+.buy-item-two {
 	height: 40px;
 	width: 170px;
 	border: 3px solid;
