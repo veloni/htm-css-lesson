@@ -8,7 +8,7 @@
     "build": "webpack",
     "webpack-watcher": "webpack --watch --progress"
   },
-  "author": "egorko",
+  "author": "veloni",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.26.3",

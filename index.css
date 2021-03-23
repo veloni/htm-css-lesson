@@ -91,6 +91,12 @@
 
 .basket-icon {
 	height: 50%;
+	cursor: pointer;
+}
+
+.basket-icon:hover {
+	border-radius: 20px 20px 20px 20px;
+	background-color: #F13C6E;
 }
 
 .box-basket {
@@ -435,6 +441,7 @@
 	background-color: #F13C6E;
 	outline: none;
 	font-size: 1.5rem;
+	cursor: pointer;
 }
 
 .header-text-two-box {
@@ -676,6 +683,7 @@
 	border-radius: 25px 25px 25px 25px;
 	background-color: #F13C6E;
 	outline: none;
+	cursor: pointer;
 }
 
 .buy-item-two {
@@ -1050,6 +1058,7 @@
 	height: 100%;
 	width: 100%;
 	display: flex;
+	cursor: pointer;
 }
 
 .true-into-line-price {
@@ -1262,6 +1271,11 @@
 	outline: none;
 	border-radius: 30px 30px 30px 30px;
 	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.close-order-close:hover {
+	background-color: coral;
 }
 
 .ul-data > li {
@@ -1287,7 +1301,7 @@
 
 .close-order {
 	position: absolute;
-	padding-left: 75%;
+	margin-left: 75%;
 	outline: none;
 	text-decoration: none;
 	color: black;
@@ -1295,6 +1309,12 @@
 	font-family: Roboto;
 	font-size: 1vw;
 	letter-spacing: 0em;
+	cursor: pointer;
+}
+
+.close-order:hover {
+	border-radius: 40px 40px 40px 40px;
+	background-color: #FFE4E1;
 }
 
 .button-close-order {
@@ -1304,6 +1324,7 @@
 	border-color: grey;
 	outline: none;
 	border-radius: 30px 30px 30px 30px;
+	cursor: pointer;
 }
 
 .button-close-order:hover {
@@ -1419,6 +1440,7 @@
 	font-weight: 400;
 	line-height: 16px;
 	letter-spacing: 0em;
+	cursor: pointer;
 }
 
 .style-button-filter-dont-active {
@@ -1471,6 +1493,7 @@
 	outline: none;
 	border: none;
 	background: no-repeat;
+	cursor: pointer;
 }
 
 .input-phone {
@@ -1561,6 +1584,7 @@
 .select-payment-method {
 	font-size: 1vw;
 	height: 4vw;
+	cursor: pointer;
 }
 
 .title-close-order {
