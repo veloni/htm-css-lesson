@@ -16,15 +16,15 @@ const buyItem = () => {
 				document.querySelector('.js-trigger-charts').click();
 			} else { 
 				
-			_saveProductArrayState.map((product) => {
-					if (product.productId === productId) {
-						if (product.ordered === true) {
-							checkAddItems !== checkAddItems;   
-							document.querySelector('.js-trigger-item-dont-added').click();    
-							return;
+				_saveProductArrayState.map((product) => {
+						if (product.productId === productId) {
+							if (product.ordered === true) {
+								checkAddItems !== checkAddItems;   
+								document.querySelector('.js-trigger-item-dont-added').click();    
+								return;
+							}
 						}
-					}
-				});  
+					});  
 
 				if (!checkAddItems) {
 					let itemAdded = false;
@@ -46,8 +46,8 @@ const buyItem = () => {
 						});
 					}
 				}
-				
 			}
+
 		});
 	});
 }

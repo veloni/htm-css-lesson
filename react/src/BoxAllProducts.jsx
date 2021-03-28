@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const BoxAllProducts = () => {
   const [dataItemsState, setDataItemsState] = useState(productList);
 
-  const giveData = () =>{
+  const giveData = () => {
     setDataItemsState([..._sortingData]);
   }
 

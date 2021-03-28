@@ -1,9 +1,9 @@
 const basketOpen = () => {
-    const basketIcon = document.querySelector('.basket-icon');
+	const basketIcon = document.querySelector('.basket-icon');
     
-    basketIcon.onclick = function() {
-        document.querySelector('.js-trigger-open-basket').click();
-    }
+	basketIcon.onclick = function() {
+		document.querySelector('.js-trigger-open-basket').click();
+	}
 }
 
 basketOpen();

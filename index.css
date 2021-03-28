@@ -1275,6 +1275,7 @@
 }
 
 .close-order-close:hover {
+	border-radius: 30px 30px 30px 30px;
 	background-color: coral;
 }
 
@@ -1310,6 +1311,10 @@
 	font-size: 1vw;
 	letter-spacing: 0em;
 	cursor: pointer;
+	width: 8vw;
+	display: flex;
+	text-align: center;
+	justify-content: center;
 }
 
 .close-order:hover {

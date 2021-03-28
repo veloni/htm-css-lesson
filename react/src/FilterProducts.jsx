@@ -165,7 +165,7 @@ const FilterProducts = () => {
 		if (selectType.value === 'Комплекты' && item.classProduct === 'set') { return item; }
 	};
 
-	const removeFilter = ()=> {
+	const removeFilter = () => {
 		_sortingData = productList;
 
 		setCheckAscendingOrder(false);
@@ -189,7 +189,7 @@ const FilterProducts = () => {
 		filterTypeFilter();
 	};
 
-	const getValueLeft = (e) =>{
+	const getValueLeft = (e) => {
 		setLeftInputValue(e.target.value);
 		setWhereGetValueLeft(false);
 	};
@@ -237,7 +237,7 @@ const FilterProducts = () => {
 		}
 	};
 
-	const getValueRight = (e) =>{
+	const getValueRight = (e) => {
 		setRightInputValue(e.target.value);
 		setWhereGetValueRight(false);
 	};
